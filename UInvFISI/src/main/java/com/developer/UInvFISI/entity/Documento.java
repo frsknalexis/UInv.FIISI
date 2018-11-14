@@ -1,12 +1,14 @@
 package com.developer.UInvFISI.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,6 +29,9 @@ public class Documento implements Serializable{
 	
 	@Column(name="nombre_documento", nullable=false)
 	private String nombreDocumento;
+	
+	@OneToMany(mappedBy="tblDocumento")
+	private List<Docente> tblDocente;
 
 	public Documento() {
 		// TODO Auto-generated constructor stub

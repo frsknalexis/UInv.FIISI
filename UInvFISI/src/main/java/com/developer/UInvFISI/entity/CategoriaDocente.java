@@ -2,12 +2,14 @@ package com.developer.UInvFISI.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -35,17 +37,21 @@ public class CategoriaDocente implements Serializable{
 	@Column(name="fecha_modificacion", nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaModificacion;
+	
+	@OneToMany(mappedBy = "tblCategoriaDoc")
+	private List<Docente> tblDocente;
 
 	public CategoriaDocente() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public CategoriaDocente(Integer categoriaDocenteId, String nombreCategoria, Date fechaRegistro,
-			Date fechaModificacion) {
+			Date fechaModificacion, List<Docente> tblDocente) {
 		this.categoriaDocenteId = categoriaDocenteId;
 		this.nombreCategoria = nombreCategoria;
 		this.fechaRegistro = fechaRegistro;
 		this.fechaModificacion = fechaModificacion;
+		this.tblDocente = tblDocente;
 	}
 
 	public Integer getCategoriaDocenteId() {
@@ -78,5 +84,13 @@ public class CategoriaDocente implements Serializable{
 
 	public void setFechaModificacion(Date fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
+	}
+
+	public List<Docente> getTblDocente() {
+		return tblDocente;
+	}
+
+	public void setTblDocente(List<Docente> tblDocente) {
+		this.tblDocente = tblDocente;
 	}
 }
