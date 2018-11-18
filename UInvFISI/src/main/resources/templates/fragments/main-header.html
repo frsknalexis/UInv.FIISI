@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!-- main header area start -->
+        <div class="mainheader-area" th:fragment="main-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="index.html"><img src="assets/images/icon/logo2.png" alt="logo"></a>
+                        </div>
+                    </div>
+                    <!-- profile info & task notification -->
+                    <div class="col-md-9 clearfix text-right">
+                        <div class="d-md-inline-block d-block mr-md-4">
+                            <ul class="notification-area">
+                                <li id="full-view"><i class="ti-fullscreen"></i></li>
+                                <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
+                                <li class="settings-btn">
+                                    <i class="ti-settings"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix d-md-inline-block d-block">
+                            <div class="user-profile m-0">
+                                <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
+                                <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Message</a>
+                                    <a class="dropdown-item" href="#">Settings</a>
+                                    <a class="dropdown-item" href="#">Log Out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main header area end -->
+
+</body>
+</html>
