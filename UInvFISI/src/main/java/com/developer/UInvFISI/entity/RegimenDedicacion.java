@@ -28,7 +28,7 @@ public class RegimenDedicacion extends BaseEntity implements Serializable{
 
 	@Id
 	@GeneratedValue(generator="regimenSeq", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(sequenceName="regimen_seq", name="regimenSeq", schema="publuc", allocationSize=1)
+	@SequenceGenerator(sequenceName="regimen_seq", name="regimenSeq", schema="public", allocationSize=1)
 	@Column(name="regimen_dedicacion_id", unique=true, nullable=false)
 	private Integer regimenDedicacionId;
 	

@@ -6,34 +6,66 @@
 </head>
 <body>
 
-	    <!-- header area start -->
-            <div class="header-area" th:fragment="header-area">
-                <div class="row align-items-center">
-                    <!-- nav and search button -->
-                    <div class="col-md-6 col-sm-8 clearfix">
-                        <div class="nav-btn pull-left">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <div class="search-box pull-left">
-                            <form action="#">
-                                <input type="text" name="search" placeholder="Search..." required>
-                                <i class="ti-search"></i>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- profile info & task notification -->
-                    <div class="col-md-6 col-sm-4 clearfix">
-                        <ul class="notification-area pull-right">
-                            <li id="full-view"><i class="ti-fullscreen"></i></li>
-                            <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
-                           
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- header area end -->
+	<!-- header area start -->
+	<div class="header-area" th:fragment="header-area">
+		<div class="row align-items-center">
+			<!-- nav and search button -->
+			<div class="col-md-6 col-sm-8 clearfix">
+				<div class="nav-btn pull-left">
+					<span></span> <span></span> <span></span>
+				</div>
+				<div class="search-box pull-left">
+					<form action="#">
+						<input type="text" name="search" placeholder="Search..." required>
+						<i class="ti-search"></i>
+					</form>
+				</div>
+			</div>
+			<!-- profile info & task notification -->
+			<div class="col-md-6 col-sm-4 clearfix">
+				<ul class="notification-area pull-right">
+					<li id="full-view"><i class="ti-fullscreen"></i></li>
+					<li id="full-view-exit"><i class="ti-zoom-out"></i></li>
 
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- header area end -->
+
+	<div class="mt-5" th:fragment="mensaje-flash">
+		<div class="alert alert-warning alert-dismissible fade show"
+			role="alert" th:text="${warning}" th:if="${warning != null}">
+			<strong>You should check in on some of those fields below.</strong>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-success alert-dismissible fade show"
+			role="alert" th:text="${success}" th:if="${success != null}">
+			<strong>You should check in on some of those fields below.</strong>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-danger alert-dismissible fade show"
+			role="alert" th:text="${danger}" th:if="${danger != null}">
+			<strong>You should check in on some of those fields below.</strong>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="alert alert-info alert-dismissible fade show"
+			role="alert" th:text="${info}" th:if="${info != null}"> 
+			<strong>You should check in on some of those fields below.</strong>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	</div>
 </body>
 </html>

@@ -33,7 +33,7 @@ public class Documento extends BaseEntity implements Serializable{
 	@Column(name="abreviatura", nullable=false, length=20)
 	private String abreviatura;
 	
-	@Column(name="nombre_documento", nullable=false, length=30)
+	@Column(name="nombre_documento", nullable=false, length=45)
 	private String nombreDocumento;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="documento")
