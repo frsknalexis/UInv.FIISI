@@ -83,17 +83,61 @@ constraint fk_docente_condicion foreign key (condicion_id) references tbl_condic
 );
 alter sequence tbl_docentes_docente_id_seq rename to docente_seq
 
-create table tbl_investigacion
+
+create table tbl_programa
 (
-investigacion_id serial not null,
-nombre_investigacion varchar(200) not null,
-palabras_claves varchar(100) not null,
-fecha_publicacion timestamp,
-resumen_investigacion varchar(300) not null,
+programa_id serial not null,
+nombre_programa varchar(200) not null,
 fecha_registro timestamp,
 fecha_modificacion timestamp,
 habilitado boolean default true,
-constraint pk_investigacion primary key (investigacion_id)
+constraint pk_programa primary key(programa_id)
 );
-alter sequence tbl_investigacion_investigacion_id_seq rename to investigacion_id
+alter sequence tbl_programa_programa_id_seq rename to programa_seq;
+
+create table tbl_linea_investigacion
+(
+linea_investigacion_id serial not null,
+nombre_linea_investigacion varchar(200) not null,
+programa_id int,
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_linea_investigacion primary key(linea_investigacion_id),
+constraint fk_linea_programa foreign key(programa_id) references tbl_programa(programa_id)
+);
+alter sequence tbl_linea_investigacion_linea_investigacion_id_seq rename to linea_investigacion_seq;
+
+
+create table tbl_investigacion
+(
+investigacion_id serial not null,
+linea_investigacion_id int,
+nombre_investigacion varchar(200) not null,
+fecha_publicacion date,
+resumen_investigacion varchar(300) not null,
+nombre_archivo varchar(150) not null,
+tamanio_archivo varchar(10) not null,
+formato_archivo varchar(10) not null,
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_investigacion primary key(investigacion_id),
+constraint fk_investigacion_linea foreign key(linea_investigacion_id) references tbl_linea_investigacion(linea_investigacion_id)
+);
+alter sequence tbl_investigacion_investigacion_id_seq rename to investigacion_seq;
+
+create table tbl_detalle_investigacion
+(
+detalle_investigacion_id serial not null,
+docente_id int,
+investigacion_id int,
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_detalle_investigacion primary key(detalle_investigacion_id),
+constraint fk_detalle_docente foreign key(docente_id) references tbl_docentes(docente_id),
+constraint fk_detalle_investigacion_investigacion foreign key(investigacion_id) references tbl_investigacion(investigacion_id)
+);
+alter sequence tbl_detalle_investigacion_detalle_investigacion_id_seq rename to detalle_investigacion_seq;
 
