@@ -70,5 +70,11 @@ public class DocumentoDAOImpl extends JdbcDaoSupport implements DocumentoDAO {
 		Documento documento = findOne(documentoId);
 		em.remove(documento);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Documento> findAllEnabled() {
+		return em.createQuery("from Documento d where d.habilitado = true").getResultList();
+	}
 	
 }

@@ -18,5 +18,6 @@ public interface RegimenDedicacionDAO {
 	
 	public void delete(Integer regimenDedicacionId);
 	
+	List<RegimenDedicacion> findAllEnabled();
 	
 }

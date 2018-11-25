@@ -79,4 +79,10 @@ public class FacultadServiceImpl implements FacultadService{
 		}
 	}
 
+	@Override
+	public List<Facultad> findAllEnabled() {
+		List<Facultad> facultades = facultadDAO.findAllEnabled();
+		return facultades;
+	}
+
 }

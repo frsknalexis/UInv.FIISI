@@ -77,4 +77,11 @@ public class RegimenDedicacionDAOImpl extends JdbcDaoSupport implements RegimenD
 		em.remove(regimenDedicacion);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RegimenDedicacion> findAllEnabled() {
+		// TODO Auto-generated method stub
+		return em.createQuery("from RegimenDedicacion rd where rd.habilitado = true").getResultList();
+	}
+
 }

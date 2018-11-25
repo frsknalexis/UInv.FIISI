@@ -54,7 +54,7 @@
                                 <a th:href="@{/documento/form}" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus-circle"></i> Agregar Documento</a>
                                 <hr/>
                                 <div class="data-tables">
-                                    <table id="dataTable" class="text-center">
+                                    <table id="dataTable" class="text-center" width="100%">
                                         <thead class="bg-light text-capitalize">
                                             <tr>
                                                 <th>#</th>
@@ -75,8 +75,8 @@
                                             	</td>
                                             	<td>
                                             		<div class="btn-group" role="group" aria-label="Basic example">
-                                            			<a th:href="@{/documento/detail/} + ${documento.documentoId}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></a>
-                                            			<a th:href="@{/documento/form/} + ${documento.documentoId}" class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
+                                            			<a th:if="${documento.habilitado == true}" th:href="@{/documento/detail/} + ${documento.documentoId}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></a>
+                                            			<a th:if="${documento.habilitado == true}" th:href="@{/documento/form/} + ${documento.documentoId}" class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
                                             			<a th:if="${documento.habilitado == true}" th:href="@{/documento/delete/} + ${documento.documentoId}" class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></a>
                                             			<a th:if="${documento.habilitado != true}" th:href="@{/documento/enabled/} + ${documento.documentoId}" class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></a>
                                             		</div>

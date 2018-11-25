@@ -60,7 +60,7 @@
 									class="fa fa-plus-circle"></i> Agregar Regimen</a>
 								<hr />
 								<div class="data-tables">
-									<table id="dataTable" class="text-center">
+									<table id="dataTable" class="text-center" width="100%">
 										<thead class="bg-light text-capitalize">
 											<tr>
 												<th>#</th>
@@ -81,9 +81,11 @@
 													<div class="btn-group" role="group"
 														aria-label="Basic example">
 														<a
+															th:if="${regimen.habilitado == true}"
 															th:href="@{/regimen/detail/} + ${regimen.regimenDedicacionId}"
 															class="btn btn-outline-info btn-sm"><i
 															class="fa fa-eye" title="Ver"></i></a> <a
+															th:if="${regimen.habilitado == true}"
 															th:href="@{/regimen/form/} + ${regimen.regimenDedicacionId}"
 															class="btn btn btn-outline-primary btn-sm"><i
 															class="fa fa-pencil" title="Editar"></i></a> <a

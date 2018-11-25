@@ -77,4 +77,11 @@ public class CategoriaDocenteServiceImpl implements CategoriaDocenteService {
 		}
 	}
 
+	@Override
+	@Transactional(readOnly=true)
+	public List<CategoriaDocente> findAllEnabled() {
+		List<CategoriaDocente> categoriasDocente = categoriaDocenteDAO.findAllEnabled();
+		return categoriasDocente;
+	}
+
 }

@@ -54,7 +54,7 @@
                                 <a th:href="@{/facultad/form}" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus-circle"></i> Agregar Facultad</a>
                                 <hr/>
                                 <div class="data-tables">
-                                    <table id="dataTable" class="text-center">
+                                    <table id="dataTable" class="text-center" width="100%">
                                         <thead class="bg-light text-capitalize">
                                             <tr>
                                                 <th>#</th>
@@ -75,8 +75,8 @@
                                             	</td>
                                             	<td>
                                             		<div class="btn-group" role="group" aria-label="Basic example">
-                                            			<a th:href="@{/facultad/detail/} + ${facultad.facultadId}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></a>
-                                            			<a th:href="@{/facultad/form/} + ${facultad.facultadId}" class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
+                                            			<a th:if="${facultad.habilitado == true}" th:href="@{/facultad/detail/} + ${facultad.facultadId}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></a>
+                                            			<a th:if="${facultad.habilitado == true}" th:href="@{/facultad/form/} + ${facultad.facultadId}" class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
                                             			<a th:if="${facultad.habilitado == true}" th:href="@{/facultad/delete/} + ${facultad.facultadId}" class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></a>
                                             			<a th:if="${facultad.habilitado != true}" th:href="@{/facultad/enabled/} + ${facultad.facultadId}" class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></a>
                                             		</div>

@@ -104,7 +104,7 @@ public class DocumentoController {
 		
 		model.put("titulo", "Documento: " + documento.getNombreDocumento());
 		model.put("documento", documento);
-		return "/documento/ver";
+		return "documento/ver";
 	}
 	
 }

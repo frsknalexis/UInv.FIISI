@@ -72,5 +72,11 @@ public class CategoriaDocenteDAOImpl extends JdbcDaoSupport implements Categoria
 		}
 		em.remove(categoriaDocente);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CategoriaDocente> findAllEnabled() {
+		return em.createQuery("from CategoriaDocente cd where cd.habilitado = true").getResultList();
+	}
 	
 }

@@ -64,12 +64,15 @@
                                 </ul>
                             </li>
                             <li class="active">
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
-                                    <span>Tables</span></a>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-book"></i>
+                                    <span>Docente Investigador</span></a>
                                 <ul class="collapse">
-                                    <li><a href="table-basic.html">basic table</a></li>
-                                    <li><a href="table-layout.html">table layout</a></li>
-                                    <li class="active"><a href="datatable.html">datatable</a></li>
+									<li><a href="#" aria-expanded="true">Registro en DINA</a>
+                                        <ul class="collapse">
+                                            <li><a th:href="@{'/docente/form'}">Agregar</a></li>
+                                            <li><a th:href="@{'/docente/listar'}">Listar</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                             <li><a href="maps.html"><i class="ti-map-alt"></i> <span>maps</span></a></li>

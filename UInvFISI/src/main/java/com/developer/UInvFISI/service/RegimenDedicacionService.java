@@ -18,5 +18,5 @@ public interface RegimenDedicacionService {
 	
 	public void remove(Integer regimenDedicacionId);
 	
-	
+	List<RegimenDedicacion> findAllEnabled();
 }

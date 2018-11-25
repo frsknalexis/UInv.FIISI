@@ -17,4 +17,6 @@ public interface CategoriaDocenteService {
 	public void delete(Integer categoriaDocenteId);
 	
 	public void remove(Integer categoriaDocenteId);
+	
+	List<CategoriaDocente> findAllEnabled();
 }

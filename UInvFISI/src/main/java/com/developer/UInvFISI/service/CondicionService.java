@@ -17,4 +17,6 @@ public interface CondicionService {
 	void delete(Integer condicionId);
 	
 	void remove(Integer condicionId);
+	
+	List<Condicion> findAllEnabled();
 }

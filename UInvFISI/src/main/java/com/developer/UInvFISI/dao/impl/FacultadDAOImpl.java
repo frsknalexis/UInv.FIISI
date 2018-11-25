@@ -71,5 +71,12 @@ public class FacultadDAOImpl extends JdbcDaoSupport implements FacultadDAO{
 		em.remove(facultad);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Facultad> findAllEnabled() {
+		// TODO Auto-generated method stub
+		return em.createQuery("from Facultad f where f.habilitado = true").getResultList();
+	}
+
 	
 }

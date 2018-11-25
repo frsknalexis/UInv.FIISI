@@ -17,5 +17,7 @@ public interface CategoriaDocenteDAO {
 	public void disabled(CategoriaDocente categoriaDocente);
 	
 	public void delete(Integer categoriaDocenteId);
+	
+	List<CategoriaDocente> findAllEnabled();
 
 }

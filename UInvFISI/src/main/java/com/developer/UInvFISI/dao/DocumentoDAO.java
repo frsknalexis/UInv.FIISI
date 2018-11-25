@@ -18,4 +18,6 @@ public interface DocumentoDAO {
 	
 	public void delete(Integer documentoId);
 	
+	public List<Documento> findAllEnabled();
+	
 }

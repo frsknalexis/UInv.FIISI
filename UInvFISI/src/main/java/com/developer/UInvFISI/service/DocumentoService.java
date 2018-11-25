@@ -17,4 +17,6 @@ public interface DocumentoService {
 	public void delete(Integer documentoId);
 	
 	public void delete2(Integer documentoId);
+	
+	List<Documento> findAllEnabled();
 }

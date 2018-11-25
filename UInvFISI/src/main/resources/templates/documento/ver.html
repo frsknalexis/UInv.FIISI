@@ -65,7 +65,7 @@
 										th:if="${documento.habilitado != true}"
 										class="btn btn-danger btn-sm" th:text="'Inactivo'"></a></li>
 									<li class="list-group-item"
-										th:text="${documento.fechaRegistro}"></li>
+										th:text="${#dates.format(documento.fechaRegistro, 'dd MMM yyyy')}"></li>
 								</ul>
 								<div class="mt-3">
 									<a class="btn btn-outline-primary btn-sm"

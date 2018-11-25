@@ -87,4 +87,10 @@ public class RegimenDedicacionServiceImpl implements RegimenDedicacionService {
 		}
 	}
 
+	@Override
+	public List<RegimenDedicacion> findAllEnabled() {
+		List<RegimenDedicacion> regimenes = regimenDedicacionDAO.findAllEnabled();
+		return regimenes;
+	}
+
 }

@@ -78,5 +78,11 @@ public class CondicionServiceImpl implements CondicionService {
 		if(condicionId != null && condicionId > 0) {
 			condicionDAO.delete(condicionId);
 		}
+	}
+
+	@Override
+	public List<Condicion> findAllEnabled() {
+		List<Condicion> condiciones = condicionDAO.findAllEnabled();
+		return condiciones;
 	}	
 }

@@ -76,5 +76,12 @@ public class DocumentoServiceImpl implements DocumentoService {
 			documentoDAO.delete(documentoId);
 		}
 	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Documento> findAllEnabled() {
+		List<Documento> documentos = documentoDAO.findAllEnabled();
+		return documentos;
+	}
 	
 }

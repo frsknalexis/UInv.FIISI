@@ -76,4 +76,11 @@ public class CondicionDAOImpl extends JdbcDaoSupport implements CondicionDAO {
 		
 		em.remove(condicion);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Condicion> findAllEnabled() {
+		// TODO Auto-generated method stub
+		return em.createQuery("from Condicion c where c.habilitado = true").getResultList();
+	}
 }

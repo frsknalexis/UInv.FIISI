@@ -17,4 +17,6 @@ public interface FacultadDAO {
 	public void disabled(Facultad facultad);
 	
 	public void delete(Integer facultadId);
+	
+	List<Facultad> findAllEnabled();
 }

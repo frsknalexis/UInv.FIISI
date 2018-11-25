@@ -17,4 +17,6 @@ public interface CondicionDAO {
 	public void disabled(Condicion condicion);
 	
 	public void delete(Integer condicionId);
+	
+	List<Condicion> findAllEnabled();
 }
