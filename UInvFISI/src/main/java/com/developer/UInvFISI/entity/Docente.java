@@ -65,10 +65,6 @@ public class Docente extends BaseEntity implements Serializable{
 	@JoinColumn(name="facultad_id")
 	private Facultad facultad;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="condicion_id")
-	private Condicion condicion;
-
 	public Docente() {
 		
 	}
@@ -167,14 +163,5 @@ public class Docente extends BaseEntity implements Serializable{
 
 	public void setFacultad(Facultad facultad) {
 		this.facultad = facultad;
-	}
-
-	public Condicion getCondicion() {
-		return condicion;
-	}
-
-	public void setCondicion(Condicion condicion) {
-		this.condicion = condicion;
-	}
-	
+	}	
 }

@@ -17,13 +17,11 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.developer.UInvFISI.entity.CategoriaDocente;
-import com.developer.UInvFISI.entity.Condicion;
 import com.developer.UInvFISI.entity.Docente;
 import com.developer.UInvFISI.entity.Documento;
 import com.developer.UInvFISI.entity.Facultad;
 import com.developer.UInvFISI.entity.RegimenDedicacion;
 import com.developer.UInvFISI.service.CategoriaDocenteService;
-import com.developer.UInvFISI.service.CondicionService;
 import com.developer.UInvFISI.service.DocenteService;
 import com.developer.UInvFISI.service.DocumentoService;
 import com.developer.UInvFISI.service.FacultadService;
@@ -53,11 +51,7 @@ public class DocenteController {
 	@Autowired
 	@Qualifier("facultadService")
 	private FacultadService facultadService;
-	
-	@Autowired
-	@Qualifier("condicionService")
-	private CondicionService condicionService;
-	
+		
 	@GetMapping("/listar")
 	public String listarDocentes(Map<String, Object> model) {
 		List<Docente> docentes = docenteService.findAll();
@@ -72,9 +66,7 @@ public class DocenteController {
 		List<CategoriaDocente> categorias = categoriaDocenteService.findAllEnabled();
 		List<RegimenDedicacion> regimenes = regimenDedicacionService.findAllEnabled();
 		List<Facultad> facultades = facultadService.findAllEnabled();
-		List<Condicion> condiciones = condicionService.findAllEnabled();
 		Docente docente = new Docente();
-		model.put("condiciones", condiciones);
 		model.put("facultades", facultades);
 		model.put("regimenes", regimenes);
 		model.put("categorias", categorias);
@@ -100,7 +92,6 @@ public class DocenteController {
 		List<CategoriaDocente> categorias = categoriaDocenteService.findAllEnabled();
 		List<RegimenDedicacion> regimenes = regimenDedicacionService.findAllEnabled();
 		List<Facultad> facultades = facultadService.findAllEnabled();
-		List<Condicion> condiciones = condicionService.findAllEnabled();
 		if(docenteId != null && docenteId > 0) {
 			docente = docenteService.getByDocenteId(docenteId);
 			if(docente == null) {
@@ -114,7 +105,6 @@ public class DocenteController {
 			return "redirect:/docente/listar";
 		}
 		model.put("titulo", "Editar Docente");
-		model.put("condiciones", condiciones);
 		model.put("facultades", facultades);
 		model.put("regimenes", regimenes);
 		model.put("categorias", categorias);

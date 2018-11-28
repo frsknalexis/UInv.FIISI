@@ -1,17 +1,12 @@
 package com.developer.UInvFISI.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -33,11 +28,9 @@ public class Condicion extends BaseEntity implements Serializable {
 	@Column(name="nombre_condicion", nullable=false, length=45)
 	private String nombreCondicion;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="condicion")
-	private List<Docente> docentes;
 	
 	public Condicion() {
-		docentes = new ArrayList<Docente>();
+		
 	}
 
 	public Integer getCondicionId() {
@@ -54,18 +47,5 @@ public class Condicion extends BaseEntity implements Serializable {
 
 	public void setNombreCondicion(String nombreCondicion) {
 		this.nombreCondicion = nombreCondicion;
-	}
-
-	public List<Docente> getDocentes() {
-		return docentes;
-	}
-
-	public void setDocentes(List<Docente> docentes) {
-		this.docentes = docentes;
-	}
-	
-	public void addDocente(Docente docente) {
-		docentes.add(docente);
-	}
-		
+	}	
 }
