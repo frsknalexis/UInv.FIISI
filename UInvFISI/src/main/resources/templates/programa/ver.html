@@ -76,14 +76,18 @@
 										</div>
 									</div>
 									<div class="col-md-6 mt-1">
-										<div
-											th:if="${not #lists.isEmpty(programa.lineasInvestigacion)}">
-											<p class="mb-2"
-												th:text="'Lineas de Investigacion asociadas a ' + ${programa.nombrePrograma}"></p>
-											<ul class="list-group" th:each="linea : ${programa.lineasInvestigacion}">
-												<li th:text="${linea.nombreLineaInvestigacion}"  class="list-group-item disabled"></li>
-											</ul>
-										</div>
+										<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(programa.lineasInvestigacion)}">
+											<thead class="bg-primary text-capitalize">
+												<tr>
+													<th th:text="'Lineas de Investigacion asociadas a ' + ${programa.nombrePrograma}"></th>
+												</tr>
+											</thead>
+											<tbody>
+													<tr th:each="linea : ${programa.lineasInvestigacion}">
+														<td th:text="${linea.nombreLineaInvestigacion}"></td>
+													</tr>
+											</tbody>
+										</table>
 										<div class="alert alert-info my-2"
 											th:if="${#lists.isEmpty(programa.lineasInvestigacion)}">
 											<p
