@@ -75,5 +75,12 @@ public class DocenteDAOImpl extends JdbcDaoSupport implements DocenteDAO {
 		}
 		em.remove(docente);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Docente> findAllEnabled() {
+		
+		return em.createQuery("from Docente d where d.habilitado = true").getResultList();
+	}
 	
 }

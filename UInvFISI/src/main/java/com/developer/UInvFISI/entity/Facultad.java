@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="tbl_facultad", schema="public")
 public class Facultad extends BaseEntity implements Serializable {
@@ -35,12 +37,13 @@ public class Facultad extends BaseEntity implements Serializable {
 	
 	@Column(name="abreviatura_facultad", nullable=false, length=10)
 	private String abreviaturaFacultad;
-	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="facultad")
-	private List<Docente> docentes;
 
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="facultad")
+	@JsonManagedReference
+	private List<AsignacionDocente> asignacionDocentes;
+	
 	public Facultad() {
-		docentes = new ArrayList<Docente>();
+		asignacionDocentes = new ArrayList<AsignacionDocente>();
 	}
 
 	public Integer getFacultadId() {
@@ -67,16 +70,15 @@ public class Facultad extends BaseEntity implements Serializable {
 		this.abreviaturaFacultad = abreviaturaFacultad;
 	}
 
-	public List<Docente> getDocentes() {
-		return docentes;
+	public List<AsignacionDocente> getAsignacionDocentes() {
+		return asignacionDocentes;
 	}
 
-	public void setDocentes(List<Docente> docentes) {
-		this.docentes = docentes;
+	public void setAsignacionDocentes(List<AsignacionDocente> asignacionDocentes) {
+		this.asignacionDocentes = asignacionDocentes;
 	}
 	
-	public void addDocente(Docente docente) {
-		docentes.add(docente);
+	public void addAsignacionDocente(AsignacionDocente asignacionDocente) {
+		asignacionDocentes.add(asignacionDocente);
 	}
-	
 }

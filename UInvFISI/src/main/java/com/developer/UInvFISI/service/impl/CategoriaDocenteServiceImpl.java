@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.developer.UInvFISI.dao.CategoriaDocenteDAO;
 import com.developer.UInvFISI.entity.CategoriaDocente;
+import com.developer.UInvFISI.repository.CategoriaDocenteRepository;
 import com.developer.UInvFISI.service.CategoriaDocenteService;
 
 @Service("categoriaDocenteService")
@@ -18,6 +19,10 @@ public class CategoriaDocenteServiceImpl implements CategoriaDocenteService {
 	@Autowired
 	@Qualifier("categoriaDocenteRepository")
 	private CategoriaDocenteDAO categoriaDocenteDAO;
+	
+	@Autowired
+	@Qualifier("catRepository")
+	private CategoriaDocenteRepository categoriaDocenteRepository;
 	
 	@Override
 	@Transactional(readOnly=true)
@@ -82,6 +87,12 @@ public class CategoriaDocenteServiceImpl implements CategoriaDocenteService {
 	public List<CategoriaDocente> findAllEnabled() {
 		List<CategoriaDocente> categoriasDocente = categoriaDocenteDAO.findAllEnabled();
 		return categoriasDocente;
+	}
+
+	@Override
+	public List<CategoriaDocente> findByNombreCategoria(String termino) {
+		List<CategoriaDocente> categorias = categoriaDocenteRepository.findByNombreCategoria(termino);
+		return categorias;
 	}
 
 }

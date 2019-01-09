@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.developer.UInvFISI.dao.DocenteDAO;
 import com.developer.UInvFISI.entity.Docente;
+import com.developer.UInvFISI.repository.DocenteRepository;
 import com.developer.UInvFISI.service.DocenteService;
 
 @Service("docenteService")
@@ -18,6 +19,10 @@ public class DocenteServiceImpl implements DocenteService {
 	@Autowired
 	@Qualifier("docenteRepository")
 	private DocenteDAO docenteDAO;
+	
+	@Autowired
+	@Qualifier("docenteRepository2")
+	private DocenteRepository docenteRepository;
 	
 	@Override
 	@Transactional(readOnly=true)
@@ -80,5 +85,19 @@ public class DocenteServiceImpl implements DocenteService {
 		if(docenteId != null && docenteId > 0) {
 			docenteDAO.delete(docenteId);
 		}
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Docente> findAllEnabled() {
+		List<Docente> docentes = docenteDAO.findAllEnabled();
+		return docentes;
+	}
+
+	@Override
+	public List<Docente> findByNombresDocente(String termino) {
+		
+		List<Docente> docentes = docenteRepository.findByNombresDocente(termino);
+		return docentes;
 	}
 }

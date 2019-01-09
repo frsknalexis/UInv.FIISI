@@ -226,23 +226,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="form-row">
-										<div class="col-md-4 mb-3">
-											<label for="facultadDocente">Facultad</label>
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"
-														id="inputGroupFacultadDocente"><i
-														class="fa fa-university"> </i></span>
-												</div>
-												<select th:field="*{facultad.facultadId}" id="facultadDocente" class="form-control">
-													<option value="">Seleccione una Facultad</option>
-													<option th:each="facultad : ${facultades}" th:value="${facultad.facultadId}"
-														th:text="${facultad.abreviaturaFacultad}"/>
-												</select>
-											</div>
-										</div>
-									</div>
 
 									<button class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar docente

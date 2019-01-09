@@ -17,4 +17,6 @@ public interface DocenteDAO {
 	void disabled(Docente docente);
 	
 	void delete(Integer docenteId);
+	
+	List<Docente> findAllEnabled();
 }

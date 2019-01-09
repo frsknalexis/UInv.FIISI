@@ -8,6 +8,8 @@ public interface LineaInvestigacionService {
 
 	List<LineaInvestigacion> findAll();
 	
+	List<LineaInvestigacion> findAllEnabled();
+	
 	void saveOrUpdate(LineaInvestigacion lineaInvestigacion);
 	
 	LineaInvestigacion getByLineaInvestigacionId(Integer lineaInvestigacionId);
@@ -17,6 +19,8 @@ public interface LineaInvestigacionService {
 	void delete(Integer lineaInvestigacionId);
 	
 	void remove(Integer lineaInvestigacionId);
+	
+	List<LineaInvestigacion> findByNombreLineaInvestigacion(String termino);
 	
 	
 }

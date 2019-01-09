@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,6 +44,25 @@ public class LineaInvestigacionController {
 		model.put("titulo", "Listado Lineas Investigacion");
 		return "linea/listar";
 		
+	}
+	
+	@GetMapping("/formLineaInvestigacion/{programaId}")
+	public String createLineaInvestigacion(@PathVariable(value="programaId") Integer programaId, Map<String, Object> model,
+			RedirectAttributes flash) {
+		
+		Programa programa = programaService.getByProgramaId(programaId);
+		if(programa == null) {
+			
+			flash.addFlashAttribute("error", "El Programa no existe");
+			return "redirect:/programa/listar";
+		}
+		
+		LineaInvestigacion lineaInvestigacion = new LineaInvestigacion();
+		lineaInvestigacion.setPrograma(programa);
+		
+		model.put("lineaInvestigacion", lineaInvestigacion);
+		model.put("titulo", "Formulario Linea Investigacion");
+		return "programa/formLinea";
 	}
 	
 	@GetMapping("/form/{lineaInvestigacionId}")
@@ -86,15 +106,14 @@ public class LineaInvestigacionController {
 		
 	}
 	
-	@PostMapping("/form")
-	public String save(@Valid LineaInvestigacion lineaInvestigacion, SessionStatus status, RedirectAttributes flash) {
+	@PostMapping("/formLineaInvestigacion")
+	public String saveLineaInvestigacion(@Valid LineaInvestigacion lineaInvestigacion, SessionStatus status, 
+			RedirectAttributes flash) {
 		
-		String mensajeFlash = (lineaInvestigacion.getLineaInvestigacionId() != null) ? "Linea Investigacion Editado con exito" : 
-			"Linea Investigacion Creado con exito";
 		lineaInvestigacionService.saveOrUpdate(lineaInvestigacion);
 		status.setComplete();
-		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/linea/listar";
+		flash.addFlashAttribute("success", "Linea Investigacion Creada con exito");
+		return "redirect:/linea/formLineaInvestigacion/" + lineaInvestigacion.getPrograma().getProgramaId();
 		
 	}
 	
@@ -135,5 +154,12 @@ public class LineaInvestigacionController {
 		model.put("lineaInvestigacion", lineaInvestigacion);
 		return "linea/ver";
 		
+	}
+	
+	@GetMapping("/cargar-lineas/{termino}")
+	@ResponseBody List<LineaInvestigacion> cargarLineas(@PathVariable(value="termino") String termino) {
+		
+		List<LineaInvestigacion> lineasInvestigacion = lineaInvestigacionService.findByNombreLineaInvestigacion(termino);
+		return lineasInvestigacion;
 	}
 }

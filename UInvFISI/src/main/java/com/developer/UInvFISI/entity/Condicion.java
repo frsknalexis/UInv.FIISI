@@ -1,14 +1,21 @@
 package com.developer.UInvFISI.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "tbl_condicion", schema = "public")
@@ -28,9 +35,12 @@ public class Condicion extends BaseEntity implements Serializable {
 	@Column(name="nombre_condicion", nullable=false, length=45)
 	private String nombreCondicion;
 
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="condicion")
+	@JsonManagedReference
+	private List<AsignacionDocente> asignacionDocentes;
 	
 	public Condicion() {
-		
+		asignacionDocentes = new ArrayList<AsignacionDocente>();
 	}
 
 	public Integer getCondicionId() {
@@ -47,5 +57,17 @@ public class Condicion extends BaseEntity implements Serializable {
 
 	public void setNombreCondicion(String nombreCondicion) {
 		this.nombreCondicion = nombreCondicion;
-	}	
+	}
+
+	public List<AsignacionDocente> getAsignacionDocentes() {
+		return asignacionDocentes;
+	}
+
+	public void setAsignacionDocentes(List<AsignacionDocente> asignacionDocentes) {
+		this.asignacionDocentes = asignacionDocentes;
+	}
+	
+	public void addAsignacionDocente(AsignacionDocente asignacionDocente) {
+		asignacionDocentes.add(asignacionDocente);
+	}
 }

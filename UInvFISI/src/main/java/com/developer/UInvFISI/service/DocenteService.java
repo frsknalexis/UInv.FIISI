@@ -17,4 +17,8 @@ public interface DocenteService {
 	void delete(Integer docenteId);
 	
 	void remove(Integer docenteId);
+	
+	List<Docente> findAllEnabled();
+	
+	List<Docente> findByNombresDocente(String termino);
 }

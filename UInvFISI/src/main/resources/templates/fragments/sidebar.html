@@ -45,19 +45,17 @@
                                     <li><a href="dropdown.html">Dropdown</a></li>
                                 </ul>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-book"></i>
                                     <span>Docente Investigador</span></a>
                                 <ul class="collapse">
-									<li><a href="#" aria-expanded="true">Registro en DINA</a>
-                                        <ul class="collapse">
-                                            <li><a th:href="@{'/docente/form'}">Agregar</a></li>
-                                            <li><a th:href="@{'/docente/listar'}">Listar</a></li>
-                                        </ul>
-                                    </li>
+									<li><a th:href="@{'/docente/listar'}" aria-expanded="true">DINA y ORCID</a></li>
+                                </ul>
+                                <ul class="collapse">
+                                	<li><a th:href="@{'/asignacion/list'}" aria-expanded="true">Proyecto Investigacion</a></li>
                                 </ul>
                             </li>
-                            <li class="active">
+                            <li>
                             	<a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-newspaper-o"></i>
                             		<span>Linea de Investigacion</span></a>
                             	<ul class="collapse">

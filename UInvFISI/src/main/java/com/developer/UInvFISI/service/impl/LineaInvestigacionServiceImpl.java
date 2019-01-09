@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.developer.UInvFISI.dao.LineaInvestigacionDAO;
 import com.developer.UInvFISI.entity.LineaInvestigacion;
+import com.developer.UInvFISI.repository.LineaInvestigacionRepository;
 import com.developer.UInvFISI.service.LineaInvestigacionService;
 
 @Service("lineaInvestigacionService")
@@ -18,6 +19,10 @@ public class LineaInvestigacionServiceImpl implements LineaInvestigacionService 
 	@Autowired
 	@Qualifier("lineaInvestigacionRepository")
 	private LineaInvestigacionDAO lineaInvestigacionDAO;
+	
+	@Autowired
+	@Qualifier("lineaInvRepository")
+	private LineaInvestigacionRepository lineaInvestigacionRepository;
 	
 	@Override
 	@Transactional(readOnly=true)
@@ -98,6 +103,21 @@ public class LineaInvestigacionServiceImpl implements LineaInvestigacionService 
 			
 			lineaInvestigacionDAO.delete(lineaInvestigacionId);
 		}
+	}
+
+	@Override
+	@Transactional
+	public List<LineaInvestigacion> findAllEnabled() {
+		
+		List<LineaInvestigacion> lineasInvestigacion = lineaInvestigacionDAO.findAllEnabled();
+		return lineasInvestigacion;
+	}
+
+	@Override
+	public List<LineaInvestigacion> findByNombreLineaInvestigacion(String termino) {
+		
+		List<LineaInvestigacion> lineasInvestigacion = lineaInvestigacionRepository.findByNombreLineaInvestigacion(termino);
+		return lineasInvestigacion;
 	}
 
 }

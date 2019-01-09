@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -19,12 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.developer.UInvFISI.entity.CategoriaDocente;
 import com.developer.UInvFISI.entity.Docente;
 import com.developer.UInvFISI.entity.Documento;
-import com.developer.UInvFISI.entity.Facultad;
 import com.developer.UInvFISI.entity.RegimenDedicacion;
 import com.developer.UInvFISI.service.CategoriaDocenteService;
 import com.developer.UInvFISI.service.DocenteService;
 import com.developer.UInvFISI.service.DocumentoService;
-import com.developer.UInvFISI.service.FacultadService;
 import com.developer.UInvFISI.service.RegimenDedicacionService;
 
 @Controller
@@ -48,9 +47,6 @@ public class DocenteController {
 	@Qualifier("regimenDedicacionService")
 	private RegimenDedicacionService regimenDedicacionService;
 	
-	@Autowired
-	@Qualifier("facultadService")
-	private FacultadService facultadService;
 		
 	@GetMapping("/listar")
 	public String listarDocentes(Map<String, Object> model) {
@@ -65,9 +61,7 @@ public class DocenteController {
 		List<Documento> documentos = documentoService.findAllEnabled();
 		List<CategoriaDocente> categorias = categoriaDocenteService.findAllEnabled();
 		List<RegimenDedicacion> regimenes = regimenDedicacionService.findAllEnabled();
-		List<Facultad> facultades = facultadService.findAllEnabled();
 		Docente docente = new Docente();
-		model.put("facultades", facultades);
 		model.put("regimenes", regimenes);
 		model.put("categorias", categorias);
 		model.put("documentos", documentos);
@@ -91,7 +85,6 @@ public class DocenteController {
 		List<Documento> documentos = documentoService.findAllEnabled();
 		List<CategoriaDocente> categorias = categoriaDocenteService.findAllEnabled();
 		List<RegimenDedicacion> regimenes = regimenDedicacionService.findAllEnabled();
-		List<Facultad> facultades = facultadService.findAllEnabled();
 		if(docenteId != null && docenteId > 0) {
 			docente = docenteService.getByDocenteId(docenteId);
 			if(docente == null) {
@@ -105,7 +98,6 @@ public class DocenteController {
 			return "redirect:/docente/listar";
 		}
 		model.put("titulo", "Editar Docente");
-		model.put("facultades", facultades);
 		model.put("regimenes", regimenes);
 		model.put("categorias", categorias);
 		model.put("documentos", documentos);
@@ -139,4 +131,11 @@ public class DocenteController {
 		model.put("docente", docente);
 		return "docente/ver";
 	}
+	
+	@GetMapping(value="/cargar-docentes/{termino}", produces= {"application/json"})
+	@ResponseBody List<Docente> cargarDocentes(@PathVariable(value="termino") String termino) {
+		List<Docente> docentes = docenteService.findByNombresDocente(termino);
+		return docentes;
+	}
+	
 }

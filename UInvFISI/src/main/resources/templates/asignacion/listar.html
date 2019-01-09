@@ -7,7 +7,7 @@
 	<div id="preloader">
 		<div class="loader"></div>
 	</div>
-
+	
 	<!-- page container area start -->
 	<div class="page-container">
 
@@ -26,7 +26,7 @@
 							<h4 class="page-title pull-left">Dashboard</h4>
 							<ul class="breadcrumbs pull-left">
 								<li><a th:href="@{/}">Home</a></li>
-								<li><span>Registro DINA</span></li>
+								<li><span>Proyecto Investigacion</span></li>
 							</ul>
 						</div>
 					</div>
@@ -55,61 +55,38 @@
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
 
-								<a th:href="@{/docente/form}"
+								<a th:href="@{/asignacion/form}"
 									class="btn btn-outline-primary btn-sm"><i
-									class="fa fa-plus-circle"></i> Agregar Docente</a>
+									class="fa fa-plus-circle"></i> Asignar Investigacion</a>
 								<hr />
 								<div class="data-tables">
 									<table id="dataTable" class="text-center" width="100%">
 										<thead class="bg-light text-capitalize">
 											<tr>
-												<th>#</th>
-												<th>Docente</th>
-												<th>Nro. DNI</th>
-												<th>Categoria Docente</th>
-												<th>Regimen Dedicacion</th>
-												<th>DINA(Datos academicos)</th>
-												<th>DINA(Proyectos de Investigacion)</th>
-												<th>Codigo ORCID</th>
+												<th>Investigacion</th>
+												<th>Periodo</th>
 												<th>Estado</th>
+												<th>Asignar Docente</th>
 												<th>Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="docente : ${docentes}">
-												<td th:text="${docente.docenteId}"></td>
-												<td
-													th:text="${docente.apellidosDocente} + ' ' + ${docente.nombresDocente}"></td>
-												<td th:text="${docente.nroDocumento}"></td>
-												<td th:text="${docente.categoriaDocente.nombreCategoria}"></td>
-												<td th:text="${docente.regimenDedicacion.nombreRegimen}"></td>
-												<td th:text="${docente.dinaDatosAcademicos}"></td>
-												<td th:text="${docente.dinaProyectosInvestigacion}"></td>
-												<td><a th:href="${docente.codigoOrcid}" th:text="${docente.codigoOrcid}" target="_blank"></a></td>
-												<td><a th:if="${docente.habilitado == true}"
-													class="btn btn-success btn-sm" th:text="'Activo'"></a> <a
-													th:if="${docente.habilitado != true}"
-													class="btn btn-danger btn-sm" th:text="'Inactivo'"></a></td>
+											<tr th:each="asignacion : ${asignaciones}">
+												<td th:text="${asignacion.nombreInvestigacion}"></td>
+												<td th:text="${asignacion.anio}"></td>
 												<td>
-													<div class="btn-group" role="group"
-														aria-label="Basic example">
-														<a
-															th:if="${docente.habilitado == true}"
-															th:href="@{/docente/detail/} + ${docente.docenteId}"
-															class="btn btn-outline-info btn-sm"><i
-															class="fa fa-eye" title="Ver"></i></a> <a
-															th:if="${docente.habilitado == true}"
-															th:href="@{/docente/form/} + ${docente.docenteId}"
-															class="btn btn btn-outline-primary btn-sm"><i
-															class="fa fa-pencil" title="Editar"></i></a> <a
-															th:if="${docente.habilitado == true}"
-															th:href="@{/docente/delete/} + ${docente.docenteId}"
-															class="btn btn-outline-danger btn-sm"><i
-															class="fa fa-close" title="Deshabilitar"></i></a> <a
-															th:if="${docente.habilitado != true}"
-															th:href="@{/docente/enabled/} + ${docente.docenteId}"
-															class="btn btn-outline-success btn-sm"><i
-															class="fa fa-check" title="Habilitar"></i></a>
+												<a th:if="${asignacion.habilitado == true}" class="btn btn-success btn-sm" th:text="'Activo'"></a>
+                                            	<a th:if="${asignacion.habilitado != true}" class="btn btn-danger btn-sm" th:text="'Inactivo'"></a>
+												</td>
+												<td>
+												<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacionDocente/formAsignacionDetalle/} + ${asignacion.asignacionId}" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus-circle"></i> Asignar Investigador</a>
+												</td>
+												<td>
+													<div class="btn-group" role="group" aria-label="Basic example">
+														<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacion/detail/} + ${asignacion.asignacionId}"  class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></a>
+                                            			<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacion/form/} + ${asignacion.asignacionId}"  class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
+                                            			<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacion/delete/} + ${asignacion.asignacionId}"  class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></a>
+                                            			<a th:if="${asignacion.habilitado != true}" th:href="@{/asignacion/enabled/} + ${asignacion.asignacionId}"  class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></a>
 													</div>
 												</td>
 											</tr>

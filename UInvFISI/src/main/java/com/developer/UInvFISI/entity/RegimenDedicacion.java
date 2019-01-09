@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name="tbl_regimen_dedicacion", schema="public")
@@ -36,6 +38,7 @@ public class RegimenDedicacion extends BaseEntity implements Serializable{
 	private String nombreRegimen;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="regimenDedicacion")
+	@JsonManagedReference
 	private List<Docente> docentes;
 
 	public RegimenDedicacion() {

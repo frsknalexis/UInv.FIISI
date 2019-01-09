@@ -19,4 +19,6 @@ public interface CategoriaDocenteService {
 	public void remove(Integer categoriaDocenteId);
 	
 	List<CategoriaDocente> findAllEnabled();
+	
+	List<CategoriaDocente> findByNombreCategoria(String termino);
 }

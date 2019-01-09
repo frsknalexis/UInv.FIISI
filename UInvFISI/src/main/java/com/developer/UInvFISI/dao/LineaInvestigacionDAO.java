@@ -8,6 +8,8 @@ public interface LineaInvestigacionDAO {
 
 	List<LineaInvestigacion> findAll();
 	
+	List<LineaInvestigacion> findAllEnabled();
+	
 	void save(LineaInvestigacion lineaInvestigacion);
 	
 	void update(LineaInvestigacion lineaInvestigacion);

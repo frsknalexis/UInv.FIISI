@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="tbl_docentes", schema="public")
 public class Docente extends BaseEntity implements Serializable{
@@ -39,10 +41,12 @@ public class Docente extends BaseEntity implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="categoria_docente_id")
+	@JsonBackReference
 	private CategoriaDocente categoriaDocente;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="regimen_dedicacion_id")
+	@JsonBackReference
 	private RegimenDedicacion regimenDedicacion;
 	
 	@Column(name="dina_datos_academicos", length=5, nullable=false)
@@ -53,6 +57,7 @@ public class Docente extends BaseEntity implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="documento_id")
+	@JsonBackReference
 	private Documento documento;
 	
 	@Column(name="codigo_orcid", length=100, nullable=false)
@@ -60,10 +65,6 @@ public class Docente extends BaseEntity implements Serializable{
 	
 	@Column(name="publicaciones_orcid", nullable=false)
 	private Integer publicacionesOrcid;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="facultad_id")
-	private Facultad facultad;
 	
 	public Docente() {
 		
@@ -156,12 +157,4 @@ public class Docente extends BaseEntity implements Serializable{
 	public void setPublicacionesOrcid(Integer publicacionesOrcid) {
 		this.publicacionesOrcid = publicacionesOrcid;
 	}
-
-	public Facultad getFacultad() {
-		return facultad;
-	}
-
-	public void setFacultad(Facultad facultad) {
-		this.facultad = facultad;
-	}	
 }

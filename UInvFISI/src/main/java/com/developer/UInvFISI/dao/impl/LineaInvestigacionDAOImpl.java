@@ -80,4 +80,12 @@ public class LineaInvestigacionDAOImpl extends JdbcDaoSupport implements LineaIn
 		em.remove(lineaInvestigacion);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<LineaInvestigacion> findAllEnabled() {
+		
+		List<LineaInvestigacion> lineasInvestigacion = em.createQuery("from LineaInvestigacion li where li.habilitado = true").getResultList();
+		return lineasInvestigacion;
+	}
+
 }
