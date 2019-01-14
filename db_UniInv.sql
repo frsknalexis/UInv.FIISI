@@ -109,7 +109,7 @@ create  table tbl_asignacion
 asignacion_id serial not null,
 nombre_investigacion varchar(500) not null,
 linea_investigacion_id int,
-anio date,
+anio integer,
 fecha_inicio date,
 fecha_fin date,
 fecha_registro timestamp,

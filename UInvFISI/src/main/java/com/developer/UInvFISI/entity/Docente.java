@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -66,10 +67,13 @@ public class Docente extends BaseEntity implements Serializable{
 	@Column(name="publicaciones_orcid", nullable=false)
 	private Integer publicacionesOrcid;
 	
+	
+	
 	public Docente() {
 		
 	}
-
+	
+	
 	public Integer getDocenteId() {
 		return docenteId;
 	}
@@ -157,4 +161,7 @@ public class Docente extends BaseEntity implements Serializable{
 	public void setPublicacionesOrcid(Integer publicacionesOrcid) {
 		this.publicacionesOrcid = publicacionesOrcid;
 	}
+
+
+	
 }
