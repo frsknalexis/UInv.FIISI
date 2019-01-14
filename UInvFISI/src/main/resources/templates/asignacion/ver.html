@@ -53,6 +53,11 @@
 					<div class="col-md-12 mt-5">
 						<div class="card">
 							<div class="card-body">
+							<div class="mt-2">
+									<a class="btn btn-outline-primary btn-sm"
+										th:href="@{/asignacion/list}"><i
+										class="fa fa-arrow-circle-o-left"></i> Volver</a>
+								</div>
 								<h4 class="header-title text-center" th:text="${titulo}"></h4>
 								<p class="text-center card-text">Titulo: </p>
 								<h5 class="title text-center" th:text="${asignacion.nombreInvestigacion}"></h5>
@@ -75,10 +80,9 @@
 								</table>
 								<div class="alert-items" th:if="${#lists.isEmpty(asignacion.asignacionDocentes)}">
 									<div class="alert alert-primary my-2" role="alert">
-										Aun no hay Investigadores Asignados al Proyecto de Investigacion: <strong th:text="${asignacion.nombreInvestigacion}"></strong>
+										Aun no hay Investigadores Asignados al Proyecto de Investigacion: <strong th:text="${asignacion.nombreInvestigacion}"></strong>.<a th:href="@{/asignacionDocente/formAsignacionDetalle/} + ${asignacion.asignacionId}"> Click aqui para asignar Investigador</a>
 									</div>
 								</div>
-								<hr>
 								<table class="table text-center table-hover table-striped table-bordered" style="width: 700px; margin: 0 auto;">
 									<thead class="bg-primary text-capitalize">
 										<tr>
@@ -93,6 +97,36 @@
 									</tr>
 									</tbody>
 								</table>
+								<p class="text-center card-text my-2">Ficheros en este Item: </p>
+								<table class="table text-center table-hover table-striped table-bordered" width="100%"
+									th:if="${not #lists.isEmpty(asignacion.informesInvestigacion)}">
+									<thead class="bg-primary text-capitalize">
+										<tr>
+											<th>Descripcion</th>
+											<th>Fichero</th>
+											<th>Formato</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="informeInv : ${asignacion.informesInvestigacion}">
+											<td th:text="${informeInv.asunto}"></td>
+											<td th:text="${informeInv.nombreFichero}"></td>
+											<td th:text="${informeInv.formatoFichero}"></td>
+											<td>
+												<div class="btn-group" role="group" aria-label="Basic example">
+													<a th:href="@{/informe/view/} + ${informeInv.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+													<a th:href="@{/informe/download/} + ${informeInv.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="alert-items" th:if="${#lists.isEmpty(asignacion.informesInvestigacion)}">
+									<div class="alert alert-primary my-2" role="alert">
+										Aun no hay ficheros asociados al Proyecto de Investigacion: <strong th:text="${asignacion.nombreInvestigacion}"></strong>.<a th:href="@{/informe/formInformeInvestigacion/} + ${asignacion.asignacionId}"> Click aqui para adjuntar Informe</a>
+									</div>
+								</div>
 								<p class="text-center card-text my-2">Duracion: </p>
 								<p class="text-center card-text" th:text="'Del ' + ${#dates.format(asignacion.fechaInicio, 'dd MMMM')} + ' al ' + ${#dates.format(asignacion.fechaFin, 'dd MMMM')} + ' del ' + ${asignacion.anio}"></p>
 								<p class="text-center card-text">HUACHO - PERU</p>

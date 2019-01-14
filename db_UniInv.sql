@@ -139,3 +139,19 @@ constraint fk_asignacion_detalle_facultad foreign key(facultad_id) references tb
 alter sequence tbl_asignacion_detalle_asignacion_detalle_id_seq rename to asignacion_detalle_seq;
 
 select * from tbl_asignacion_detalle;
+
+create table tbl_informes_asignacion(
+informe_asignacion_id serial not null,
+asignacion_id int,
+asunto varchar(100),
+nombre_fichero varchar(75),
+tamanio_fichero varchar(10),
+formato_fichero varchar(20),
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_informes_asignacion primary key(informe_asignacion_id),
+constraint fk_informes_asignacion_asignacion foreign key(asignacion_id) references tbl_asignacion(asignacion_id)
+);
+
+alter sequence tbl_informes_asignacion_informe_asignacion_id_seq rename to informe_asignacion_seq;

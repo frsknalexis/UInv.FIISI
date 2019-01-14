@@ -76,12 +76,12 @@
 												<td th:text="${programa.nombrePrograma}"></td>
 												<td>
 												<a th:if="${programa.habilitado == true}"
-													class="btn btn-success btn-sm" th:text="'Activo'"></a> <a
+													class="btn btn-success btn-xs" th:text="'Activo'"></a> <a
 													th:if="${programa.habilitado != true}"
-													class="btn btn-danger btn-sm" th:text="'Inactivo'"></a>
+													class="btn btn-danger btn-xs" th:text="'Inactivo'"></a>
 												</td>
 												<td>
-													<a th:if="${programa.habilitado == true}" th:href="@{/linea/formLineaInvestigacion/} + ${programa.programaId}" class="btn btn-outline-primary btn-sm">
+													<a th:if="${programa.habilitado == true}" th:href="@{/linea/formLineaInvestigacion/} + ${programa.programaId}" class="btn btn-outline-primary btn-xs">
 													<i class="fa fa-plus-circle"></i> Agregar Linea Investigacion</a>
 												</td>
 												<td>
@@ -90,19 +90,19 @@
 														<a
 															th:if="${programa.habilitado == true}"
 															th:href="@{/programa/detail/} + ${programa.programaId}"
-															class="btn btn-outline-info btn-sm"><i
+															class="btn btn-outline-info btn-xs"><i
 															class="fa fa-eye" title="Ver"></i></a> <a
 															th:if="${programa.habilitado == true}"
 															th:href="@{/programa/form/} + ${programa.programaId}"
-															class="btn btn btn-outline-primary btn-sm"><i
+															class="btn btn btn-outline-primary btn-xs"><i
 															class="fa fa-pencil" title="Editar"></i></a> <a
 															th:if="${programa.habilitado == true}"
 															th:href="@{/programa/delete/} + ${programa.programaId}"
-															class="btn btn-outline-danger btn-sm"><i
+															class="btn btn-outline-danger btn-xs"><i
 															class="fa fa-close" title="Deshabilitar"></i></a> <a
 															th:if="${programa.habilitado != true}"
 															th:href="@{/programa/enabled/} + ${programa.programaId}"
-															class="btn btn-outline-success btn-sm"><i
+															class="btn btn-outline-success btn-xs"><i
 															class="fa fa-check" title="Habilitar"></i></a>
 													</div>
 												</td>

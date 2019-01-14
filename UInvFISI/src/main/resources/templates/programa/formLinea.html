@@ -103,8 +103,38 @@
 					<div class="col-sm-6 mt-5">
 						<div class="card">
 							<div class="card-body">
-								
-								
+								<h4 class="header-title text-center" th:text="${lineaInvestigacion.programa.nombrePrograma}"></h4>
+								<hr>
+								<table class="table text-center table-hover table-striped" width="100%" th:if="${not #lists.isEmpty(lineasInvestigacion)}">
+									<thead class="bg-primary text-capitalize">
+										<tr>
+											<th>Linea Investigacion</th>
+											<th>Estado</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="lineaInvg : ${lineasInvestigacion}">
+											<td th:text="${lineaInvg.nombreLineaInvestigacion}"></td>
+											<td>
+												<a th:if="${lineaInvg.habilitado == true}" class="btn btn-success btn-xs" th:text="'Activo'"></a>
+                                        		<a th:if="${lineaInvg.habilitado != true}" class="btn btn-danger btn-xs" th:text="'Inactivo'"></a>
+											</td>
+											<td>
+												<div class="btn-group" role="group" aria-label="Basic example">
+													<a th:href="@{/linea/formLineaInvestigacion/} + ${lineaInvg.programa.programaId} + '/' + ${lineaInvg.lineaInvestigacionId}" th:if="${lineaInvg.habilitado == true}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+													<a th:href="@{/linea/delete/} + ${lineaInvg.lineaInvestigacionId}" th:if="${lineaInvg.habilitado == true}" class="btn btn-outline-danger btn-xs"><i class="fa fa-close" title="Deshabilitar"></i></a>
+													<a th:href="@{/linea/enabled/} + ${lineaInvg.lineaInvestigacionId}" th:if="${lineaInvg.habilitado != true}" class="btn btn-outline-success btn-xs"><i class="fa fa-check" title="Habilitar"></i></a>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="alert-items" th:if="${#lists.isEmpty(lineasInvestigacion)}">
+									<div class="alert alert-primary my-2" role="alert">
+									Aun no hay Lineas de Investigacion asociadas al: <strong th:text="${lineaInvestigacion.programa.nombrePrograma}"></strong>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

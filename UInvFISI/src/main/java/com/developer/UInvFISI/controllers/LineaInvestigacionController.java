@@ -50,6 +50,7 @@ public class LineaInvestigacionController {
 	public String createLineaInvestigacion(@PathVariable(value="programaId") Integer programaId, Map<String, Object> model,
 			RedirectAttributes flash) {
 		
+		List<LineaInvestigacion> lineasInvestigacion = lineaInvestigacionService.findByProgramaProgramaId(programaId);
 		Programa programa = programaService.getByProgramaId(programaId);
 		if(programa == null) {
 			
@@ -60,8 +61,31 @@ public class LineaInvestigacionController {
 		LineaInvestigacion lineaInvestigacion = new LineaInvestigacion();
 		lineaInvestigacion.setPrograma(programa);
 		
+		model.put("lineasInvestigacion", lineasInvestigacion);
 		model.put("lineaInvestigacion", lineaInvestigacion);
 		model.put("titulo", "Formulario Linea Investigacion");
+		return "programa/formLinea";
+	}
+	
+	@GetMapping("/formLineaInvestigacion/{programaId}/{lineaInvestigacionId}")
+	public String updateLineaInvestigacion(@PathVariable(value="programaId") Integer programaId, @PathVariable(value="lineaInvestigacionId") Integer lineaInvestigacionId,
+			Map<String, Object> model) {
+		
+		List<LineaInvestigacion> lineasInvestigacion = lineaInvestigacionService.findByProgramaProgramaId(programaId);
+		LineaInvestigacion lineaInvestigacion = null;
+		Programa programa = null;
+		
+		if(programaId != null && programaId > 0) {
+			programa = programaService.getByProgramaId(programaId);
+			if(lineaInvestigacionId != null && lineaInvestigacionId > 0) {
+				lineaInvestigacion = lineaInvestigacionService.findByProgramaProgramaIdAndLineaInvestigacionId(programaId, lineaInvestigacionId);
+			}
+		}
+		
+		lineaInvestigacion.setPrograma(programa);
+		model.put("lineaInvestigacion", lineaInvestigacion);
+		model.put("lineasInvestigacion", lineasInvestigacion);
+		model.put("titulo", "Editar Linea Investigacion");
 		return "programa/formLinea";
 	}
 	
@@ -120,23 +144,27 @@ public class LineaInvestigacionController {
 	@GetMapping("/enabled/{lineaInvestigacionId}")
 	public String enabled(@PathVariable(value="lineaInvestigacionId") Integer lineaInvestigacionId) {
 		
+		LineaInvestigacion lineaInvestigacion = null;
 		if(lineaInvestigacionId != null && lineaInvestigacionId > 0) {
 			
 			lineaInvestigacionService.enabled(lineaInvestigacionId);
+			lineaInvestigacion = lineaInvestigacionService.getByLineaInvestigacionId(lineaInvestigacionId);
 		}
 		
-		return "redirect:/linea/listar";
+		return "redirect:/linea/formLineaInvestigacion/" + lineaInvestigacion.getPrograma().getProgramaId();
 	}
 	
 	@GetMapping("/delete/{lineaInvestigacionId}")
 	public String delete(@PathVariable(value="lineaInvestigacionId") Integer lineaInvestigacionId) {
 		
+		LineaInvestigacion lineaInvestigacion = null;
 		if(lineaInvestigacionId != null && lineaInvestigacionId > 0) {
 			
 			lineaInvestigacionService.delete(lineaInvestigacionId);
+			lineaInvestigacion = lineaInvestigacionService.getByLineaInvestigacionId(lineaInvestigacionId);
 		}
 		
-		return "redirect:/linea/listar";
+		return "redirect:/linea/formLineaInvestigacion/" + lineaInvestigacion.getPrograma().getProgramaId();
 	}
 	
 	

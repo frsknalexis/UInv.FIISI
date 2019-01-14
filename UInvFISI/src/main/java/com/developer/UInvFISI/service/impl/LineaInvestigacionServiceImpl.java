@@ -120,4 +120,27 @@ public class LineaInvestigacionServiceImpl implements LineaInvestigacionService 
 		return lineasInvestigacion;
 	}
 
+	@Override
+	public List<LineaInvestigacion> findByProgramaProgramaId(Integer programaId) {
+		
+		List<LineaInvestigacion> lineasInvestigacion = lineaInvestigacionRepository.findByProgramaProgramaId(programaId);
+		return lineasInvestigacion;
+	}
+
+	@Override
+	public LineaInvestigacion findByProgramaProgramaIdAndLineaInvestigacionId(Integer programaId,
+			Integer lineaInvestigacionId) {
+		
+		LineaInvestigacion lineaInvestigacion = null;
+		
+		if(programaId != null && programaId > 0) {
+			
+			if(lineaInvestigacionId != null && lineaInvestigacionId > 0) {
+				lineaInvestigacion = lineaInvestigacionRepository.findByProgramaProgramaIdAndLineaInvestigacionId(programaId, lineaInvestigacionId);
+			}
+		}
+		
+		return lineaInvestigacion;
+	}
+
 }

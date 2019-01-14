@@ -56,20 +56,17 @@
 								<h4 class="header-title" th:text="${titulo}"></h4>
 
 								<a th:href="@{/docente/form}"
-									class="btn btn-outline-primary btn-sm"><i
+									class="btn btn-outline-primary btn-xs"><i
 									class="fa fa-plus-circle"></i> Agregar Docente</a>
 								<hr />
-								<div class="data-tables">
-									<table id="dataTable" class="text-center" width="100%">
-										<thead class="bg-light text-capitalize">
+								<div class="data-tables datatable-primary">
+									<table id="dataTable" class="text-center progress-table table-hover table-striped" width="100%">
+										<thead class="text-capitalize">
 											<tr>
 												<th>#</th>
 												<th>Docente</th>
-												<th>Nro. DNI</th>
 												<th>Categoria Docente</th>
 												<th>Regimen Dedicacion</th>
-												<th>DINA(Datos academicos)</th>
-												<th>DINA(Proyectos de Investigacion)</th>
 												<th>Codigo ORCID</th>
 												<th>Estado</th>
 												<th>Acciones</th>
@@ -80,35 +77,32 @@
 												<td th:text="${docente.docenteId}"></td>
 												<td
 													th:text="${docente.apellidosDocente} + ' ' + ${docente.nombresDocente}"></td>
-												<td th:text="${docente.nroDocumento}"></td>
 												<td th:text="${docente.categoriaDocente.nombreCategoria}"></td>
 												<td th:text="${docente.regimenDedicacion.nombreRegimen}"></td>
-												<td th:text="${docente.dinaDatosAcademicos}"></td>
-												<td th:text="${docente.dinaProyectosInvestigacion}"></td>
 												<td><a th:href="${docente.codigoOrcid}" th:text="${docente.codigoOrcid}" target="_blank"></a></td>
-												<td><a th:if="${docente.habilitado == true}"
-													class="btn btn-success btn-sm" th:text="'Activo'"></a> <a
-													th:if="${docente.habilitado != true}"
-													class="btn btn-danger btn-sm" th:text="'Inactivo'"></a></td>
+												<td>
+													<span th:if="${docente.habilitado == true}" class="status-p bg-success" th:text="'Activo'"></span>
+                                            		<span th:if="${docente.habilitado != true}" class="status-p bg-danger" th:text="'Inactivo'"></span>
+												</td>
 												<td>
 													<div class="btn-group" role="group"
 														aria-label="Basic example">
 														<a
 															th:if="${docente.habilitado == true}"
 															th:href="@{/docente/detail/} + ${docente.docenteId}"
-															class="btn btn-outline-info btn-sm"><i
+															class="btn btn-outline-info btn-xs"><i
 															class="fa fa-eye" title="Ver"></i></a> <a
 															th:if="${docente.habilitado == true}"
 															th:href="@{/docente/form/} + ${docente.docenteId}"
-															class="btn btn btn-outline-primary btn-sm"><i
+															class="btn btn btn-outline-primary btn-xs"><i
 															class="fa fa-pencil" title="Editar"></i></a> <a
 															th:if="${docente.habilitado == true}"
 															th:href="@{/docente/delete/} + ${docente.docenteId}"
-															class="btn btn-outline-danger btn-sm"><i
+															class="btn btn-outline-danger btn-xs"><i
 															class="fa fa-close" title="Deshabilitar"></i></a> <a
 															th:if="${docente.habilitado != true}"
 															th:href="@{/docente/enabled/} + ${docente.docenteId}"
-															class="btn btn-outline-success btn-sm"><i
+															class="btn btn-outline-success btn-xs"><i
 															class="fa fa-check" title="Habilitar"></i></a>
 													</div>
 												</td>

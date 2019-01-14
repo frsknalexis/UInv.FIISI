@@ -22,5 +22,8 @@ public interface LineaInvestigacionService {
 	
 	List<LineaInvestigacion> findByNombreLineaInvestigacion(String termino);
 	
+	List<LineaInvestigacion> findByProgramaProgramaId(Integer programaId);
+	
+	LineaInvestigacion findByProgramaProgramaIdAndLineaInvestigacionId(Integer programaId, Integer lineaInvestigacionId);
 	
 }

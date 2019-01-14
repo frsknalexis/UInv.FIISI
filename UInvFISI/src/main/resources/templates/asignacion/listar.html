@@ -56,17 +56,18 @@
 								<h4 class="header-title" th:text="${titulo}"></h4>
 
 								<a th:href="@{/asignacion/form}"
-									class="btn btn-outline-primary btn-sm"><i
-									class="fa fa-plus-circle"></i> Asignar Investigacion</a>
+									class="btn btn-outline-primary btn-xs"><i
+									class="fa fa-plus-circle"></i> Asignar Proyecto Investigacion</a>
 								<hr />
-								<div class="data-tables">
-									<table id="dataTable" class="text-center" width="100%">
-										<thead class="bg-light text-capitalize">
+								<div class="data-tables datatable-primary">
+									<table id="dataTable" class="text-center progress-table table-hover table-striped" width="100%">
+										<thead class="text-capitalize">
 											<tr>
 												<th>Investigacion</th>
 												<th>Periodo</th>
 												<th>Estado</th>
 												<th>Asignar Docente</th>
+												<th>Informes</th>
 												<th>Acciones</th>
 											</tr>
 										</thead>
@@ -75,18 +76,21 @@
 												<td th:text="${asignacion.nombreInvestigacion}"></td>
 												<td th:text="${asignacion.anio}"></td>
 												<td>
-												<a th:if="${asignacion.habilitado == true}" class="btn btn-success btn-sm" th:text="'Activo'"></a>
-                                            	<a th:if="${asignacion.habilitado != true}" class="btn btn-danger btn-sm" th:text="'Inactivo'"></a>
+                                            	<span th:if="${asignacion.habilitado == true}" class="status-p bg-warning" th:text="'Iniciado'"></span>
+                                            	<span th:if="${asignacion.habilitado != true}" class="status-p bg-success" th:text="'Terminado'"></span>
 												</td>
 												<td>
-												<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacionDocente/formAsignacionDetalle/} + ${asignacion.asignacionId}" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus-circle"></i> Asignar Investigador</a>
+												<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacionDocente/formAsignacionDetalle/} + ${asignacion.asignacionId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-plus-circle"></i> Asignar Investigador</a>
+												</td>
+												<td>
+												<a th:href="@{/informe/formInformeInvestigacion/} + ${asignacion.asignacionId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-files-o"></i> Adjuntar Informes</a>
 												</td>
 												<td>
 													<div class="btn-group" role="group" aria-label="Basic example">
-														<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacion/detail/} + ${asignacion.asignacionId}"  class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></a>
-                                            			<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacion/form/} + ${asignacion.asignacionId}"  class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
-                                            			<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacion/delete/} + ${asignacion.asignacionId}"  class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></a>
-                                            			<a th:if="${asignacion.habilitado != true}" th:href="@{/asignacion/enabled/} + ${asignacion.asignacionId}"  class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></a>
+														<a th:href="@{/asignacion/detail/} + ${asignacion.asignacionId}"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Ver"></i></a>
+                                            			<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacion/form/} + ${asignacion.asignacionId}"  class="btn btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+                                            			<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacion/delete/} + ${asignacion.asignacionId}"  class="btn btn-outline-danger btn-xs"><i class="fa fa-close" title="Deshabilitar"></i></a>
+                                            			<a th:if="${asignacion.habilitado != true}" th:href="@{/asignacion/enabled/} + ${asignacion.asignacionId}"  class="btn btn-outline-success btn-xs"><i class="fa fa-check" title="Habilitar"></i></a>
 													</div>
 												</td>
 											</tr>

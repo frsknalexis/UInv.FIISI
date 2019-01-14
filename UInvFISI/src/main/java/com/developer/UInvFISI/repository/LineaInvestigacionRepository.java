@@ -15,4 +15,7 @@ public interface LineaInvestigacionRepository extends JpaRepository<LineaInvesti
 	@Query("SELECT li FROM LineaInvestigacion li WHERE li.nombreLineaInvestigacion like %?1%")
 	List<LineaInvestigacion> findByNombreLineaInvestigacion(String termino);
 	
+	List<LineaInvestigacion> findByProgramaProgramaId(Integer programaId);
+	
+	LineaInvestigacion findByProgramaProgramaIdAndLineaInvestigacionId(Integer programaId, Integer lineaInvestigacionId);
 }

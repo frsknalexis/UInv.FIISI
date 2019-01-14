@@ -95,7 +95,7 @@ public class ProgramaController {
 		if(programaId > 0 && programaId != null) {
 			programa = programaService.getByProgramaId(programaId);
 		}
-		model.put("titulo", "Programa: " + programa.getNombrePrograma());
+		model.put("titulo", "PROGRAMA Y LINEAS INVESTIGACION");
 		model.put("programa", programa);
 		return "programa/ver";
 	}

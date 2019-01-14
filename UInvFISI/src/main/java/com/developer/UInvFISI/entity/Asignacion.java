@@ -65,8 +65,12 @@ public class Asignacion extends BaseEntity implements Serializable {
 	@JsonManagedReference
 	private List<AsignacionDocente> asignacionDocentes;
 
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="asignacion")
+	private List<InformeInvestigacion> informesInvestigacion;
+	
 	public Asignacion() {
 		asignacionDocentes = new ArrayList<AsignacionDocente>();
+		informesInvestigacion = new ArrayList<InformeInvestigacion>();
 	}
 
 	public Integer getAsignacionId() {
@@ -127,5 +131,17 @@ public class Asignacion extends BaseEntity implements Serializable {
 
 	public void setAnio(Integer anio) {
 		this.anio = anio;
+	}
+
+	public List<InformeInvestigacion> getInformesInvestigacion() {
+		return informesInvestigacion;
+	}
+
+	public void setInformesInvestigacion(List<InformeInvestigacion> informesInvestigacion) {
+		this.informesInvestigacion = informesInvestigacion;
+	}
+	
+	public void addInformeInvestigacion(InformeInvestigacion informeInvestigacion) {
+		informesInvestigacion.add(informeInvestigacion);
 	}
 }

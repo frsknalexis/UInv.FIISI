@@ -53,50 +53,34 @@
 					<div class="col-md-12 mt-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="header-title" th:text="${titulo}"></h4>
-								<hr>
-
-								<div class="form-row">
-									<div class="col-md-6 mt-1">
-										<ul class="list-group">
-											<li class="list-group-item active"
-												th:text="${programa.nombrePrograma}"></li>
-											<li class="list-group-item"><a
-												th:if="${programa.habilitado == true}"
-												class="btn btn-success btn-sm" th:text="'Activo'"></a> <a
-												th:if="${programa.habilitado != true}"
-												class="btn btn-danger btn-sm" th:text="'Inactivo'"></a></li>
-											<li class="list-group-item"
-												th:text="${#dates.format(programa.fechaRegistro, 'dd MMM yyyy')}"></li>
-										</ul>
-										<div class="mt-3">
-											<a class="btn btn-outline-primary btn-sm"
-												th:href="@{/programa/listar}"><i
-												class="fa fa-arrow-circle-o-left"></i> Volver</a>
-										</div>
-									</div>
-									<div class="col-md-6 mt-1">
-										<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(programa.lineasInvestigacion)}">
-											<thead class="bg-primary text-capitalize">
-												<tr>
-													<th th:text="'Lineas de Investigacion asociadas a ' + ${programa.nombrePrograma}"></th>
-												</tr>
-											</thead>
-											<tbody>
-													<tr th:each="linea : ${programa.lineasInvestigacion}">
-														<td th:text="${linea.nombreLineaInvestigacion}"></td>
-													</tr>
-											</tbody>
-										</table>
-										<div class="alert alert-info my-2"
-											th:if="${#lists.isEmpty(programa.lineasInvestigacion)}">
-											<p
-												th:text="'No hay Lineas de Investigacion asociadas a ' + ${programa.nombrePrograma}"></p>
-											<a th:text="'Click aqui para agregar.'"
-												th:href="@{'/linea/form'}"></a>
-										</div>
+							<div class="mt-2">
+									<a class="btn btn-outline-primary btn-sm"
+										th:href="@{/programa/listar}"><i
+										class="fa fa-arrow-circle-o-left"></i> Volver</a>
+								</div>
+								<h4 class="header-title text-center" th:text="${titulo}"></h4>
+								<p class="text-center card-text">Programa: </p>
+								<h5 class="title text-center" th:text="${programa.nombrePrograma}"></h5>
+								<p class="text-center card-text">Lineas Investigacion: </p>
+								<table class="table text-center table-hover table-striped" style="width: 750px; margin: 0 auto;"
+									th:if="${not #lists.isEmpty(programa.lineasInvestigacion)}">
+									<thead class="bg-primary text-capitalize">
+										<tr>
+											<th>Linea Investigacion</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="lineaInvestigacion : ${programa.lineasInvestigacion}">
+											<td th:text="${lineaInvestigacion.nombreLineaInvestigacion}"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="alert-items" th:if="${#lists.isEmpty(programa.lineasInvestigacion)}">
+									<div class="alert alert-primary my-2" role="alert">
+										Aun no hay Lineas de Investigacion asociadas al: <strong th:text="${programa.nombrePrograma}"></strong>
 									</div>
 								</div>
+								
 							</div>
 						</div>
 					</div>

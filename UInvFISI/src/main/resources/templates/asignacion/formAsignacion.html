@@ -49,7 +49,42 @@
 			<!-- page title area end -->
 			<div class="main-content-inner">
 				<div class="row">
-					<div class="col-sm-5 mt-5">
+					<div class="col-sm-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="header-title text-center" th:text="${asignacionDocente.asignacion.nombreInvestigacion}"></h4>
+								<p class="card-text">Responsable (s):</p>
+								<table class="table text-center table-hover table-striped" width="100%" th:if="${not #lists.isEmpty(asignacionDocentes)}">
+									<thead class="bg-primary text-capitalize">
+										<tr>
+											<th>Investigador</th>
+											<th>Facultad</th>
+											<th>Condicion</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+									<tr th:each="asignacionDocente : ${asignacionDocentes}">
+										<td th:text="${asignacionDocente.investigador}"></td>
+										<td th:text="${asignacionDocente.facultad.abreviaturaFacultad}"></td>
+										<td th:text="${asignacionDocente.condicion.nombreCondicion}"></td>
+										<td>
+											<div class="btn-group" role="group" aria-label="Basic example">
+												<a th:href="@{/asignacionDocente/formAsignacionDetalle/} + ${asignacionDocente.asignacion.asignacionId} + '/' + ${asignacionDocente.asignacionDetalleId}" th:if="${asignacionDocente.habilitado == true}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+								<div class="alert-items" th:if="${#lists.isEmpty(asignacionDocentes)}">
+									<div class="alert alert-primary my-2" role="alert" >
+									Aun no hay Investigadores Asignados al Proyecto de Investigacion: <strong th:text="${asignacionDocente.asignacion.nombreInvestigacion}"></strong> 
+									</div>	
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 mt-5">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
@@ -91,7 +126,7 @@
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="col-md-12 mb-3">
+										<div class="col-md-6 mb-3">
 											<label for="facultadAsignacion">Facultad: </label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -106,9 +141,7 @@
 												</select>
 											</div>
 										</div>
-									</div>
-									<div class="form-row">
-										<div class="col-md-12 mb-3">
+										<div class="col-md-6 mb-3">
 											<label for="condicionDocenteAsignacion">Condicion: </label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -134,49 +167,6 @@
 							</div>
 						</div>
 					</div>	
-					<div class="col-sm-7 mt-5">
-						<div class="card">
-							<div class="card-body">
-								<h4 class="header-title text-center" th:text="${asignacionDocente.asignacion.nombreInvestigacion}"></h4>
-								<hr>
-								<table class="table text-center table-hover table-striped" width="100%" th:if="${not #lists.isEmpty(asignacionDocentes)}">
-									<thead class="bg-primary text-capitalize">
-										<tr>
-											<th>Investigador</th>
-											<th>Facultad</th>
-											<th>Condicion</th>
-											<th>Estado</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-									<tr th:each="asignacionDocente : ${asignacionDocentes}">
-										<td th:text="${asignacionDocente.investigador}"></td>
-										<td th:text="${asignacionDocente.facultad.abreviaturaFacultad}"></td>
-										<td th:text="${asignacionDocente.condicion.nombreCondicion}"></td>
-										<td>
-										<a th:if="${asignacionDocente.habilitado == true}" class="btn btn-success btn-sm" th:text="'Activo'"></a>
-                                        <a th:if="${asignacionDocente.habilitado != true}" class="btn btn-danger btn-sm" th:text="'Inactivo'"></a>
-										</td>
-										<td>
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<a th:href="@{/asignacionDocente/formAsignacionDetalle/} + ${asignacionDocente.asignacion.asignacionId} + '/' + ${asignacionDocente.asignacionDetalleId}" th:if="${asignacionDocente.habilitado == true}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-												<a th:if="${asignacionDocente.habilitado == true}" class="btn btn-outline-danger btn-xs"><i class="fa fa-close" title="Deshabilitar"></i></a>
-												<a th:if="${asignacionDocente.habilitado != true}" class="btn btn-outline-success btn-xs"><i class="fa fa-check" title="Habilitar"></i></a>
-											</div>
-										</td>
-									</tr>
-									</tbody>
-								</table>
-								<div class="alert-items" th:if="${#lists.isEmpty(asignacionDocentes)}">
-									<div class="alert alert-primary my-2" role="alert" >
-									Aun no hay Investigadores Asignados al Proyecto de Investigacion: <strong th:text="${asignacionDocente.asignacion.nombreInvestigacion}"></strong> 
-									</div>	
-								</div>
-							</div>
-						</div>
-					</div>
-
 				</div>
 			</div>
 		</div>

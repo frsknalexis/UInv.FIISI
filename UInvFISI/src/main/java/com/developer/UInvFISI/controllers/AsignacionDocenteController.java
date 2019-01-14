@@ -76,6 +76,7 @@ public class AsignacionDocenteController {
 	public String updateAsignacionDocente(@PathVariable(value="asignacionDetalleId") Integer asignacionDetalleId, @PathVariable(value="asignacionId") Integer asignacionId,
 			Map<String, Object> model, RedirectAttributes flash) {
 		
+		List<AsignacionDocente> asignacionDocentes = asignacionDocenteService.findByAsignacionId(asignacionId);
 		List<Facultad> facultades = facultadService.findAllEnabled();
 		List<Condicion> condiciones = condicionService.findAllEnabled();
 		AsignacionDocente asignacionDocente = null;
@@ -91,6 +92,7 @@ public class AsignacionDocenteController {
 		
 		asignacionDocente.setAsignacion(asignacion);
 		
+		model.put("asignacionDocentes", asignacionDocentes);
 		model.put("facultades", facultades);
 		model.put("condiciones", condiciones);
 		model.put("asignacionDocente", asignacionDocente);
