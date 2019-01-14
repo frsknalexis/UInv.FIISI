@@ -1,0 +1,43 @@
+create table tbl_escuela
+(
+escuela_id serial not null,
+nombre_escuela varchar(150) not null,
+director_escuela varchar(150) not null,
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_escuela primary key (escuela_id)
+);
+alter sequence tbl_escuela_escuela_id_seq rename to escuela_seq
+
+create  table tbl_asignatura
+(
+asignatura_id serial not null,
+nombre_asignatura varchar(200) not null,
+escuela_id int,
+nombre_docente varchar(100) not null,
+periodo varchar(25) not null,
+ciclo varchar(25) not null,
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_asignatura primary key(asignatura_id),
+constraint fk_asignatura_escuela foreign key(escuela_id) references tbl_escuela(escuela_id)
+);
+alter sequence tbl_asignatura_asignatura_id_seq rename to asignatura_seq;
+
+create  table tbl_asignatura_detalle
+(
+asignatura_detalle_id serial not null,
+alumno varchar(200) not null,
+asignatura_id int,
+documento_id int,
+nro_documento varchar(10) not null,
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_asignatura_detalle primary key(asignatura_detalle_id),
+constraint fk_asignatura_detalle_documento foreign key(documento_id) references tbl_documentos(documento_id),
+constraint fk_asignatura_detalle_asignatura foreign key(asignatura_id) references tbl_asignatura(asignatura_id)
+);
+alter sequence tbl_asignatura_detalle_asignatura_detalle_id_seq rename to asignatura_detalle_seq;
