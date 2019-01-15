@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.developer.UInvFISI.entity.AsignaturaAlumno;
 
-public interface AsignaturaAlumnoDAO {
 
+public interface AsignaturaAlumnoDAO {
+/*
 	List<AsignaturaAlumno> findAll();
 	
 	void save(AsignaturaAlumno asignaturaAlumno);
@@ -13,5 +14,11 @@ public interface AsignaturaAlumnoDAO {
 	void  update(AsignaturaAlumno asignaturaAlumno);
 	
 	AsignaturaAlumno findOne(Integer asignaturaDetalleId);
+	*/
 	
+	List<AsignaturaAlumno> findAll();
+	
+	void save(AsignaturaAlumno asignaturaAlumno);
+	
+	void update(AsignaturaAlumno  asignaturaAlumno);
 }

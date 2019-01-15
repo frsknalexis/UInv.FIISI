@@ -94,12 +94,23 @@
 										<tr>
 											<th>ALUMNO</th>
 											<th>CU/DNI</th>
+											<th>DESCRIPCION</th>
+											<th>NOMBRE ARCHIVO</th>
+											<th>ACCIONES</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each="asignaturaD : ${asignatura.asignaturaAlumnos}">
 											<td th:text="${asignaturaD.alumno}"></td>
 											<td th:text="${asignaturaD.nroDocumento}"></td>
+											<td th:text="${asignaturaD.asunto}"></td>
+											<td th:text="${asignaturaD.nombreFichero}"></td>
+											<td>
+												<div class="btn-group" role="group" aria-label="Basic example">
+													<a th:href="@{/asignaturaAlumno/view/} + ${asignaturaD.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+													<a th:href="@{/asignaturaAlumno/download/} + ${asignaturaD.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
+												</div>
+											</td>
 										</tr>
 									</tbody>
 								</table>

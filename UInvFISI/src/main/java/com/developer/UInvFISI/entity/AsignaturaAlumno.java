@@ -45,6 +45,18 @@ public class AsignaturaAlumno extends BaseEntity implements Serializable{
 	@Column(name="nro_documento", nullable=false, length=10)
 	private String nroDocumento;
 	
+	@Column(name="asunto", length=100, nullable=false)
+	private String asunto;
+	
+	@Column(name="nombre_fichero", length=75)
+	private String nombreFichero;
+	
+	@Column(name="tamanio_fichero", length=10)
+	private String tamanioFichero;
+	
+	@Column(name="formato_fichero", length=20)
+	private String formatoFichero;
+	
 	
 
 	public AsignaturaAlumno() {
@@ -110,6 +122,57 @@ public class AsignaturaAlumno extends BaseEntity implements Serializable{
 	public void setNroDocumento(String nroDocumento) {
 		this.nroDocumento = nroDocumento;
 	}
+
+
+
+	public String getAsunto() {
+		return asunto;
+	}
+
+
+
+	public void setAsunto(String asunto) {
+		this.asunto = asunto;
+	}
+
+
+
+	public String getNombreFichero() {
+		return nombreFichero;
+	}
+
+
+
+	public void setNombreFichero(String nombreFichero) {
+		this.nombreFichero = nombreFichero;
+	}
+
+
+
+	public String getTamanioFichero() {
+		return tamanioFichero;
+	}
+
+
+
+	public void setTamanioFichero(String tamanioFichero) {
+		this.tamanioFichero = tamanioFichero;
+	}
+
+
+
+	public String getFormatoFichero() {
+		return formatoFichero;
+	}
+
+
+
+	public void setFormatoFichero(String formatoFichero) {
+		this.formatoFichero = formatoFichero;
+	}
+
+
+	
 	
 	
 }
