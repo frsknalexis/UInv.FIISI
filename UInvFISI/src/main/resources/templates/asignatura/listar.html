@@ -81,8 +81,8 @@
 												
 												<td th:text="${asignatura.ciclo}"></td>												
 												<td>
-												<a th:if="${asignatura.habilitado == true}" class="btn btn-success btn-sm" th:text="'Activo'"></a>
-                                            	<a th:if="${asignatura.habilitado != true}" class="btn btn-danger btn-sm" th:text="'Inactivo'"></a>
+												<a th:if="${asignatura.habilitado == true}" class="btn btn-danger btn-sm" th:text="'Incompleto'"></a>
+                                            	<a th:if="${asignatura.habilitado != true}" class="btn btn-success btn-sm" th:text="'completo'"></a>
 												</td>
 												
 					
@@ -92,7 +92,8 @@
 												
 												<td>
 													<div class="btn-group" role="group" aria-label="Basic example">
-														<a th:if="${asignatura.habilitado == true}" th:href="@{/asignatura/detail/} + ${asignatura.asignaturaId}"  class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></a>
+														<a th:href="@{/asignatura/detail/} + ${asignatura.asignaturaId}"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Ver"></i></a>
+														
                                             			<a th:if="${asignatura.habilitado == true}" th:href="@{/asignatura/form/} + ${asignatura.asignaturaId}"  class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
                                             			<a th:if="${asignatura.habilitado == true}" th:href="@{/asignatura/delete/} + ${asignatura.asignaturaId}"  class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></a>
                                             			<a th:if="${asignatura.habilitado != true}" th:href="@{/asignatura/enabled/} + ${asignatura.asignaturaId}"  class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></a>

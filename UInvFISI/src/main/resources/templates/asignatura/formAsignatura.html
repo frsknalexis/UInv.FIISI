@@ -49,36 +49,42 @@
 			<!-- page title area end -->
 			<div class="main-content-inner">
 				<div class="row">
-					<div class="col-lg-12 col-xs-12 mt-5">
+					<div class="col-sm-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+								
+								<div class="col-lg-12 col-xs-12 mt-6">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form th:action="@{/asignaturaAlumno/formAsignaturaDetalle}" th:object="${asignaturaAlumno}"  
+								<form th:action="@{/asignaturaAlumno/formAsignaturaDetalle}" enctype="multipart/form-data" 
+								th:object="${asignaturaAlumno}" 
 								novalidate="" class="needs-validation" method="post">
-									
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
 											<div class="input-group">
-												<input type="hidden" class="form-control" id="asignaturaAlumno-id"
+												<input type="hidden" class="form-control" id="asignaturaAlumnoId"
 												th:field="*{asignaturaDetalleId}" required=""/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupNombreAlumnoArchivo">
+													<i class="fa fa-book"></i></span>
+												</div>
+												<input type="text" class="form-control" id="nombreAlumnoArchivo"
+												aria-describedby="inputGroupNombreAlumnoArchivo" disabled="disabled"
+												th:value="${asignaturaAlumno.asignatura.nombreAsignatura}"/>
 											</div>
 										</div>
 									</div>
 									
 									<div class="form-row">
-										<div class="col-md-6 mb-4">
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text" id="inputGroupNombreAsignatura"><i
-														class="fa fa-book"></i></span>
-												</div>
-												<input type="text" class="form-control" placeholder="Nombre Asignatura"
-													id="nombreAsignaturaAsignado" aria-describedby="inputGroupNombreAsignatura" 
-													 disabled="disabled"  th:value="${asignaturaAlumno.asignatura.nombreAsignatura}" />
-											</div>
-										</div>
-										
-										<div class="col-md-6 mb-4">
+									<div class="col-md-12 mb-3">
+										<label for="alumnoAsignatura">Apellidos y Nombres </label>
 											<div class="input-group">
 												<div class="input-group-prepend">
 													<span class="input-group-text"
@@ -93,11 +99,8 @@
 										</div>
 									</div>
 									
-									
-									
-									
 									<div class="form-row">
-										<div class="col-md-6 mb-4">
+										<div class="col-md-6 mb-3">
 											<label for="documentoAlumno">Documento</label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -113,7 +116,7 @@
 											</div>
 										</div>
 										
-										<div class="col-md-6 mb-4">
+										<div class="col-md-6 mb-3">
 											<label for="nroDocumentoAlumno">Nro. Documento</label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -131,68 +134,101 @@
 										</div>
 									</div>
 									
+									<div class="form-row">
+										<div class="col-md-6 mb-3">
+											<label for="asuntoAsignaturaAlumno">Descripcion </label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupAsuntoAsignaturaAlumno">
+													<i class="fa fa-pencil-square-o"></i></span>
+												</div>
+												<input type="text" class="form-control" id="asuntoAsignaturaAlumno"
+												placeholder="Descripcion" aria-describedby="inputGroupAsuntoAsignaturaAlumno"
+												required="" th:field="*{asunto}"/>
+												<div class="invalid-feedback">Campo obligatorio, ingrese un valor</div>
+											</div>
+										</div>
+										<div class="col-md-6 mb-3">
+											<label for="fileAlumno">Archivo </label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupFileAlumno">
+													<i class="fa fa-upload"></i></span>
+												</div>
+												<div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="fileAlumno"
+                                                    name="fileAlumno" required="">
+                                                    <label class="custom-file-label" for="fileAlumno">Seleccione un Archivo</label>
+                                                </div>
+                                                <div class="invalid-feedback">Campo obligatorio, seleccione un archivo</div>
+											</div>
+										</div>
+									</div>
 									<button class="btn btn-outline-primary btn-sm" type="submit">
-										<i class="fa fa-check-circle"></i> Guardar Asignacion
+										<i class="fa fa-check-circle"></i> Guardar Informe
 									</button>
 									<a class="btn btn-outline-danger btn-sm"
 										th:href="@{/asignatura/list}"><i
 										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
-									
-									
 								</form>
-								
-								
-								
 							</div>
 						</div>
 					</div>	
-					
-				<div class="col-sm-12 mt-5">
-						<div class="card">
-							<div class="card-body">
-								<h4 class="header-title text-center" th:text="${subtitulo}"></h4>
+								
+								
+								
 								<hr>
-								<table class="table text-center table-hover table-striped" width="100%" th:if="${not #lists.isEmpty(asignaturaAlumnos)}">
+								
+								<h4 class="header-title text-center" th:text="${asignaturaAlumno.asignatura.nombreAsignatura}"></h4>
+								
+								<h4 class="header-title text-center" th:text="${subtitulo}"></h4>
+								
+								<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(asignaturasAlumno)}" width="100%">
 									<thead class="bg-primary text-capitalize">
 										<tr>
 											<th>ALUMNO</th>
-											<th>TIPO DOC</th>
-											<th>NRO</th>
-											<th>Estado</th>
-											<th>Acciones</th>
+											<th>CU/DNI</th>
+											<th>DESCRIPCION</th>
+											<th>FICHERO</th>
+											<th>FORMATO</th>
+											<th>ACCIONES</th>
 										</tr>
 									</thead>
 									<tbody>
-									<tr th:each="asignaturaAlumno : ${asignaturaAlumnos}">
-										<td th:text="${asignaturaAlumno.alumno}"></td>
-										<td th:text="${asignaturaAlumno.documento1.abreviatura}"></td>
-										<td th:text="${asignaturaAlumno.nroDocumento}"></td>
-										<td>
-										<a th:if="${asignaturaAlumno.habilitado == true}" class="btn btn-success btn-sm" th:text="'Activo'"></a>
-                                        <a th:if="${asignaturaAlumno.habilitado != true}" class="btn btn-danger btn-sm" th:text="'Inactivo'"></a>
-										</td>
-										<td>
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<a th:href="@{/asignaturaAlumno/formAsignaturaDetalle/} + ${asignaturaAlumno.asignatura.asignaturaId} + '/' + ${asignaturaAlumno.asignaturaDetalleId}" th:if="${asignaturaAlumno.habilitado == true}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-												<a th:if="${asignaturaAlumno.habilitado == true}" class="btn btn-outline-danger btn-xs"><i class="fa fa-close" title="Deshabilitar"></i></a>
-												<a th:if="${asignaturaAlumno.habilitado != true}" class="btn btn-outline-success btn-xs"><i class="fa fa-check" title="Habilitar"></i></a>
-											</div>
-										</td>
-									</tr>
+										<tr th:each=" asignaturaAlumno : ${asignaturasAlumno}">
+											<td th:text="${asignaturaAlumno.asunto}"></td>
+											<td th:text="${asignaturaAlumno.nroDocumento}"></td>
+											<td th:text="${asignaturaAlumno.asunto}"></td>
+											<td th:text="${asignaturaAlumno.nombreFichero}"></td>
+											<td th:text="${asignaturaAlumno.formatoFichero}"></td>
+											<td>
+												<div class="btn-group" role="group" aria-label="Basic example">
+													<a th:href="@{/asignaturaAlumno/view/} + ${asignaturaAlumno.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+													<a th:href="@{/asignaturaAlumno/download/} + ${asignaturaAlumno.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
+													<a class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+												</div>
+											</td>
+										</tr>
 									</tbody>
 								</table>
-								<div class="alert-items" th:if="${#lists.isEmpty(asignaturaAlumnos)}">
-									<div class="alert alert-primary my-2" role="alert" >
-									Aun no hay Alumnos Asignados a la Asignatura: <strong th:text="${asignaturaAlumno.asignatura.nombreAsignatura}"></strong> 
-									</div>	
+								<div class="alert-items" th:if="${#lists.isEmpty(asignaturasAlumno)}">
+									<div class="alert alert-primary my-2" role="alert">
+									Aun no hay ficheros asociados a la Asignatura: <strong th:text="${asignaturaAlumno.asignatura.nombreAsignatura}"></strong>
+									</div>
 								</div>
 							</div>
-						</div>
+						</div>							
 					</div>
-
-
+			
+			
+					
+			
+			
 				</div>
 			</div>
+			
+				
+			
 		</div>
 		<!-- main content area end -->
 		<footer th:replace="fragments/footer :: footer"></footer>
