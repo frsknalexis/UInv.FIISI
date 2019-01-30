@@ -31,17 +31,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-6 clearfix">
-                        <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Message</a>
-                                <a class="dropdown-item" href="#">Settings</a>
-                                <a class="dropdown-item" href="#">Log Out</a>
-                            </div>
-                        </div>
-                    </div>
+                    
+                   <div th:replace="fragments/user-profile :: user-profile"></div>
+                   
                 </div>
             </div>
             <!-- page title area end -->
@@ -51,29 +43,8 @@
                     <div class="col-12 mt-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Data Table Default</h4>
-                                <div class="data-tables">
-                                    <table id="dataTable" class="text-center">
-                                        <thead class="bg-light text-capitalize">
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Abreviatura</th>
-                                                <th>Documento</th>
-                                                <th>Estado</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="documento : ${documentos}">
-                                            	<td th:text="${documento.documentoId}"></td>
-                                            	<td th:text="${documento.abreviatura}"></td>
-                                            	<td th:text="${documento.nombreDocumento}"></td>
-                                            	<td><a class="btn btn-success btn-sm" th:text="${documento.habilitado}"></a></td>
-                                            	<td><a class="btn btn-danger btn-sm"></a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                
+                                
                             </div>
                         </div>
                     </div>

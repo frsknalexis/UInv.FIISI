@@ -155,3 +155,20 @@ constraint fk_informes_asignacion_asignacion foreign key(asignacion_id) referenc
 );
 
 alter sequence tbl_informes_asignacion_informe_asignacion_id_seq rename to informe_asignacion_seq;
+
+create table tbl_informes_trimestrales(
+informe_trimestral_id serial not null,
+asignacion_detalle_id int,
+descripcion varchar(100),
+trimestre varchar(50),
+nombre_fichero varchar(150),
+tamanio_fichero int,
+formato_fichero varchar(150),
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_informe_trimestral primary key(informe_trimestral_id),
+constraint fk_informe_trimestral_asignacion_detalle foreign key(asignacion_detalle_id) references tbl_asignacion_detalle(asignacion_detalle_id)
+);
+
+alter sequence tbl_informes_trimestrales_informe_trimestral_id_seq rename to informe_trimestral_seq;

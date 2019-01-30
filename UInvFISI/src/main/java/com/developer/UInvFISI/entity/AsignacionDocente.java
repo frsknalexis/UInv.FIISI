@@ -1,7 +1,10 @@
 package com.developer.UInvFISI.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -46,9 +50,12 @@ public class AsignacionDocente extends BaseEntity implements Serializable {
 	@JoinColumn(name="facultad_id")
 	@JsonBackReference
 	private Facultad facultad;
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="asignacionDetalle")
+	private List<InformeTrimestral> informesTrimestrales;
 
 	public AsignacionDocente() {
-		
+		informesTrimestrales = new ArrayList<InformeTrimestral>();
 	}
 
 	public Integer getAsignacionDetalleId() {
@@ -89,6 +96,18 @@ public class AsignacionDocente extends BaseEntity implements Serializable {
 
 	public void setFacultad(Facultad facultad) {
 		this.facultad = facultad;
+	}
+
+	public List<InformeTrimestral> getInformesTrimestrales() {
+		return informesTrimestrales;
+	}
+
+	public void setInformesTrimestrales(List<InformeTrimestral> informesTrimestrales) {
+		this.informesTrimestrales = informesTrimestrales;
+	}
+	
+	public void addInformeTrimestral(InformeTrimestral informeTrimestral) {
+		informesTrimestrales.add(informeTrimestral);
 	}
 
 }
