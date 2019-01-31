@@ -172,3 +172,37 @@ constraint fk_informe_trimestral_asignacion_detalle foreign key(asignacion_detal
 );
 
 alter sequence tbl_informes_trimestrales_informe_trimestral_id_seq rename to informe_trimestral_seq;
+
+create table tbl_usuarios(
+usuario_id serial not null,
+nombre varchar(50),
+apellidos varchar(75),
+email varchar(45),
+password varchar(100),
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_usuario primary key(usuario_id)
+);
+
+alter sequence tbl_usuarios_usuario_id_seq rename to usuario_seq;
+
+create table tbl_roles(
+rol_id serial not null,
+nombre varchar(45),
+descripcion varchar(100),
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_rol primary key(rol_id)
+);
+
+alter sequence tbl_roles_rol_id_seq rename to rol_seq;
+
+create table tbl_usuario_roles(
+usuario_id int,
+rol_id int,
+constraint pk_usuario_rol primary key(usuario_id, rol_id),
+constraint fk_usuario foreign key(usuario_id) references tbl_usuarios(usuario_id),
+constraint fk_rol foreign key(rol_id) references tbl_roles(rol_id)
+);

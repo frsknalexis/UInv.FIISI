@@ -14,8 +14,10 @@
 				Administrador <i class="fa fa-angle-down"></i>
 			</h4>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="#">Settings</a> <a
-					class="dropdown-item" href="#">Log Out</a>
+				<a class="dropdown-item" href="#">Settings</a> 
+				<form method="post" th:action="@{/logout}">
+				<button class="dropdown-item" type="submit">Log Out</button>
+				</form>
 			</div>
 		</div>
 	</div>

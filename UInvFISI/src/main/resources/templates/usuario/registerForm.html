@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headinc :: head"></head>
+<body>
+
+    <!-- preloader area start -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- preloader area end -->
+    <!-- login area start -->
+    <div class="login-area login-bg">
+        <div class="container">
+            <div class="login-box ptb--100">
+                <form method="post" th:action="@{/register}" th:object="${usuario}" id="registerForm">
+                    <div class="login-form-head">
+                        <h4>Sign up</h4>
+                        <p>Hello there, Sign up and Join with Us</p>
+                    </div>
+                    <div class="login-form-body">
+                        <div class="form-gp">
+                            <label for="nombre">Nombres</label>
+                            <input type="text" id="nombre" name="nombre" th:field="*{nombre}">
+                            <i class="ti-user"></i>
+                        </div>
+                     
+                        <div class="form-gp">
+                        	<label for="apellidos">Apellidos</label>
+                        	<input type="text" id="apellidos" name="apellidos" th:field="*{apellidos}"/>
+                        	<i class="ti-user"></i>
+                        </div>
+                     
+                        <div class="form-gp">
+                            <label for="email">Correo electronico</label>
+                            <input type="email" id="email" name="email" th:field="*{email}">
+                            <i class="ti-email"></i>
+                        </div>
+                  
+                        <div class="form-gp">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" th:field="*{password}">
+                            <i class="ti-lock"></i>
+                        </div>
+                        
+                        <div class="form-gp">
+                            <label for="password2">Confirm Password</label>
+                            <input type="password" id="password2" name="password2">
+                            <i class="ti-lock"></i>
+                        </div>
+                        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
+                        <div class="alert alert-info" th:if="${exists}">
+                        <p class="text text-center">User with this Email already Exist</p>
+                        </div>
+                        <div class="alert alert-danger alert-dismissible col-sm-12"
+                        th:if="${(bindingResult != null && bindingResult.getAllErrors() != null)}">
+                        	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                        	<ul th:each="data : ${bindingResult.getAllErrors()}">
+                        		<li th:text="${data.getField() + ' ' + data.getDefaultMessage()}"></li>
+                        	</ul>
+                        </div>
+                        <div id="error"></div>
+                        <div class="submit-btn-area">
+                            <button id="form_submit" type="submit">Registrar <i class="ti-arrow-right"></i></button>
+                            <div class="login-other row mt-4">
+                                <div class="col-6">
+                                    <a class="fb-login" href="#">Sign up with <i class="fa fa-facebook"></i></a>
+                                </div>
+                                <div class="col-6">
+                                    <a class="google-login" href="#">Sign up with <i class="fa fa-google"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-footer text-center mt-5">
+                            <p class="text-muted">Don't have an account? <a th:href="@{/login}">Registrarse</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- login area end -->
+    
+    <th:block th:replace="fragments/script"></th:block>
+
+</body>
+</html>
