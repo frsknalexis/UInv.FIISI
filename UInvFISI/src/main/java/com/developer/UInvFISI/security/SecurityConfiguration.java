@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 
@@ -25,22 +27,39 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.jdbcAuthentication().dataSource(dataSource)
-			.usersByUsernameQuery("select email, password, '1' as enabled from tbl_usuarios where email= ? and habilitado = true")
-			.authoritiesByUsernameQuery("select u.email, r.nombre from tbl_usuarios u inner join tbl_usuario_roles ur on(u.usuario_id=ur.usuario_id) inner join tbl_roles r on(ur.rol_id=r.rol_id) where u.email=?")
-			.passwordEncoder(bCryptPasswordEncoder).rolePrefix("ROLE_");
+		auth.jdbcAuthentication().usersByUsernameQuery("select email, password, '1' as enabled from tbl_usuarios where email= ? and habilitado = true")
+			.authoritiesByUsernameQuery("select u.email, r.role_name from tbl_usuarios u inner join tbl_usuario_roles ur on(u.usuario_id=ur.usuario_id) inner join tbl_roles r on(ur.rol_id=r.rol_id) where u.email=?")
+			.dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
+		
+		
 
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.authorizeRequests().antMatchers("/", "/assets/**", "/register").permitAll()
+		http.authorizeRequests()
+					.antMatchers("/").permitAll()
+					.antMatchers("/register").permitAll()
+					.antMatchers("/login").permitAll()
+					.antMatchers("/inicio").hasAnyAuthority("SUPER_USER", "ADMIN_USER")
 					.anyRequest().authenticated()
-					.and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/inicio")
-					.and().logout().permitAll().logoutSuccessUrl("/login");
+					.and()
+					.csrf().disable().formLogin()
+					.loginPage("/login")
+					.failureUrl("/login?error=true")
+					.defaultSuccessUrl("/inicio")
+					.usernameParameter("email")
+					.passwordParameter("password")
+					.and()
+					.logout()
+					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+					.logoutSuccessUrl("/login");
 	}
 	
-	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/resources/**", "/static/**", "/assets/**");
+	}
 
 }
