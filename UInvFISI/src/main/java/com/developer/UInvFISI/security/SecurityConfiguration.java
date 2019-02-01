@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
 		auth.jdbcAuthentication().usersByUsernameQuery("select email, password, '1' as enabled from tbl_usuarios where email= ? and habilitado = true")
-			.authoritiesByUsernameQuery("select u.email, r.role_name from tbl_usuarios u inner join tbl_usuario_roles ur on(u.usuario_id=ur.usuario_id) inner join tbl_roles r on(ur.rol_id=r.rol_id) where u.email=?")
+			.authoritiesByUsernameQuery("select u.email, r.nombre from tbl_usuarios u inner join tbl_usuario_roles ur on(u.usuario_id=ur.usuario_id) inner join tbl_roles r on(ur.rol_id=r.rol_id) where u.email=?")
 			.dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
 		
 		
