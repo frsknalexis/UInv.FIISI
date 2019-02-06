@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+
+	 <!-- sidebar menu area start -->
+        <div class="sidebar-menu" th:fragment="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="index.html"><img th:src="@{/assets/images/icon/logo.png}" alt="logo"></a>
+                </div>
+            </div>
+            <div class="main-menu">
+                <div class="menu-inner">
+                    <nav>
+                        <ul class="metismenu" id="menu">
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
+                                <ul class="collapse">
+                                    <li><a href="index.html">ICO dashboard</a></li>
+                                    <li><a href="index2.html">Ecommerce dashboard</a></li>
+                                    <li><a href="index3.html">SEO dashboard</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Trabajos
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a th:href="@{'/trabajo/list'}">Trabajos Tesis</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-book"></i>
+                                    <span>Docente Investigador</span></a>
+                                <ul class="collapse">
+									<li><a th:href="@{'/docente/listar'}" aria-expanded="true">DINA y ORCID</a></li>
+                                </ul>
+                                <ul class="collapse">
+                                	<li><a th:href="@{'/asignacion/list'}" aria-expanded="true">Proyecto Investigacion</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Alumnos
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a th:href="@{'/escuela/listar'}">Escuelas</a></li>
+                                    <li><a th:href="@{'/asignatura/list'}">Asignaturas</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                            	<a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-newspaper-o"></i>
+                            		<span>Linea de Investigacion</span></a>
+                            	<ul class="collapse">
+                            		<li><a th:href="@{'/programa/listar'}" aria-expanded="true">Programa y Lineas</a></li>
+                            	</ul>
+                            </li>
+                            <li><a th:href="@{'/reglamento/listar'}"><i class="ti-map-alt"></i> <span>Reglamentos</span></a></li>
+             
+                           
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-align-left"></i> <span>Configuracion General</span></a>
+                                <ul class="collapse">
+                                    <li><a href="#" aria-expanded="true">Documento</a>
+                                        <ul class="collapse">
+                                            <li><a th:href="@{'/documento/form'}">Agregar</a></li>
+                                            <li><a th:href="@{'/documento/listar'}">Listar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#" aria-expanded="true">Categoria Docente</a>
+                                    	<ul class="collapse">
+                                    		<li><a th:href="@{'/categoriadoc/form'}">Agregar</a></li>
+                                    		<li><a th:href="@{'/categoriadoc/listar'}">Listar</a></li>
+                                    	</ul>
+                                    </li>
+                                    <li><a href="#" aria-expanded="true">Condicion Docente</a>
+                                    	<ul class="collapse">
+                                    		<li><a th:href="@{'/condicion/form'}">Agregar</a></li>
+                                    		<li><a th:href="@{'/condicion/listar'}">Listar</a></li>
+                                    	</ul>
+                                    </li>
+                                    <li><a href="#" aria-expanded="true">Regimen Dedicacion</a>
+                                    	<ul class="collapse">
+                                    		<li><a th:href="@{'/regimen/form'}">Agregar</a></li>
+                                    		<li><a th:href="@{'/regimen/listar'}">Listar</a></li>
+                                    	</ul>
+                                    </li>
+                                     <li><a href="#" aria-expanded="true">Facultad</a>
+                                    	<ul class="collapse">
+                                    		<li><a th:href="@{'/facultad/form'}">Agregar</a></li>
+                                            <li><a th:href="@{'/facultad/listar'}">Listar</a></li>
+                                    	</ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar menu area end -->
+	
+
+</body>
+</html>

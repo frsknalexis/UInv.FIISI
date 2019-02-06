@@ -1,57 +1,48 @@
 package com.developer.UInvFISI.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
-@Table(name="tbl_regimen_dedicacion")
-public class RegimenDedicacion implements Serializable{
+@Table(name="tbl_regimen_dedicacion", schema="public")
+public class RegimenDedicacion extends BaseEntity implements Serializable{
 
-	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6310875725916693282L;
+
 	@Id
-	@GeneratedValue(generator="regimendseq", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(sequenceName="regimend_seq", name="regimendseq", schema="publuc", allocationSize=1)
+	@GeneratedValue(generator="regimenSeq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(sequenceName="regimen_seq", name="regimenSeq", schema="public", allocationSize=1)
 	@Column(name="regimen_dedicacion_id", unique=true, nullable=false)
 	private Integer regimenDedicacionId;
 	
-	@Column(name="nombre_regimen", nullable=false)
+	@Column(name="nombre_regimen", nullable=false, length=50)
 	private String nombreRegimen;
 	
-	@Column(name="fecha_registro", nullable=false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fecha_registro;
-	
-	@Column(name="fecha_modificacion", nullable=false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fecha_modificacion;
-	
-	@OneToMany(mappedBy="tblRegimenDed")
-	private List<Docente> tblDocente;
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="regimenDedicacion")
+	@JsonManagedReference
+	private List<Docente> docentes;
 
 	public RegimenDedicacion() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public RegimenDedicacion(Integer regimenDedicacionId, String nombreRegimen, Date fecha_registro,
-			Date fecha_modificacion, List<Docente> tblDocente) {
-		this.regimenDedicacionId = regimenDedicacionId;
-		this.nombreRegimen = nombreRegimen;
-		this.fecha_registro = fecha_registro;
-		this.fecha_modificacion = fecha_modificacion;
-		this.tblDocente = tblDocente;
+		docentes = new ArrayList<Docente>();
 	}
 
 	public Integer getRegimenDedicacionId() {
@@ -70,27 +61,16 @@ public class RegimenDedicacion implements Serializable{
 		this.nombreRegimen = nombreRegimen;
 	}
 
-	public Date getFecha_registro() {
-		return fecha_registro;
+	public List<Docente> getDocentes() {
+		return docentes;
 	}
 
-	public void setFecha_registro(Date fecha_registro) {
-		this.fecha_registro = fecha_registro;
+	public void setDocentes(List<Docente> docentes) {
+		this.docentes = docentes;
 	}
-
-	public Date getFecha_modificacion() {
-		return fecha_modificacion;
+	
+	public void addDocente(Docente docente) {
+		docentes.add(docente);
 	}
-
-	public void setFecha_modificacion(Date fecha_modificacion) {
-		this.fecha_modificacion = fecha_modificacion;
-	}
-
-	public List<Docente> getTblDocente() {
-		return tblDocente;
-	}
-
-	public void setTblDocente(List<Docente> tblDocente) {
-		this.tblDocente = tblDocente;
-	}
+	
 }

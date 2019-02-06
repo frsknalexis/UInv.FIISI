@@ -1,84 +1,79 @@
 package com.developer.UInvFISI.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="tbl_docentes")
-public class Docente implements Serializable{
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-	private static final long serialVersionUID = 1L;
+@Entity
+@Table(name="tbl_docentes", schema="public")
+public class Docente extends BaseEntity implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6261053429578225112L;
 
 	@Id
-	@GeneratedValue(generator="docenteseq", strategy=GenerationType.SEQUENCE)
-	@SequenceGenerator(sequenceName="docente_seq", name="docenteseq", schema="public", allocationSize=1)
-	@Column(name="docente_id", unique=true, nullable=false)
+	@GeneratedValue(generator="docenteSeq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(sequenceName="docente_seq", name="docenteSeq", schema="public", allocationSize=1)
+	@Column(name="docente_id", nullable=false, unique=true)
 	private Integer docenteId;
 	
-	@Column(name="apellidos_docente", nullable=false)
+	@Column(name="apellidos_docente", nullable=false, length=100)
 	private String apellidosDocente;
 	
-	@Column(name="nombres_docente", nullable=false)
+	@Column(name="nombres_docente", nullable=false, length=50)
 	private String nombresDocente;
 	
-	@Column(name="nro_documento", nullable=false)
+	@Column(name="nro_documento", nullable=false, length=8)
 	private String nroDocumento;
 	
-	@Column(name="dina_datos_academicos", nullable=false)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="categoria_docente_id")
+	@JsonBackReference
+	private CategoriaDocente categoriaDocente;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="regimen_dedicacion_id")
+	@JsonBackReference
+	private RegimenDedicacion regimenDedicacion;
+	
+	@Column(name="dina_datos_academicos", length=5, nullable=false)
 	private String dinaDatosAcademicos;
 	
-	@Column(name="dina_proyectos_investigacion", nullable=false)
+	@Column(name="dina_proyectos_investigacion", length=5, nullable=false)
 	private String dinaProyectosInvestigacion;
 	
-	@Column(name="codigo_orcid", nullable=false)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="documento_id")
+	@JsonBackReference
+	private Documento documento;
+	
+	@Column(name="codigo_orcid", length=100, nullable=false)
 	private String codigoOrcid;
 	
 	@Column(name="publicaciones_orcid", nullable=false)
-	private String publicacionesOrcid;
+	private Integer publicacionesOrcid;
 	
-	@ManyToOne
-	@JoinColumn(name="categoria_docente_id")
-	private CategoriaDocente tblCategoriaDoc;
 	
-	@ManyToOne
-	@JoinColumn(name="regimen_dedicacion_id")
-	private RegimenDedicacion tblRegimenDed;
 	
-	@ManyToOne
-	@JoinColumn(name="documento_id")
-	private Documento tblDocumento;
-
 	public Docente() {
-		// TODO Auto-generated constructor stub
+		
 	}
-
-	public Docente(Integer docenteId, String apellidosDocente, String nombresDocente, String nroDocumento,
-			String dinaDatosAcademicos, String dinaProyectosInvestigacion, String codigoOrcid,
-			String publicacionesOrcid, CategoriaDocente tblCategoriaDoc, RegimenDedicacion tblRegimenDed,
-			Documento tblDocumento) {
-		this.docenteId = docenteId;
-		this.apellidosDocente = apellidosDocente;
-		this.nombresDocente = nombresDocente;
-		this.nroDocumento = nroDocumento;
-		this.dinaDatosAcademicos = dinaDatosAcademicos;
-		this.dinaProyectosInvestigacion = dinaProyectosInvestigacion;
-		this.codigoOrcid = codigoOrcid;
-		this.publicacionesOrcid = publicacionesOrcid;
-		this.tblCategoriaDoc = tblCategoriaDoc;
-		this.tblRegimenDed = tblRegimenDed;
-		this.tblDocumento = tblDocumento;
-	}
-
+	
+	
 	public Integer getDocenteId() {
 		return docenteId;
 	}
@@ -111,6 +106,22 @@ public class Docente implements Serializable{
 		this.nroDocumento = nroDocumento;
 	}
 
+	public CategoriaDocente getCategoriaDocente() {
+		return categoriaDocente;
+	}
+
+	public void setCategoriaDocente(CategoriaDocente categoriaDocente) {
+		this.categoriaDocente = categoriaDocente;
+	}
+
+	public RegimenDedicacion getRegimenDedicacion() {
+		return regimenDedicacion;
+	}
+
+	public void setRegimenDedicacion(RegimenDedicacion regimenDedicacion) {
+		this.regimenDedicacion = regimenDedicacion;
+	}
+
 	public String getDinaDatosAcademicos() {
 		return dinaDatosAcademicos;
 	}
@@ -127,6 +138,14 @@ public class Docente implements Serializable{
 		this.dinaProyectosInvestigacion = dinaProyectosInvestigacion;
 	}
 
+	public Documento getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(Documento documento) {
+		this.documento = documento;
+	}
+
 	public String getCodigoOrcid() {
 		return codigoOrcid;
 	}
@@ -135,35 +154,14 @@ public class Docente implements Serializable{
 		this.codigoOrcid = codigoOrcid;
 	}
 
-	public String getPublicacionesOrcid() {
+	public Integer getPublicacionesOrcid() {
 		return publicacionesOrcid;
 	}
 
-	public void setPublicacionesOrcid(String publicacionesOrcid) {
+	public void setPublicacionesOrcid(Integer publicacionesOrcid) {
 		this.publicacionesOrcid = publicacionesOrcid;
 	}
 
-	public CategoriaDocente getTblCategoriaDoc() {
-		return tblCategoriaDoc;
-	}
 
-	public void setTblCategoriaDoc(CategoriaDocente tblCategoriaDoc) {
-		this.tblCategoriaDoc = tblCategoriaDoc;
-	}
-
-	public RegimenDedicacion getTblRegimenDed() {
-		return tblRegimenDed;
-	}
-
-	public void setTblRegimenDed(RegimenDedicacion tblRegimenDed) {
-		this.tblRegimenDed = tblRegimenDed;
-	}
-
-	public Documento getTblDocumento() {
-		return tblDocumento;
-	}
-
-	public void setTblDocumento(Documento tblDocumento) {
-		this.tblDocumento = tblDocumento;
-	}
+	
 }

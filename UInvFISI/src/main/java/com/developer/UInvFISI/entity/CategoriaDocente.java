@@ -1,57 +1,48 @@
 package com.developer.UInvFISI.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
-@Table(name = "tbl_categoria_docentes")
-public class CategoriaDocente implements Serializable{
+@Table(name = "tbl_categoria_docentes", schema = "public")
+public class CategoriaDocente extends BaseEntity implements Serializable{
 
+	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(generator="categoriaseq",strategy=GenerationType.SEQUENCE )
-	@SequenceGenerator(sequenceName="categoria_seq", name ="categoriaseq", schema="public" ,allocationSize = 1)
+	@GeneratedValue(generator = "categoriaSeq", strategy = GenerationType.SEQUENCE )
+	@SequenceGenerator(sequenceName="categoria_seq", name="categoriaSeq", schema="public" , allocationSize=1)
 	@Column(name="categoria_docente_id", unique=true, nullable=false)
 	private Integer categoriaDocenteId;
 	
-	@Column(name="nombre_categoria", nullable=false)
+	@Column(name="nombre_categoria", nullable=false, length=50)
 	private String nombreCategoria;
 	
-	@Column(name="fecha_registro", nullable=false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaRegistro;
-	
-	@Column(name="fecha_modificacion", nullable=false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaModificacion;
-	
-	@OneToMany(mappedBy = "tblCategoriaDoc")
-	private List<Docente> tblDocente;
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="categoriaDocente")
+	@JsonManagedReference
+	private List<Docente> docentes;
 
 	public CategoriaDocente() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public CategoriaDocente(Integer categoriaDocenteId, String nombreCategoria, Date fechaRegistro,
-			Date fechaModificacion, List<Docente> tblDocente) {
-		this.categoriaDocenteId = categoriaDocenteId;
-		this.nombreCategoria = nombreCategoria;
-		this.fechaRegistro = fechaRegistro;
-		this.fechaModificacion = fechaModificacion;
-		this.tblDocente = tblDocente;
+		docentes = new ArrayList<Docente>();
 	}
 
 	public Integer getCategoriaDocenteId() {
@@ -70,27 +61,16 @@ public class CategoriaDocente implements Serializable{
 		this.nombreCategoria = nombreCategoria;
 	}
 
-	public Date getFechaRegistro() {
-		return fechaRegistro;
+	public List<Docente> getDocentes() {
+		return docentes;
 	}
 
-	public void setFechaRegistro(Date fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
+	public void setDocentes(List<Docente> docentes) {
+		this.docentes = docentes;
 	}
-
-	public Date getFechaModificacion() {
-		return fechaModificacion;
+	
+	public void addDocente(Docente docente) {
+		docentes.add(docente);
 	}
-
-	public void setFechaModificacion(Date fechaModificacion) {
-		this.fechaModificacion = fechaModificacion;
-	}
-
-	public List<Docente> getTblDocente() {
-		return tblDocente;
-	}
-
-	public void setTblDocente(List<Docente> tblDocente) {
-		this.tblDocente = tblDocente;
-	}
+	
 }
