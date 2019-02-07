@@ -154,7 +154,7 @@
 										</div>
 									</div>
 									<button class="btn btn-outline-primary btn-sm" type="submit">
-										<i class="fa fa-check-circle"></i> Guardar Informe
+										<i class="fa fa-check-circle"></i> Guardar Alumno
 									</button>
 									<a class="btn btn-outline-danger btn-sm"
 										th:href="@{/asignatura/list}"><i
@@ -185,7 +185,7 @@
 									</thead>
 									<tbody>
 										<tr th:each=" asignaturaAlumno : ${asignaturasAlumno}">
-											<td th:text="${asignaturaAlumno.asunto}"></td>
+											<td th:text="${asignaturaAlumno.alumno}"></td>
 											<td th:text="${asignaturaAlumno.nroDocumento}"></td>
 											<td th:text="${asignaturaAlumno.asunto}"></td>
 											<td th:text="${asignaturaAlumno.nombreFichero}"></td>
