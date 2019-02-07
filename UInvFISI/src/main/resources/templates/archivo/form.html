@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headinc :: head"></head>
+<body>
+
+	<!-- preloader area start -->
+	<div id="preloader">
+		<div class="loader"></div>
+	</div>
+	
+	<!-- page container area start -->
+	<div class="page-container">
+
+		<div th:replace="fragments/sidebar :: sidebar"></div>
+
+		<!-- main content area start -->
+		<div class="main-content">
+
+			<div th:replace="fragments/header-area :: header-area"></div>
+
+			<!-- page title area start -->
+			<div class="page-title-area">
+				<div class="row align-items-center">
+					<div class="col-sm-6">
+						<div class="breadcrumbs-area clearfix">
+							<h4 class="page-title pull-left">Dashboard</h4>
+							<ul class="breadcrumbs pull-left">
+								<li><a th:href="@{/}">Home</a></li>
+								<li><span>Proyectos de Tesis</span></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6 clearfix">
+						<div class="user-profile pull-right">
+							<img class="avatar user-thumb"
+								th:src="@{/assets/images/author/avatar.png}" alt="avatar">
+							<h4 class="user-name dropdown-toggle" data-toggle="dropdown">
+								Kumkum Rai <i class="fa fa-angle-down"></i>
+							</h4>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">Message</a> <a
+									class="dropdown-item" href="#">Settings</a> <a
+									class="dropdown-item" href="#">Log Out</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- page title area end -->
+			<div class="main-content-inner">
+				<div class="row">
+					<div class="col-sm-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="header-title text-center" th:text="${informeTrabajo.trabajo.nombre}"></h4>
+								<p class="card-text">Ficheros en este Item:</p>
+								<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(informesTrabajo)}" width="100%">
+									<thead class="bg-primary text-capitalize">
+										<tr>
+											<th>Descripcion</th>
+											<th>Fichero</th>
+											<th>Formato</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each=" archivo : ${informesTrabajo}">
+											<td th:text="${archivo.asunto}"></td>
+											<td th:text="${archivo.nombreFichero}"></td>
+											<td th:text="${archivo.formatoFichero}"></td>
+											<td>
+												<div class="btn-group" role="group" aria-label="Basic example">
+													<a th:href="@{/archivo/view/} + ${archivo.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+													<a th:href="@{/archivo/download/} + ${archivo.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
+													<a class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="alert-items" th:if="${#lists.isEmpty(informesTrabajo)}">
+									<div class="alert alert-primary my-2" role="alert">
+									Aun no hay ficheros asociados a la Tesis: <strong th:text="${informeTrabajo.trabajo.nombre}"></strong>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="header-title" th:text="${titulo}"></h4>
+								<form th:action="@{/archivo/formInformeTrabajo}" enctype="multipart/form-data" 
+								th:object="${informeTrabajo}" 
+								novalidate="" class="needs-validation" method="post">
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<div class="input-group">
+												<input type="hidden" class="form-control" id="informeTrabajoId"
+												th:field="*{informeTrabajoId}" required=""/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupNombreTrabajoInforme">
+													<i class="fa fa-book"></i></span>
+												</div>
+												<input type="text" class="form-control" id="nombreTrabajoInforme"
+												aria-describedby="inputGroupNombreInvestigacionInforme" disabled="disabled"
+												th:value="${informeTrabajo.trabajo.nombre}"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-6 mb-3">
+											<label for="asuntoInformeTrabajo">Descripcion: </label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupAsuntoInformeTrabajo">
+													<i class="fa fa-pencil-square-o"></i></span>
+												</div>
+												<input type="text" class="form-control" id="asuntoInformeTrabajo"
+												placeholder="Descripcion" aria-describedby="inputGroupAsuntoInformeTrabajo"
+												required="" th:field="*{asunto}"/>
+												<div class="invalid-feedback">Campo obligatorio, ingrese un valor</div>
+											</div>
+										</div>
+										<div class="col-md-6 mb-3">
+											<label for="fileArchivo">Informe: </label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupFileArchivo">
+													<i class="fa fa-upload"></i></span>
+												</div>
+												<div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="fileArchivo"
+                                                    name="fileArchivo" required="">
+                                                    <label class="custom-file-label" for="fileArchivo">Seleccione un archivo</label>
+                                                </div>
+                                                <div class="invalid-feedback">Campo obligatorio, seleccione un archivo</div>
+											</div>
+										</div>
+									</div>
+									<button class="btn btn-outline-primary btn-sm" type="submit">
+										<i class="fa fa-check-circle"></i> Guardar Archivo
+									</button>
+									<a class="btn btn-outline-danger btn-sm"
+										th:href="@{/trabajo/list}"><i
+										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
+								</form>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<!-- main content area end -->
+		<footer th:replace="fragments/footer :: footer"></footer>
+
+	</div>
+	<!-- page container area end -->
+
+	<th:block th:replace="fragments/script"></th:block>
+
+</body>
+</html>

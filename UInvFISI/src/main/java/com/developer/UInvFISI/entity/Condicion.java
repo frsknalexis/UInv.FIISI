@@ -39,6 +39,10 @@ public class Condicion extends BaseEntity implements Serializable {
 	@JsonManagedReference
 	private List<AsignacionDocente> asignacionDocentes;
 	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="condicion")
+	@JsonManagedReference
+	private List<Autor> autor;
+	
 	public Condicion() {
 		asignacionDocentes = new ArrayList<AsignacionDocente>();
 	}
@@ -70,4 +74,17 @@ public class Condicion extends BaseEntity implements Serializable {
 	public void addAsignacionDocente(AsignacionDocente asignacionDocente) {
 		asignacionDocentes.add(asignacionDocente);
 	}
+
+	public List<Autor> getAutor() {
+		return autor;
+	}
+
+	public void setAutor(List<Autor> autor) {
+		this.autor = autor;
+	}
+	
+	public void addAutor(Autor autor) {
+		this.autor.add(autor);
+	}
+
 }

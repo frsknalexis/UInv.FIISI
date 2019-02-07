@@ -45,6 +45,10 @@ public class Documento extends BaseEntity implements Serializable{
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="documento1")
 	@JsonManagedReference
 	private List<AsignaturaAlumno> asignaturaAlumnos;
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="documento")
+	@JsonManagedReference
+	private List<Autor> autor;
 
 	public Documento() {
 		docentes = new ArrayList<Docente>();
@@ -98,5 +102,17 @@ public class Documento extends BaseEntity implements Serializable{
 	public void addAsignaturaAlumno(AsignaturaAlumno asignaturaAlumno) {
 		asignaturaAlumnos.add(asignaturaAlumno);
 	}
+
+	public List<Autor> getAutor() {
+		return autor;
+	}
+
+	public void setAutor(List<Autor> autor) {
+		this.autor = autor;
+	}
 	
+	public void addAutor(Autor autor) {
+		this.autor.add(autor);
+	}
 }	
+

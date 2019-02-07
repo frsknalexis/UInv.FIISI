@@ -43,6 +43,10 @@ public class Escuela extends BaseEntity implements Serializable{
 	@JsonManagedReference
 	private List<Asignatura> asignaturas;
 	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="escuela")
+	@JsonManagedReference
+	private List<Trabajo> trabajo;
+	
 	public Escuela() {
 		asignaturas = new ArrayList<Asignatura>();
 	}
@@ -83,5 +87,11 @@ public class Escuela extends BaseEntity implements Serializable{
 		asignaturas.add(asignatura);
 	}
 	
+	public List<Trabajo> getTrabajo() {
+		return trabajo;
+	}
 
+	public void setTrabajo(List<Trabajo> trabajo) {
+		this.trabajo = trabajo;
+	}
 }
