@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -38,7 +39,7 @@ public class CategoriaDocente extends BaseEntity implements Serializable{
 	private String nombreCategoria;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="categoriaDocente")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Docente> docentes;
 
 	public CategoriaDocente() {

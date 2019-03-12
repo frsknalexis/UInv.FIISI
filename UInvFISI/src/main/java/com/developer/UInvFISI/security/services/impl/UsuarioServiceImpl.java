@@ -21,6 +21,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	BCryptPasswordEncoder encoder;
 	
+	
 	@Autowired
 	@Qualifier("usuarioRepository")
 	private UsuarioRepository usuarioRepository;

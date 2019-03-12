@@ -39,7 +39,6 @@ public class AsignaturaAlumno extends BaseEntity implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="documento_id")
-	@JsonBackReference
 	private Documento documento1;
 	
 	@Column(name="nro_documento", nullable=false, length=10)

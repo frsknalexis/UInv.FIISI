@@ -42,12 +42,10 @@ public class Docente extends BaseEntity implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="categoria_docente_id")
-	@JsonBackReference
 	private CategoriaDocente categoriaDocente;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="regimen_dedicacion_id")
-	@JsonBackReference
 	private RegimenDedicacion regimenDedicacion;
 	
 	@Column(name="dina_datos_academicos", length=5, nullable=false)
@@ -58,7 +56,6 @@ public class Docente extends BaseEntity implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="documento_id")
-	@JsonBackReference
 	private Documento documento;
 	
 	@Column(name="codigo_orcid", length=100, nullable=false)

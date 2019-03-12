@@ -6,17 +6,12 @@
 	<div id="preloader">
 		<div class="loader"></div>
 	</div>
-
 	<!-- page container area start -->
 	<div class="page-container">
-
 		<div th:replace="fragments/sidebar :: sidebar"></div>
-
 		<!-- main content area start -->
 		<div class="main-content">
-
 			<div th:replace="fragments/header-area :: header-area"></div>
-
 			<!-- page title area start -->
 			<div class="page-title-area">
 				<div class="row align-items-center">
@@ -29,20 +24,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-6 clearfix">
-						<div class="user-profile pull-right">
-							<img class="avatar user-thumb"
-								th:src="@{/assets/images/author/avatar.png}" alt="avatar">
-							<h4 class="user-name dropdown-toggle" data-toggle="dropdown">
-								Kumkum Rai <i class="fa fa-angle-down"></i>
-							</h4>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Message</a> <a
-									class="dropdown-item" href="#">Settings</a> <a
-									class="dropdown-item" href="#">Log Out</a>
-							</div>
-						</div>
-					</div>
+					<div th:replace="fragments/user-profile :: user-profile"></div>
 				</div>
 			</div>
 			<!-- page title area end -->
@@ -56,17 +38,14 @@
 								<form class="needs-validation" novalidate=""
 									th:action="@{/escuela/form}" th:object="${escuela}"
 									method="post">
-
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
-
 											<div class="input-group">
 												<input type="hidden" class="form-control" th:field="*{escuelaId}"
 													id="escuela-id" required=""/>
 											</div>
 										</div>
 									</div>
-
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
 											<label for="nombre-escuela">Nombre Escuela</label>
@@ -93,32 +72,26 @@
 														id="inputGroupDocenteAsignacion"><i
 														class="fa fa-user"></i></span>
 												</div>
-												<input type="text" class="form-control" name="docenteAsignacion" required="" id="docenteAsignacion"
+												<input type="text" class="form-control" name="docenteAsignan" required="" id="docenteAsignacion"
 												aria-describedby="inputGroupDocenteAsignacion" placeholder="Director de Escuela" th:field="*{directorEscuela}"/>
 											</div>
 										</div>
 									</div>
-									<button class="btn btn-outline-primary btn-sm" type="submit"><i class="fa fa-check-circle"></i> Guardar
+									<button id="guardarEscuela" class="btn btn-outline-primary btn-sm" type="submit"><i class="fa fa-check-circle"></i> Guardar
 										Escuela</button>
 									<a class="btn btn-outline-danger btn-sm" th:href="@{/escuela/listar}"><i class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
-
 								</form>
-
 							</div>
 						</div>
 					</div>
 					<!-- accordion style 1 end -->
-
 				</div>
 			</div>
 		</div>
 		<!-- main content area end -->
 		<footer th:replace="fragments/footer :: footer"></footer>
-
 	</div>
 	<!-- page container area end -->
-
 	<th:block th:replace="fragments/script"></th:block>
-
 </body>
 </html>

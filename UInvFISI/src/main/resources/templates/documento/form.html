@@ -42,8 +42,8 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form class="needs-validation" novalidate=""
-									th:action="@{/documento/form}" th:object="${documento}"
+								<form id="formDocumento" class="needs-validation" novalidate=""
+									 th:object="${documento}"
 									method="post">
 
 									<div class="form-row">
@@ -65,7 +65,7 @@
 														class="fa fa-list-alt"></i></span>
 												</div>
 												<input type="text" class="form-control" th:field="*{abreviatura}"
-													id="abreviatura-documento"
+													id="abreviatura-documento" name="abreviaturaDocumento"
 													placeholder="Abreviatura Documento"
 													aria-describedby="inputGroupPrepend" required=""/>
 												<div class="invalid-feedback">Campo obligatorio,
@@ -89,7 +89,7 @@
 											</div>
 										</div>
 									</div>
-									<button class="btn btn-outline-primary btn-sm" type="submit"><i class="fa fa-check-circle"></i> Guardar
+									<button id="guardarDocumento" class="btn btn-outline-primary btn-sm" type="submit"><i class="fa fa-check-circle"></i> Guardar
 										documento</button>
 									<a class="btn btn-outline-danger btn-sm" th:href="@{/documento/listar}"><i class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
 

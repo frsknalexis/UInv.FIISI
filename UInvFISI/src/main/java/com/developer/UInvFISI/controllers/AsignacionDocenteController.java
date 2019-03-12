@@ -20,10 +20,12 @@ import com.developer.UInvFISI.entity.Asignacion;
 import com.developer.UInvFISI.entity.AsignacionDocente;
 import com.developer.UInvFISI.entity.Condicion;
 import com.developer.UInvFISI.entity.Facultad;
+import com.developer.UInvFISI.entity.InformeTrimestral;
 import com.developer.UInvFISI.service.AsignacionDocenteService;
 import com.developer.UInvFISI.service.AsignacionService;
 import com.developer.UInvFISI.service.CondicionService;
 import com.developer.UInvFISI.service.FacultadService;
+import com.developer.UInvFISI.service.InformeTrimestralService;
 
 @Controller
 @RequestMapping("/asignacionDocente")
@@ -46,12 +48,17 @@ public class AsignacionDocenteController {
 	@Qualifier("asignacionDocenteService")
 	private AsignacionDocenteService asignacionDocenteService;
 	
+	@Autowired
+	@Qualifier("informeTrimestralService")
+	private InformeTrimestralService informeTrimestralService;
+	
 	@GetMapping("/formAsignacionDetalle/{asignacionId}")
 	public String createAsignacionDocente(@PathVariable(value="asignacionId") Integer asignacionId, Map<String, Object> model,
 			RedirectAttributes flash) {
 		
 		List<Facultad> facultades = facultadService.findAllEnabled();
 		List<AsignacionDocente> asignacionDocentes = asignacionDocenteService.findByAsignacionId(asignacionId);
+		List<InformeTrimestral> informesTrimestrales = informeTrimestralService.findByAsignacionDetalleAsignacionAsignacionId(asignacionId);
 		List<Condicion> condiciones = condicionService.findAllEnabled();
 		Asignacion asignacion = asignacionService.getByAsignacionId(asignacionId);
 		
@@ -68,6 +75,7 @@ public class AsignacionDocenteController {
 		model.put("facultades", facultades);
 		model.put("condiciones", condiciones);
 		model.put("asignacionDocentes", asignacionDocentes);
+		model.put("informesTrimestrales", informesTrimestrales);
 		model.put("titulo", "Formulario Asignacion Investigador");
 		return "asignacion/formAsignacion";
 	}
@@ -77,6 +85,7 @@ public class AsignacionDocenteController {
 			Map<String, Object> model, RedirectAttributes flash) {
 		
 		List<AsignacionDocente> asignacionDocentes = asignacionDocenteService.findByAsignacionId(asignacionId);
+		List<InformeTrimestral> informesTrimestrales = informeTrimestralService.findByAsignacionDetalleAsignacionAsignacionId(asignacionId);
 		List<Facultad> facultades = facultadService.findAllEnabled();
 		List<Condicion> condiciones = condicionService.findAllEnabled();
 		AsignacionDocente asignacionDocente = null;
@@ -93,6 +102,7 @@ public class AsignacionDocenteController {
 		asignacionDocente.setAsignacion(asignacion);
 		
 		model.put("asignacionDocentes", asignacionDocentes);
+		model.put("informesTrimestrales", informesTrimestrales);
 		model.put("facultades", facultades);
 		model.put("condiciones", condiciones);
 		model.put("asignacionDocente", asignacionDocente);

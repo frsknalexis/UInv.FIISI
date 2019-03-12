@@ -9,4 +9,6 @@ public interface InformeTrimestralService {
 	List<InformeTrimestral> findAll();
 	
 	void saveOrUpdate(InformeTrimestral informeTrimestral);
+	
+	List<InformeTrimestral> findByAsignacionDetalleAsignacionAsignacionId(Integer asignacionId);
 }

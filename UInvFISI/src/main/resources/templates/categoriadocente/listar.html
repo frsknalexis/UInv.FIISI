@@ -67,10 +67,10 @@
 												</td>
 												<td>
 													<div class="btn-group" role="group" aria-label="Basic example">
-														<a th:if="${categoria.habilitado == true}" th:href="@{/categoriadoc/detail/} + ${categoria.categoriaDocenteId}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></a>
+														<button th:if="${categoria.habilitado == true}" id="detalleCategoriaDocente" th:idCategoriaDocente="${categoria.categoriaDocenteId}" data-toggle="modal" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></button>
                                             			<a th:if="${categoria.habilitado == true}" th:href="@{/categoriadoc/form/} + ${categoria.categoriaDocenteId}" class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
-                                            			<a th:if="${categoria.habilitado == true}" th:href="@{/categoriadoc/delete/} + ${categoria.categoriaDocenteId}" class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></a>
-                                            			<a th:if="${categoria.habilitado != true}" th:href="@{/categoriadoc/enabled/} + ${categoria.categoriaDocenteId}" class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></a>
+                                            			<button th:if="${categoria.habilitado == true}" id="disabledCategoriaDocente" th:idCategoriaDocente="${categoria.categoriaDocenteId}" class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></button>
+                                            			<button th:if="${categoria.habilitado != true}" id="enabledCategoriaDocente" th:idCategoriaDocente="${categoria.categoriaDocenteId}" class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></button>
 													</div>
 												</td>
 											</tr>
@@ -81,6 +81,39 @@
 						</div>
 					</div>
 					<!-- data table end -->
+					
+					<div class="modal fade" id="modalDetalleCategoriaDocente">
+                     	<div class="modal-dialog modal-dialog-centered" role="document">
+                        	<div class="modal-content">
+                            	<div class="modal-header">
+                                 	<h5 class="modal-title" id="titleCategoriaDocenteModal"></h5>
+                                    	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                	<form class="needs-validation">
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<label for="categoriaNombre">Categoria</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupCategoria"><i
+														class="fa fa-book"></i></span>
+												</div>
+												<input type="text" class="form-control"
+													id="detalleCategoriaNombre" aria-describedby="inputGroupCategoria"/>
+											</div>
+										</div>
+									</div>
+								</form>
+                                	
+                                 </div>
+                                 <div class="modal-footer">
+                                  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                 </div>
+                               </div>
+                            </div>
+                         </div>
+					
 				</div>
 			</div>
 		</div>

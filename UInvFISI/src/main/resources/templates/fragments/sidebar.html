@@ -9,8 +9,8 @@
 	 <!-- sidebar menu area start -->
         <div class="sidebar-menu" th:fragment="sidebar">
             <div class="sidebar-header">
-                <div class="logo">
-                    <a href="index.html"><img th:src="@{/assets/images/icon/logo.png}" alt="logo"></a>
+                <div>
+                    <a th:href="@{/inicio}"><img th:src="@{/assets/images/icon/logo-uni.png}" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
@@ -18,12 +18,7 @@
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
-                                <ul class="collapse">
-                                    <li><a href="index.html">ICO dashboard</a></li>
-                                    <li><a href="index2.html">Ecommerce dashboard</a></li>
-                                    <li><a href="index3.html">SEO dashboard</a></li>
-                                </ul>
+                            	<a th:href="@{/inicio}" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Trabajos
@@ -65,31 +60,26 @@
                                 <ul class="collapse">
                                     <li><a href="#" aria-expanded="true">Documento</a>
                                         <ul class="collapse">
-                                            <li><a th:href="@{'/documento/form'}">Agregar</a></li>
                                             <li><a th:href="@{'/documento/listar'}">Listar</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="#" aria-expanded="true">Categoria Docente</a>
                                     	<ul class="collapse">
-                                    		<li><a th:href="@{'/categoriadoc/form'}">Agregar</a></li>
                                     		<li><a th:href="@{'/categoriadoc/listar'}">Listar</a></li>
                                     	</ul>
                                     </li>
                                     <li><a href="#" aria-expanded="true">Condicion Docente</a>
                                     	<ul class="collapse">
-                                    		<li><a th:href="@{'/condicion/form'}">Agregar</a></li>
                                     		<li><a th:href="@{'/condicion/listar'}">Listar</a></li>
                                     	</ul>
                                     </li>
                                     <li><a href="#" aria-expanded="true">Regimen Dedicacion</a>
                                     	<ul class="collapse">
-                                    		<li><a th:href="@{'/regimen/form'}">Agregar</a></li>
                                     		<li><a th:href="@{'/regimen/listar'}">Listar</a></li>
                                     	</ul>
                                     </li>
                                      <li><a href="#" aria-expanded="true">Facultad</a>
                                     	<ul class="collapse">
-                                    		<li><a th:href="@{'/facultad/form'}">Agregar</a></li>
                                             <li><a th:href="@{'/facultad/listar'}">Listar</a></li>
                                     	</ul>
                                     </li>

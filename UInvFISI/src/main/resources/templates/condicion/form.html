@@ -44,7 +44,7 @@
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
 								<form class="needs-validation" novalidate=""
-									th:action="@{/condicion/form}" th:object="${condicion}"
+									 th:object="${condicion}"
 									method="post">
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
@@ -71,14 +71,12 @@
 											</div>
 										</div>
 									</div>
-
-									<button class="btn btn-outline-primary btn-sm" type="submit">
+									<button id="guardarCondicionDocente" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar condicion
 									</button>
 									<a class="btn btn-outline-danger btn-sm"
 										th:href="@{/condicion/listar}"><i
 										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
-
 								</form>
 							</div>
 						</div>

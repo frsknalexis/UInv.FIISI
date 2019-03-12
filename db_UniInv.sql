@@ -173,6 +173,138 @@ constraint fk_informe_trimestral_asignacion_detalle foreign key(asignacion_detal
 
 alter sequence tbl_informes_trimestrales_informe_trimestral_id_seq rename to informe_trimestral_seq;
 
+
+create table tbl_escuela
+(
+escuela_id serial not null,
+nombre_escuela varchar(150) not null,
+director_escuela varchar(150) not null,
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_escuela primary key (escuela_id)
+);
+
+alter sequence tbl_escuela_escuela_id_seq rename to escuela_seq;
+
+create  table tbl_asignatura
+(
+asignatura_id serial not null,
+nombre_asignatura varchar(200) not null,
+escuela_id int,
+nombre_docente varchar(100) not null,
+periodo varchar(25) not null,
+ciclo varchar(25) not null,
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_asignatura primary key(asignatura_id),
+constraint fk_asignatura_escuela foreign key(escuela_id) references tbl_escuela(escuela_id)
+);
+
+alter sequence tbl_asignatura_asignatura_id_seq rename to asignatura_seq;
+
+create  table tbl_asignatura_detalle
+(
+asignatura_detalle_id serial not null,
+alumno varchar(200) not null,
+asignatura_id int,
+documento_id int,
+nro_documento varchar(10) not null,
+asunto varchar(100),
+nombre_fichero varchar(100),
+tamanio_fichero varchar(10),
+formato_fichero varchar(40),
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_asignatura_detalle primary key(asignatura_detalle_id),
+constraint fk_asignatura_detalle_documento foreign key(documento_id) references tbl_documentos(documento_id),
+constraint fk_asignatura_detalle_asignatura foreign key(asignatura_id) references tbl_asignatura(asignatura_id)
+);
+
+alter sequence tbl_asignatura_detalle_asignatura_detalle_id_seq rename to asignatura_detalle_seq;
+
+create table tbl_reglamento(
+reglamento_id serial not null,
+asunto varchar(100),
+nombre_fichero varchar(100),
+tamanio_fichero varchar(10),
+formato_fichero varchar(40),
+fecha_registro timestamp,
+fecha_modificacion timestamp,
+habilitado boolean default true,
+constraint pk_reglamento primary key(reglamento_id)
+);
+
+alter sequence tbl_reglamento_reglamento_id_seq rename to reglamento_seq;
+
+CREATE TABLE tbl_trabajo
+(
+  trabajo_id serial not null,
+  nombre character varying(150) NOT NULL,
+  tipo_trabajo character varying(50) NOT NULL,
+  cita_trabajo character varying(20) NOT NULL,
+  grado_academico character varying(50) NOT NULL,
+  denominacion character varying(100) NOT NULL,
+  escuela_id integer,
+  fecha_sustentacion date,
+  anio integer,
+  area_conocimiento character varying(100) NOT NULL,
+  cantidad_hojas integer NOT NULL,
+  fecha_registro timestamp without time zone,
+  fecha_modificacion timestamp without time zone,
+  habilitado boolean DEFAULT true,
+  CONSTRAINT pk_trabajos PRIMARY KEY (trabajo_id),
+  CONSTRAINT fk_trabajoesc FOREIGN KEY (escuela_id)
+  REFERENCES tbl_escuela (escuela_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+alter sequence tbl_trabajo_trabajo_id_seq rename to trabajo_seq;
+
+CREATE TABLE tbl_autor
+(
+  autor_id serial not null,
+  trabajo_id integer,
+  nombre character varying(150) NOT NULL,
+  nro_documento character varying(10),
+  celular character varying(12),
+  email character varying(50),
+  documento_id integer,
+  condicion_id integer,
+  fecha_registro timestamp without time zone,
+  fecha_modificacion timestamp without time zone,
+  habilitado boolean DEFAULT true,
+  CONSTRAINT pk_autor PRIMARY KEY (autor_id),
+  CONSTRAINT fk_autorcon FOREIGN KEY (condicion_id)
+      REFERENCES tbl_condicion (condicion_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_autordoc FOREIGN KEY (documento_id)
+      REFERENCES tbl_documentos (documento_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+);
+
+alter sequence tbl_autor_autor_id_seq rename to autor_seq;
+
+
+CREATE TABLE tbl_informes_trabajo
+(
+  informe_trabajo_id serial not null,
+  trabajo_id integer,
+  asunto character varying(100),
+  nombre_fichero character varying(75),
+  tamanio_fichero character varying(10),
+  formato_fichero character varying(75),
+  fecha_registro timestamp without time zone,
+  fecha_modificacion timestamp without time zone,
+  habilitado boolean DEFAULT true,
+  CONSTRAINT pk_informes_trabajo PRIMARY KEY (informe_trabajo_id),
+  CONSTRAINT fk_trabajoinf FOREIGN KEY (trabajo_id) references tbl_trabajo (trabajo_id)
+);
+
+alter sequence tbl_informes_trabajo_informe_trabajo_id_seq rename to informe_trabajo_seq;
+
 create table tbl_usuarios(
 usuario_id serial not null,
 nombre varchar(50),
@@ -198,6 +330,7 @@ constraint pk_rol primary key(rol_id)
 );
 
 alter sequence tbl_roles_rol_id_seq rename to rol_seq;
+insert into tbl_roles(nombre, descripcion) values('ADMIN_USER', 'Este usuario, tiene acceso a todo el sistema');
 
 create table tbl_usuario_roles(
 usuario_id int,

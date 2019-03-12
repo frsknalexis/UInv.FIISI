@@ -49,7 +49,6 @@ public class Autor extends BaseEntity implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="documento_id")
-	@JsonBackReference
 	private Documento documento;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

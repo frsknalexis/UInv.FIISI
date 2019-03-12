@@ -7,17 +7,12 @@
 	<div id="preloader">
 		<div class="loader"></div>
 	</div>
-
 	<!-- page container area start -->
 	<div class="page-container">
-
 		<div th:replace="fragments/sidebar :: sidebar"></div>
-
 		<!-- main content area start -->
 		<div class="main-content">
-
 			<div th:replace="fragments/header-area :: header-area"></div>
-
 			<!-- page title area start -->
 			<div class="page-title-area">
 				<div class="row align-items-center">
@@ -30,9 +25,7 @@
 							</ul>
 						</div>
 					</div>
-					
-					<div th:replace="fragments/user-profile :: user-profile"></div>
-					
+					<div th:replace="fragments/user-profile :: user-profile"></div>		
 				</div>
 			</div>
 			<!-- page title area end -->
@@ -44,7 +37,7 @@
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
 								<form class="needs-validation" novalidate=""
-									th:action="@{/regimen/form}" th:object="${regimenDedicacion}"
+									 th:object="${regimenDedicacion}"
 									method="post">
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
@@ -72,8 +65,7 @@
 											</div>
 										</div>
 									</div>
-
-									<button class="btn btn-outline-primary btn-sm" type="submit">
+									<button id="guardarRegimenDedicacion" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar regimen
 									</button>
 									<a class="btn btn-outline-danger btn-sm"
@@ -84,17 +76,13 @@
 						</div>
 					</div>
 					<!-- accordion style 1 end -->
-
 				</div>
 			</div>
 		</div>
 		<!-- main content area end -->
 		<footer th:replace="fragments/footer :: footer"></footer>
-
 	</div>
 	<!-- page container area end -->
-
 	<th:block th:replace="fragments/script"></th:block>
-
 </body>
 </html>

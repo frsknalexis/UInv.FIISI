@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -39,15 +40,15 @@ public class Documento extends BaseEntity implements Serializable{
 	private String nombreDocumento;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="documento")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Docente> docentes;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="documento1")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<AsignaturaAlumno> asignaturaAlumnos;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="documento")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Autor> autor;
 
 	public Documento() {

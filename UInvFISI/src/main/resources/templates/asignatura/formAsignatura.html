@@ -2,22 +2,16 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/headinc :: head"></head>
 <body>
-
 	<!-- preloader area start -->
 	<div id="preloader">
 		<div class="loader"></div>
 	</div>
-	
 	<!-- page container area start -->
 	<div class="page-container">
-
 		<div th:replace="fragments/sidebar :: sidebar"></div>
-
 		<!-- main content area start -->
 		<div class="main-content">
-
 			<div th:replace="fragments/header-area :: header-area"></div>
-
 			<!-- page title area start -->
 			<div class="page-title-area">
 				<div class="row align-items-center">
@@ -30,9 +24,7 @@
 							</ul>
 						</div>
 					</div>
-					
 					<div th:replace="fragments/user-profile :: user-profile"></div>
-					
 				</div>
 			</div>
 			<!-- page title area end -->
@@ -41,7 +33,6 @@
 					<div class="col-sm-12 mt-5">
 						<div class="card">
 							<div class="card-body">
-								
 								<div class="col-lg-12 col-xs-12 mt-6">
 						<div class="card">
 							<div class="card-body">
@@ -70,7 +61,6 @@
 											</div>
 										</div>
 									</div>
-									
 									<div class="form-row">
 									<div class="col-md-12 mb-3">
 										<label for="alumnoAsignatura">Apellidos y Nombres </label>
@@ -87,7 +77,6 @@
 											</div>
 										</div>
 									</div>
-									
 									<div class="form-row">
 										<div class="col-md-6 mb-3">
 											<label for="documentoAlumno">Documento</label>
@@ -104,7 +93,6 @@
 												</select>
 											</div>
 										</div>
-										
 										<div class="col-md-6 mb-3">
 											<label for="nroDocumentoAlumno">Nro. Documento</label>
 											<div class="input-group">
@@ -122,7 +110,6 @@
 											</div>
 										</div>
 									</div>
-									
 									<div class="form-row">
 										<div class="col-md-6 mb-3">
 											<label for="asuntoAsignaturaAlumno">Descripcion </label>
@@ -153,7 +140,12 @@
 											</div>
 										</div>
 									</div>
-									<button class="btn btn-outline-primary btn-sm" type="submit">
+									<div class="form-row">
+										<div class="col-md12 mb-3">
+											<div id="visorArchivo"></div>
+										</div>
+									</div>
+									<button id="guardarAsignaturaAlumno" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar Alumno
 									</button>
 									<a class="btn btn-outline-danger btn-sm"
@@ -163,69 +155,52 @@
 							</div>
 						</div>
 					</div>	
-								
-								
-								
-								<hr>
-								
-								<h4 class="header-title text-center" th:text="${asignaturaAlumno.asignatura.nombreAsignatura}"></h4>
-								
-								<h4 class="header-title text-center" th:text="${subtitulo}"></h4>
-								
-								<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(asignaturasAlumno)}" width="100%">
-									<thead class="bg-primary text-capitalize">
-										<tr>
-											<th>ALUMNO</th>
-											<th>CU/DNI</th>
-											<th>DESCRIPCION</th>
-											<th>FICHERO</th>
-											<th>FORMATO</th>
-											<th>ACCIONES</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each=" asignaturaAlumno : ${asignaturasAlumno}">
-											<td th:text="${asignaturaAlumno.alumno}"></td>
-											<td th:text="${asignaturaAlumno.nroDocumento}"></td>
-											<td th:text="${asignaturaAlumno.asunto}"></td>
-											<td th:text="${asignaturaAlumno.nombreFichero}"></td>
-											<td th:text="${asignaturaAlumno.formatoFichero}"></td>
-											<td>
-												<div class="btn-group" role="group" aria-label="Basic example">
-													<a th:href="@{/asignaturaAlumno/view/} + ${asignaturaAlumno.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-													<a th:href="@{/asignaturaAlumno/download/} + ${asignaturaAlumno.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
-													<a class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="alert-items" th:if="${#lists.isEmpty(asignaturasAlumno)}">
-									<div class="alert alert-primary my-2" role="alert">
-									Aun no hay ficheros asociados a la Asignatura: <strong th:text="${asignaturaAlumno.asignatura.nombreAsignatura}"></strong>
-									</div>
+					<hr>
+					<h4 class="header-title text-center" th:text="${asignaturaAlumno.asignatura.nombreAsignatura}"></h4>
+					<h4 class="header-title text-center" th:text="${subtitulo}"></h4>
+						<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(asignaturasAlumno)}" width="100%">
+							<thead class="bg-primary text-capitalize">
+								<tr>
+									<th>ALUMNO</th>
+									<th>CU/DNI</th>
+									<th>DESCRIPCION</th>
+									<th>FICHERO</th>
+									<th>FORMATO</th>
+									<th>ACCIONES</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each=" asignaturaAlumno : ${asignaturasAlumno}">
+									<td th:text="${asignaturaAlumno.alumno}"></td>
+									<td th:text="${asignaturaAlumno.nroDocumento}"></td>
+									<td th:text="${asignaturaAlumno.asunto}"></td>
+									<td th:text="${asignaturaAlumno.nombreFichero}"></td>
+									<td th:text="${asignaturaAlumno.formatoFichero}"></td>
+									<td>
+										<div class="btn-group" role="group" aria-label="Basic example">
+											<a th:href="@{/asignaturaAlumno/view/} + ${asignaturaAlumno.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+											<a th:href="@{/asignaturaAlumno/download/} + ${asignaturaAlumno.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
+											<a class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+										</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="alert-items" th:if="${#lists.isEmpty(asignaturasAlumno)}">
+								<div class="alert alert-primary my-2" role="alert">
+								Aun no hay ficheros asociados a la Asignatura: <strong th:text="${asignaturaAlumno.asignatura.nombreAsignatura}"></strong>
 								</div>
 							</div>
-						</div>							
-					</div>
-			
-			
-					
-			
-			
+						</div>
+					</div>							
 				</div>
 			</div>
-			
-				
-			
+		</div>	
 		</div>
 		<!-- main content area end -->
 		<footer th:replace="fragments/footer :: footer"></footer>
-
 	</div>
 	<!-- page container area end -->
-
 	<th:block th:replace="fragments/script"></th:block>
-
 </body>
 </html>

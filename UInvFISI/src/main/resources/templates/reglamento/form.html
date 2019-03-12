@@ -29,20 +29,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-6 clearfix">
-						<div class="user-profile pull-right">
-							<img class="avatar user-thumb"
-								th:src="@{/assets/images/author/avatar.png}" alt="avatar">
-							<h4 class="user-name dropdown-toggle" data-toggle="dropdown">
-								Kumkum Rai <i class="fa fa-angle-down"></i>
-							</h4>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Message</a> <a
-									class="dropdown-item" href="#">Settings</a> <a
-									class="dropdown-item" href="#">Log Out</a>
-							</div>
-						</div>
-					</div>
+					<div th:replace="fragments/user-profile :: user-profile"></div>
 				</div>
 			</div>
 			<!-- page title area end -->
@@ -98,7 +85,13 @@
 											</div>
 										</div>
 									</div>
-									<button class="btn btn-outline-primary btn-sm" type="submit">
+									
+									<div class="form-row">
+										<div class="col-md12 mb-3">
+											<div id="visorArchivoReglamento"></div>
+										</div>
+									</div>
+									<button id="guardarReglamento" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar Reglamento
 									</button>
 									<a class="btn btn-outline-danger btn-sm"
