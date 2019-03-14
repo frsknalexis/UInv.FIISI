@@ -34,8 +34,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form novalidate="" class="needs-validation" method="post"
-								th:action="@{/linea/formLineaInvestigacion}" th:object="${lineaInvestigacion}">
+								<form novalidate="" class="needs-validation" method="post" th:object="${lineaInvestigacion}">
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
 											<div class="input-group">
@@ -86,7 +85,7 @@
 							<div class="card-body">
 								<h4 class="header-title text-center" th:text="${lineaInvestigacion.programa.nombrePrograma}"></h4>
 								<hr>
-								<table class="table text-center table-hover table-striped" width="100%" th:if="${not #lists.isEmpty(lineasInvestigacion)}">
+								<table id="tablaLineasInvestigacion" class="table text-center table-hover table-striped" width="100%" th:if="${not #lists.isEmpty(lineasInvestigacion)}">
 									<thead class="bg-primary text-capitalize">
 										<tr>
 											<th>Linea Investigacion</th>
@@ -104,8 +103,10 @@
 											<td>
 												<div class="btn-group" role="group" aria-label="Basic example">
 													<a th:href="@{/linea/formLineaInvestigacion/} + ${lineaInvg.programa.programaId} + '/' + ${lineaInvg.lineaInvestigacionId}" th:if="${lineaInvg.habilitado == true}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-													<a th:href="@{/linea/delete/} + ${lineaInvg.lineaInvestigacionId}" th:if="${lineaInvg.habilitado == true}" class="btn btn-outline-danger btn-xs"><i class="fa fa-close" title="Deshabilitar"></i></a>
-													<a th:href="@{/linea/enabled/} + ${lineaInvg.lineaInvestigacionId}" th:if="${lineaInvg.habilitado != true}" class="btn btn-outline-success btn-xs"><i class="fa fa-check" title="Habilitar"></i></a>
+													<button th:if="${lineaInvg.habilitado == true}" id="disabledLineaInvestigacion" th:idLineaInvestigacion="${lineaInvg.lineaInvestigacionId}" class="btn btn-outline-danger btn-xs">
+													<i class="fa fa-close" title="Deshabilitar"></i></button>
+													<button th:if="${lineaInvg.habilitado != true}" id="enabledLineaInvestigacion" th:idLineaInvestigacion="${lineaInvg.lineaInvestigacionId}" class="btn btn-outline-success btn-xs">
+													<i class="fa fa-check" title="Habilitar"></i></button>
 												</div>
 											</td>
 										</tr>

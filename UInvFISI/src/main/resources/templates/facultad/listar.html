@@ -67,10 +67,13 @@
                                             	</td>
                                             	<td>
                                             		<div class="btn-group" role="group" aria-label="Basic example">
-                                            			<a th:if="${facultad.habilitado == true}" th:href="@{/facultad/detail/} + ${facultad.facultadId}" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></a>
+                                            			<button th:if="${facultad.habilitado == true}" id="detalleFacultad" th:idFacultad="${facultad.facultadId}" class="btn btn-outline-info btn-sm" data-toggle="modal">
+                                            			<i class="fa fa-eye" title="Ver"></i></button>
                                             			<a th:if="${facultad.habilitado == true}" th:href="@{/facultad/form/} + ${facultad.facultadId}" class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
-                                            			<a th:if="${facultad.habilitado == true}" th:href="@{/facultad/delete/} + ${facultad.facultadId}" class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></a>
-                                            			<a th:if="${facultad.habilitado != true}" th:href="@{/facultad/enabled/} + ${facultad.facultadId}" class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></a>
+                                            			<button th:if="${facultad.habilitado == true}" id="disabledFacultad" th:idFacultad="${facultad.facultadId}" class="btn btn-outline-danger btn-sm">
+                                            			<i class="fa fa-close" title="Deshabilitar"></i></button>
+                                            			<button th:if="${facultad.habilitado != true}" id="enabledFacultad" th:idFacultad="${facultad.facultadId}" class="btn btn-outline-success btn-sm">
+                                            			<i class="fa fa-check" title="Habilitar"></i></button>
                                             		</div>
                                             	</td>
                                             </tr>
@@ -81,6 +84,51 @@
                         </div>
                     </div>
                     <!-- data table end -->
+                    
+                    <div class="modal fade" id="modalDetalleFacultad">
+                     	<div class="modal-dialog modal-dialog-centered" role="document">
+                        	<div class="modal-content">
+                            	<div class="modal-header">
+                                 	<h5 class="modal-title" id="titleFacultadModal"></h5>
+                                    	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                	<form class="needs-validation">
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<label for="abreviatura-facultad">Abrev. Facultad</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupPrepend"><i
+														class="fa fa-list-alt"></i></span>
+												</div>
+												<input type="text" class="form-control" id="detalleAbreviaturaFacultad" 
+												  aria-describedby="inputGroupPrepend"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<label for="facultad">Facultad</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroup"><i
+														class="fa fa-list-alt"></i></span>
+												</div>
+												<input type="text" class="form-control" id="detalleNombreFacultad"
+													aria-describedby="inputGroup"/>
+											</div>
+										</div>
+									</div>
+								</form>
+                                 </div>
+                                 <div class="modal-footer">
+                                  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                 </div>
+                               </div>
+                            </div>
+                         </div>
+                    
                 </div>
             </div>
         </div>

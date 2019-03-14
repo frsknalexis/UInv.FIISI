@@ -45,7 +45,6 @@ public class Asignacion extends BaseEntity implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="linea_investigacion_id")
-	@JsonBackReference
 	private LineaInvestigacion lineaInvestigacion;
 	
 	@Column(name="fecha_inicio")

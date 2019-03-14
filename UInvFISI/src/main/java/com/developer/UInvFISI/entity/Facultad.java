@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -39,7 +40,7 @@ public class Facultad extends BaseEntity implements Serializable {
 	private String abreviaturaFacultad;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="facultad")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<AsignacionDocente> asignacionDocentes;
 	
 	public Facultad() {

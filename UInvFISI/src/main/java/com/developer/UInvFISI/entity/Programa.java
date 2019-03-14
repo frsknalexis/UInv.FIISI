@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -39,7 +40,7 @@ public class Programa extends BaseEntity implements Serializable {
 	private String nombrePrograma;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="programa")
-	@JacksonInject
+	@JsonIgnore
 	private List<LineaInvestigacion> lineasInvestigacion;
 
 	public Programa() {

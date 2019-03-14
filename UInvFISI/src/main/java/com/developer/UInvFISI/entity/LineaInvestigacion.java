@@ -40,13 +40,12 @@ public class LineaInvestigacion extends BaseEntity implements Serializable {
 	@Column(name="nombre_linea_investigacion", nullable=false, length=200)
 	private String nombreLineaInvestigacion;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="programa_id")
-	@JsonBackReference
 	private Programa programa;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="lineaInvestigacion")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Asignacion> asignaciones;
 	
 	public LineaInvestigacion() {

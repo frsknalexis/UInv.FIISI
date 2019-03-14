@@ -43,12 +43,10 @@ public class AsignacionDocente extends BaseEntity implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="condicion_id")
-	@JsonBackReference
 	private Condicion condicion;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="facultad_id")
-	@JsonBackReference
 	private Facultad facultad;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="asignacionDetalle")

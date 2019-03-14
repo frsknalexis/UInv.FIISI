@@ -43,6 +43,24 @@ public class RegimenDedicacionRestController {
 		}
 	}
 	
+	@GetMapping("/regimen/{regimenDedicacionId}")
+	public ResponseEntity<RegimenDedicacion> getByRegimenDedicacionId(@PathVariable(value="regimenDedicacionId") Integer regimenDedicacionId) {
+		
+		RegimenDedicacion regimenDedicacion = null;
+		
+		if(regimenDedicacionId != null && regimenDedicacionId > 0) {
+			
+			regimenDedicacion = regimenDedicacionService.getByRegimenDedicacionId(regimenDedicacionId);
+			
+			if(regimenDedicacion == null) {
+				
+				return new ResponseEntity<RegimenDedicacion>(HttpStatus.NO_CONTENT);
+			}
+		}
+		
+		return new ResponseEntity<RegimenDedicacion>(regimenDedicacion, HttpStatus.OK);
+	}
+	
 	@PostMapping("/save")
 	public ResponseEntity<ResponseBaseOperacion> saveRegimenDedicacion(@Valid @RequestBody RegimenDedicacion regimenDedicacion) {
 		
@@ -71,5 +89,69 @@ public class RegimenDedicacionRestController {
 		regimenDedicacionService.saveOrUpdate(regimenDedicacionOld);
 		ResponseBaseOperacion response = new ResponseBaseOperacion("updated", regimenDedicacionOld);
 		return new ResponseEntity<ResponseBaseOperacion>(response, HttpStatus.OK);
+	}
+	
+	@GetMapping("/regimen/disabled/{regimenDedicacionId}")
+	public ResponseEntity<Void> disabledRegimenDedicacion(@PathVariable(value="regimenDedicacionId") Integer regimenDedicacionId) {
+		
+		RegimenDedicacion regimenDedicacion = null;
+		
+		if(regimenDedicacionId != null && regimenDedicacionId > 0) {
+			
+			regimenDedicacion = regimenDedicacionService.getByRegimenDedicacionId(regimenDedicacionId);
+			
+			if(regimenDedicacion != null) {
+				
+				if(regimenDedicacion.getHabilitado().equals(true)) {
+					
+					regimenDedicacionService.delete(regimenDedicacionId);
+					return new ResponseEntity<Void>(HttpStatus.OK);
+				}
+				
+				else {
+					
+					return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+				}
+			}
+			
+			else {
+				
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			}
+		}
+		
+		return null;
+	}
+	
+	@GetMapping("/regimen/enabled/{regimenDedicacionId}")
+	public ResponseEntity<Void> enabledRegimenDedicacion(@PathVariable(value="regimenDedicacionId") Integer regimenDedicacionId) {
+		
+		RegimenDedicacion regimenDedicacion = null;
+		
+		if(regimenDedicacionId != null && regimenDedicacionId > 0) {
+			
+			regimenDedicacion = regimenDedicacionService.getByRegimenDedicacionId(regimenDedicacionId);
+			
+			if(regimenDedicacion != null) {
+				
+				if(regimenDedicacion.getHabilitado().equals(false)) {
+					
+					regimenDedicacionService.enabled(regimenDedicacionId);
+					return new ResponseEntity<Void>(HttpStatus.OK);
+				}
+				
+				else {
+					
+					return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+				}
+			}
+			
+			else {
+				
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			}
+		}
+		
+		return null;
 	}
 }

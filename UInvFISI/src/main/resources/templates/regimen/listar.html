@@ -67,25 +67,15 @@
 													th:if="${regimen.habilitado != true}"
 													class="btn btn-danger btn-sm" th:text="'Inactivo'"></a></td>
 												<td>
-													<div class="btn-group" role="group"
-														aria-label="Basic example">
-														<a
-															th:if="${regimen.habilitado == true}"
-															th:href="@{/regimen/detail/} + ${regimen.regimenDedicacionId}"
-															class="btn btn-outline-info btn-sm"><i
-															class="fa fa-eye" title="Ver"></i></a> <a
-															th:if="${regimen.habilitado == true}"
-															th:href="@{/regimen/form/} + ${regimen.regimenDedicacionId}"
-															class="btn btn btn-outline-primary btn-sm"><i
-															class="fa fa-pencil" title="Editar"></i></a> <a
-															th:if="${regimen.habilitado == true}"
-															th:href="@{/regimen/delete/} + ${regimen.regimenDedicacionId}"
-															class="btn btn-outline-danger btn-sm"><i
-															class="fa fa-close" title="Deshabilitar"></i></a> <a
-															th:if="${regimen.habilitado != true}"
-															th:href="@{/regimen/enabled/} + ${regimen.regimenDedicacionId}"
-															class="btn btn-outline-success btn-sm"><i
-															class="fa fa-check" title="Habilitar"></i></a>
+													<div class="btn-group" role="group" aria-label="Basic example">
+														<button th:if="${regimen.habilitado == true}" id="detalleRegimenDedicacion" th:idRegimenDedicacion="${regimen.regimenDedicacionId}"
+														   data-toggle="modal" class="btn btn-outline-info btn-sm"><i class="fa fa-eye" title="Ver"></i></button> 
+														<a th:if="${regimen.habilitado == true}" th:href="@{/regimen/form/} + ${regimen.regimenDedicacionId}"
+															class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a> 
+														<button th:if="${regimen.habilitado == true}" id="disabledRegimenDedicacion" th:idRegimenDedicacion="${regimen.regimenDedicacionId}"
+														  class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></button>
+														<button th:if="${regimen.habilitado != true}" id="enabledRegimenDedicacion" th:idRegimenDedicacion="${regimen.regimenDedicacionId}"
+														 class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></button>
 													</div>
 												</td>
 											</tr>
@@ -96,6 +86,36 @@
 						</div>
 					</div>
 					<!-- data table end -->
+					<div class="modal fade" id="modalDetalleRegimenDedicacion">
+                     	<div class="modal-dialog modal-dialog-centered" role="document">
+                        	<div class="modal-content">
+                            	<div class="modal-header">
+                                 	<h5 class="modal-title" id="titleRegimenDedicacionModal"></h5>
+                                    	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                	<form class="needs-validation">
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<label for="regimenNombre">Regimen</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupRegimen"><i
+														class="fa fa-bookmark"></i></span>
+												</div>
+												<input type="text" class="form-control" id="detalleRegimenNombre" 
+												   aria-describedby="inputGroupRegimen"/>
+											</div>
+										</div>
+									</div>
+								</form>
+                                 </div>
+                                 <div class="modal-footer">
+                                  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                 </div>
+                               </div>
+                            </div>
+                         </div>
 				</div>
 			</div>
 		</div>
