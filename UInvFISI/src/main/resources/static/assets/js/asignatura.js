@@ -3,10 +3,43 @@
  */
 $(document).on('ready', function() {
 	
-	$('#guardarAsignatura').click(function() {
+	$('#guardarAsignatura').click(function(e) {
 		
-		if($('#nombreAsignatura').val() == "" && $('#escuela').val().trim() == "" 
-			&& $('#periodo').val() == "" && $('#ciclo').val() == "") {
+		e.preventDefault();
+		
+		if($('#nombreAsignatura').val().match(/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\,-\s]+$/) 
+			 && $('#asignaturaEscuela').val().trim() != "" && $('#periodo').val().match(/^[a-zA-Z0-9\-\s]+$/)
+			 && $('#ciclo').val().match(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/)
+			 && $('#docenteAsignatura').val().match(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\,.-\s]+$/)) {
+			
+			var formData = {
+				
+					asignaturaId: $('#asigantura-id').val(),
+					nombreAsignatura: $('#nombreAsignatura').val(),
+					escuela: {
+						escuelaId: $('#asignaturaEscuela').val()
+					},
+					periodo: $('#periodo').val(),
+					ciclo: $('#ciclo').val(),
+					nombreDocente: $('#docenteAsignatura').val()
+			};
+			
+			console.log(formData);
+			
+			if(formData.asignaturaId) {
+				
+				var asignaturaId = formData.asignaturaId;
+				console.log("asignaturaId: " + asignaturaId);
+			}
+			
+			else {
+				
+				
+			}
+		}
+		
+		if($('#nombreAsignatura').val() == "" && $('#asignaturaEscuela').val().trim() == "" 
+			&& $('#periodo').val() == "" && $('#ciclo').val() == "" && $('#docenteAsignatura').val() == "") {
 			
 			swal({
                 type: 'error',
@@ -31,7 +64,7 @@ $(document).on('ready', function() {
 		    	return false;
 			}
 			
-			if($('#escuela').val().trim() == "") {
+			if($('#asignaturaEscuela').val().trim() == "") {
 				
 				swal({
 	                type: 'error',
@@ -66,7 +99,19 @@ $(document).on('ready', function() {
 		    	return false;
 			}
 			
-			if(!($('#nombreAsignatura').val().match(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\-\s]+$/))) {
+			if($('#docenteAsignatura').val() == "" || $('#docenteAsignatura').val() == 0) {
+				
+				swal({
+	                type: 'error',
+	                title: 'Ooops',
+	                text: 'El campo Docente no puede estar vacio, ingrese un valor valido'
+	            });
+		    	
+		    	$('#docenteAsignatura').focus();
+		    	return false;
+			}
+			
+			if(!($('#nombreAsignatura').val().match(/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\,-\s]+$/))) {
 				
 				swal({
 	                type: 'error',
@@ -106,8 +151,53 @@ $(document).on('ready', function() {
 				    	return false;
 						
 					}
+					
+					else {
+						
+						if(!($('#docenteAsignatura').val().match(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\,.-\s]+$/))) {
+							
+							swal({
+				                type: 'error',
+				                title: 'Ooops',
+				                text: 'El campo Docente no permite caracteres especiales ni numeros'
+				            });
+							
+							$('#docenteAsignatura').focus();
+					    	return false;
+						} 
+					}
 				}
 			}
+		}
+	});
+	
+	$('#docenteAsignatura').autocomplete({
+		
+		source: function(request, response) {
+			
+			$.ajax({
+				
+				type: 'GET',
+				url: '/api/docente/docentes/autocomplete/' + request.term,
+				dataType: 'json',
+				data: {
+					term: request.term
+				},
+				success: function(data) {
+					console.log(data);
+					response($.map(data, function(item) {
+						return {
+							value: item.docenteId,
+							label: item.nombresDocente + ', ' + item.apellidosDocente
+						};
+					}));
+				}
+			});
+		},
+		
+		select: function(event, ui) {
+			$('#docenteAsignatura').val(ui.item.label);
+			return false;
 		}
 	});
 });

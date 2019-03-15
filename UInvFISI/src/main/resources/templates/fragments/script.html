@@ -3,6 +3,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
+	
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
 	
 	<!-- jquery latest version -->
@@ -37,11 +38,11 @@
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <!-- all line chart activation -->
-    <script src="assets/js/line-chart.js"></script>
+    <script th:src="@{/assets/js/line-chart.js}"></script>
     <!-- all pie chart -->
-    <script src="assets/js/pie-chart.js"></script>
+    <script th:src="@{/assets/js/pie-chart.js}"></script>
     <!-- all bar chart -->
-    <script src="assets/js/bar-chart.js"></script>
+    <script th:src="@{/assets/js/bar-chart.js}"></script>
     
     <!-- others plugins -->
     <script th:src="@{/assets/js/plugins.js}"></script>
@@ -60,5 +61,6 @@
     <script type="text/javascript" th:src="@{/assets/js/reglamento.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/asignacion.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/lineaInvestigacion.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/docente.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/plantilla.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/register.js}"></script>

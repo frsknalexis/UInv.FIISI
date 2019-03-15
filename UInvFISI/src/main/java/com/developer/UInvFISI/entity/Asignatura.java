@@ -17,8 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="tbl_asignatura", schema="public")
@@ -41,7 +40,6 @@ public class Asignatura extends BaseEntity implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="escuela_id")
-	@JsonBackReference
 	private Escuela escuela;
 	
 	@Column(name="nombre_docente", nullable=false, length=100)
@@ -56,7 +54,7 @@ public class Asignatura extends BaseEntity implements Serializable {
 	
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="asignatura")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<AsignaturaAlumno> asignaturaAlumnos;
 	
 	public Asignatura() {

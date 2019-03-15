@@ -60,7 +60,7 @@
 														id="inputGroupEscuela"><i
 														class="fa fa-tasks"></i></span>
 												</div>
-												<select th:field="*{escuela.escuelaId}" id="escuela" class="form-control">
+												<select th:field="*{escuela.escuelaId}" id="asignaturaEscuela" class="form-control">
 													<option value="">Seleccione una Escuela</option>
 													<option th:each="escuela: ${escuelas}" th:value="${escuela.escuelaId}"
 															th:text="${escuela.nombreEscuela}"/>
@@ -101,7 +101,7 @@
 														id="inputGroupDocenteAsignacion"><i
 														class="fa fa-user"></i></span>
 												</div>
-												<input type="text" class="form-control" name="docenteAsignacion" required="" id="docenteAsignacion"
+												<input type="text" class="form-control" required="" id="docenteAsignatura"
 												aria-describedby="inputGroupDocenteAsignacion" placeholder="Asigne un docente" th:field="*{nombreDocente}"/>
 											</div>
 										</div>

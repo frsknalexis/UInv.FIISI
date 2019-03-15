@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "tbl_asignatura_detalle", schema = "public")
 public class AsignaturaAlumno extends BaseEntity implements Serializable{
@@ -34,7 +32,6 @@ public class AsignaturaAlumno extends BaseEntity implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="asignatura_id")
-	@JsonBackReference
 	private Asignatura asignatura;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

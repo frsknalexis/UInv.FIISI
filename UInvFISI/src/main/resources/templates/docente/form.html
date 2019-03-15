@@ -43,8 +43,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form class="needs-validation" novalidate=""
-									th:action="@{/docente/form}" th:object="${docente}"
+								<form class="needs-validation" novalidate="" th:object="${docente}"
 									method="post">
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
@@ -163,6 +162,7 @@
 												</div>
 												<select th:field="*{dinaDatosAcademicos}"
 													id="dinaDatosAcademicos" class="form-control">
+													<option value="">Seleccione</option>
 													<option th:value="SI" th:utext="'SI'" />
 													<option th:value="NO" th:utext="'NO(*)'" />
 												</select>
@@ -180,6 +180,7 @@
 												<select id="dinaProyectosInvestigacion"
 													th:field="*{dinaProyectosInvestigacion}"
 													class="form-control">
+													<option value="">Seleccione una opcion</option>
 													<option th:value="SI" th:utext="'SI'" />
 													<option th:value="NO" th:utext="'NO'" />
 												</select>
@@ -216,7 +217,7 @@
 										</div>
 									</div>
 
-									<button class="btn btn-outline-primary btn-sm" type="submit">
+									<button id="guardarDocente" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar docente
 									</button>
 									<a class="btn btn-outline-danger btn-sm"

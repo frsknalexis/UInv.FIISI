@@ -78,7 +78,6 @@ public class Trabajo extends BaseEntity implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="escuela_id")
-	@JsonBackReference
 	private Escuela escuela;
 
 	public Trabajo() {

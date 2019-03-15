@@ -35,8 +35,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form class="needs-validation" novalidate=""
-									th:action="@{/escuela/form}" th:object="${escuela}"
+								<form class="needs-validation" novalidate="" th:object="${escuela}"
 									method="post">
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
@@ -69,11 +68,11 @@
 											<div class="input-group">
 												<div class="input-group-prepend">
 													<span class="input-group-text"
-														id="inputGroupDocenteAsignacion"><i
+														id="inputGroupDirectorEscuela"><i
 														class="fa fa-user"></i></span>
 												</div>
-												<input type="text" class="form-control" name="docenteAsignan" required="" id="docenteAsignacion"
-												aria-describedby="inputGroupDocenteAsignacion" placeholder="Director de Escuela" th:field="*{directorEscuela}"/>
+												<input type="text" class="form-control" required="" id="directorEscuela"
+												aria-describedby="inputGroupDirectorEscuela" placeholder="Director de Escuela" th:field="*{directorEscuela}"/>
 											</div>
 										</div>
 									</div>

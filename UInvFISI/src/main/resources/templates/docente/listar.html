@@ -74,25 +74,15 @@
                                             		<span th:if="${docente.habilitado != true}" class="status-p bg-danger" th:text="'Inactivo'"></span>
 												</td>
 												<td>
-													<div class="btn-group" role="group"
-														aria-label="Basic example">
-														<a
-															th:if="${docente.habilitado == true}"
-															th:href="@{/docente/detail/} + ${docente.docenteId}"
-															class="btn btn-outline-info btn-xs"><i
-															class="fa fa-eye" title="Ver"></i></a> <a
-															th:if="${docente.habilitado == true}"
-															th:href="@{/docente/form/} + ${docente.docenteId}"
-															class="btn btn btn-outline-primary btn-xs"><i
-															class="fa fa-pencil" title="Editar"></i></a> <a
-															th:if="${docente.habilitado == true}"
-															th:href="@{/docente/delete/} + ${docente.docenteId}"
-															class="btn btn-outline-danger btn-xs"><i
-															class="fa fa-close" title="Deshabilitar"></i></a> <a
-															th:if="${docente.habilitado != true}"
-															th:href="@{/docente/enabled/} + ${docente.docenteId}"
-															class="btn btn-outline-success btn-xs"><i
-															class="fa fa-check" title="Habilitar"></i></a>
+													<div class="btn-group" role="group" aria-label="Basic example">
+													<button th:if="${docente.habilitado == true}" id="detalleDocente" th:idDocente="${docente.docenteId}"
+													 data-toggle="modal"class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Ver"></i></button> 
+													<a th:if="${docente.habilitado == true}" th:href="@{/docente/form/} + ${docente.docenteId}"
+														class="btn btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+													<button th:if="${docente.habilitado == true}" id="disabledDocente" th:idDocente="${docente.docenteId}"
+													  class="btn btn-outline-danger btn-xs"><i class="fa fa-close" title="Deshabilitar"></i></button>
+													 <button th:if="${docente.habilitado != true}" id="enabledDocente" th:idDocente="${docente.docenteId}"
+													 	class="btn btn-outline-success btn-xs"><i class="fa fa-check" title="Habilitar"></i></button>
 													</div>
 												</td>
 											</tr>
@@ -103,6 +93,153 @@
 						</div>
 					</div>
 					<!-- data table end -->
+					<div class="modal fade" id="modalDetalleDocente">
+                     	<div class="modal-dialog modal-lg" role="document">
+                        	<div class="modal-content">
+                            	<div class="modal-header">
+                                 	<h5 class="modal-title" id="titleDocenteModal"></h5>
+                                    	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                	<form class="needs-validation">
+									<div class="form-row">
+										<div class="col-md-4 mb-3">
+											<label for="nombreDocente">Nombres Docente</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupNombreDocente"><i
+														class="fa fa-book"></i></span>
+												</div>
+												<input type="text" class="form-control" id="detalleNombreDocente"
+													aria-describedby="inputGroupNombreDocente"/>
+											</div>
+										</div>
+										<div class="col-md-4 mb-3">
+											<label for="apellidoDocente">Apellidos Docente</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupApellidosDocente"><i
+														class="fa fa-book"></i></span>
+												</div>
+												<input type="text" class="form-control" id="detalleApellidoDocente"
+													aria-describedby="inputGroupApellidosDocente"/>
+											</div>
+										</div>
+										<div class="col-md-4 mb-3">
+											<label for="categoriaDocente">Categoria Docente</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupCategoriaDocente"><i
+														class="fa fa-tasks"></i></span>
+												</div>
+												<input type="text" class="form-control" id="detallecategoriaDocente"
+													aria-describedby="inputGroupCategoriaDocente"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-5 mb-3">
+											<label for="documentoDocente">Documento</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupCategoriaDocente"><i
+														class="fa fa-newspaper-o"></i></span>
+												</div>
+												<input type="text" class="form-control" id="detalleDocumentoDocente"
+													aria-describedby="inputGroupCategoriaDocente"/>
+											</div>
+										</div>
+										<div class="col-md-3 mb-3">
+											<label for="nroDocumentoDocente">Nro. Documento</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupNroDocumentoDocente"><i
+														class="fa fa-newspaper-o"></i></span>
+												</div>
+												<input type="text" class="form-control" placeholder="Numero Documento"
+													id="detalleNroDocumentoDocente"
+													aria-describedby="inputGroupNroDocumentoDocente" />
+											</div>
+										</div>
+										<div class="col-md-4 mb-3">
+											<label for="regimenDedicacionDocente">Regimen
+												Dedicacion</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupRegimenDedicacionDocente"><i
+														class="fa fa-suitcase"></i></span>
+												</div>
+												<input type="text" id="detalleRegimenDedicacionDocente" class="form-control"
+													aria-describedby="inputGroupRegimenDedicacionDocente"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-6 mb-3">
+											<label for="dinaDatosAcademicos">DINA (Datos
+												academicos(*))</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupDinaDatosAcademicos"><i
+														class="fa fa-book"></i></span>
+												</div>
+												<input type="text" id="detalleDinaDatosAcademicos" class="form-control"
+													aria-describedby="inputGroupDinaDatosAcademicos"/>
+											</div>
+										</div>
+										<div class="col-md-6 mb-3">
+											<label for="dinaProyectosInvestigacion">DINA
+												(Proyectos de investigacion)</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupDinaProyectosInvestigacion"><i
+														class="fa fa-book"></i></span>
+												</div>
+												<input type="text" id="detalleDinaProyectosInvestigacion" class="form-control"
+													aria-describedby="inputGroupDinaProyectosInvestigacion"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-6 mb-3">
+											<label for="codigoOrcid">CODIGO ORCID</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupCodigoOrcid">https://</span>
+												</div>
+												<input type="text" class="form-control" id="detalleCodigoOrcid"
+													aria-describedby="inputGroupCodigoOrcid"/>
+											</div>
+										</div>
+										<div class="col-md-6 mb-3">
+											<label for="publicacionesOrcid">CODIGO ORCID
+												(Cantidad publicaciones)</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupPublicacionesOrcid"><i
+														class="fa fa-book"> </i></span>
+												</div>
+												<input type="number" class="form-control" id="detallePublicacionesOrcid" 
+												aria-describedby="inputGroupPublicacionesOrcid"/>
+											</div>
+										</div>
+									</div>
+								</form>
+                                 </div>
+                                 <div class="modal-footer">
+                                  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                 </div>
+                               </div>
+                            </div>
+                         </div>
 				</div>
 			</div>
 		</div>
