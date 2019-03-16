@@ -6,21 +6,17 @@ import com.developer.UInvFISI.entity.AsignaturaAlumno;
 
 public interface AsignaturaAlumnoService {
 
-	/*
-	List<AsignaturaAlumno> findAll();
 	
 	List<AsignaturaAlumno> findByAsignaturaId(Integer asignaturaId);
 	
-	void saveOrUpdate(AsignaturaAlumno asignaturaAlumno);
-	
 	AsignaturaAlumno getAsignaturaAlumnoById(Integer asignaturaDetalleId);
 		
-	AsignaturaAlumno findByAsignaturaAsignaturaIdAndAsignaturaDetalleId(Integer asignaturaId, Integer asignaturaDetalleId);
-*/
 	
 	List<AsignaturaAlumno> findAll();
 	
 	void saveOrUpdate(AsignaturaAlumno asignaturaAlumno);
 	
 	List<AsignaturaAlumno> findByAsignaturaAsignaturaId(Integer asignaturaId);
+	
+	AsignaturaAlumno findByAsignaturaAsignaturaIdAndAsignaturaDetalleId(Integer asignaturaId, Integer asignaturaDetalleId);
 }

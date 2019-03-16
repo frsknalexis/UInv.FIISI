@@ -37,7 +37,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form th:action="@{/asignaturaAlumno/formAsignaturaDetalle}" enctype="multipart/form-data" 
+								<form id="formAsignaturaAlumno" enctype="multipart/form-data" 
 								th:object="${asignaturaAlumno}" 
 								novalidate="" class="needs-validation" method="post">
 									<div class="form-row">
@@ -158,39 +158,38 @@
 					<hr>
 					<h4 class="header-title text-center" th:text="${asignaturaAlumno.asignatura.nombreAsignatura}"></h4>
 					<h4 class="header-title text-center" th:text="${subtitulo}"></h4>
-						<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(asignaturasAlumno)}" width="100%">
+						<div class="data-tables">
+						<table id="dataTable" class="table text-center table-hover" th:if="${not #lists.isEmpty(asignaturasAlumno)}" width="100%">
 							<thead class="bg-primary text-capitalize">
 								<tr>
-									<th>ALUMNO</th>
-									<th>CU/DNI</th>
-									<th>DESCRIPCION</th>
-									<th>FICHERO</th>
-									<th>FORMATO</th>
-									<th>ACCIONES</th>
+									<th>Alumno</th>
+									<th>Descripcion</th>
+									<th>Fichero</th>
+									<th>Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each=" asignaturaAlumno : ${asignaturasAlumno}">
 									<td th:text="${asignaturaAlumno.alumno}"></td>
-									<td th:text="${asignaturaAlumno.nroDocumento}"></td>
 									<td th:text="${asignaturaAlumno.asunto}"></td>
 									<td th:text="${asignaturaAlumno.nombreFichero}"></td>
-									<td th:text="${asignaturaAlumno.formatoFichero}"></td>
 									<td>
 										<div class="btn-group" role="group" aria-label="Basic example">
-											<a th:href="@{/asignaturaAlumno/view/} + ${asignaturaAlumno.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-											<a th:href="@{/asignaturaAlumno/download/} + ${asignaturaAlumno.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
-											<a class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+											<a th:href="@{/api/asignaturaalumno/view/} + ${asignaturaAlumno.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+											<button id="downloadFileAlumno" th:nombreFicheroAlumno="${asignaturaAlumno.nombreFichero}"
+												class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></button>
+											<a th:href="@{/asignaturaAlumno/formAsignaturaDetalle/} + ${asignaturaAlumno.asignatura.asignaturaId} + '/' + ${asignaturaAlumno.asignaturaDetalleId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
 										</div>
 										</td>
 									</tr>
 								</tbody>
 							</table>
-							<div class="alert-items" th:if="${#lists.isEmpty(asignaturasAlumno)}">
-								<div class="alert alert-primary my-2" role="alert">
+						</div>
+						<div class="alert-items" th:if="${#lists.isEmpty(asignaturasAlumno)}">
+							<div class="alert alert-primary my-2" role="alert">
 								Aun no hay ficheros asociados a la Asignatura: <strong th:text="${asignaturaAlumno.asignatura.nombreAsignatura}"></strong>
-								</div>
 							</div>
+						</div>
 						</div>
 					</div>							
 				</div>

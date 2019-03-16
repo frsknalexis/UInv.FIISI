@@ -42,10 +42,8 @@
 								<h4 class="header-title" th:text="${titulo}"></h4>
 								
 									
-									<form th:action="@{/reglamento/form}" enctype="multipart/form-data" 
-								th:object="${reglamento}" 
-								novalidate="" class="needs-validation" method="post">
-
+									<form id="formReglamento" enctype="multipart/form-data" th:object="${reglamento}" novalidate="" 
+									class="needs-validation"  method="post">
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
 											<div class="input-group">

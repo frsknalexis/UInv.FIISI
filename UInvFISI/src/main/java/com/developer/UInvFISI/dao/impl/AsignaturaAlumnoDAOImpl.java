@@ -36,7 +36,7 @@ public class AsignaturaAlumnoDAOImpl implements AsignaturaAlumnoDAO{
 			em.merge(asignaturaAlumno);
 		}
 	}
-/*
+
 	@Override
 	public AsignaturaAlumno findOne(Integer asignaturaDetalleId) {
 		AsignaturaAlumno asignaturaAlumno = null;
@@ -48,5 +48,4 @@ public class AsignaturaAlumnoDAOImpl implements AsignaturaAlumnoDAO{
 		
 		return asignaturaAlumno;
 	}
-*/
 }

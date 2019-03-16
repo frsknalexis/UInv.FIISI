@@ -24,17 +24,78 @@ $(document).on('ready', function() {
 					nombreDocente: $('#docenteAsignatura').val()
 			};
 			
-			console.log(formData);
-			
 			if(formData.asignaturaId) {
 				
 				var asignaturaId = formData.asignaturaId;
 				console.log("asignaturaId: " + asignaturaId);
+				
+				$.ajax({
+					
+					type: 'PUT',
+					url: '/api/asignatura/update/' + asignaturaId,
+					headers: {
+						"Content-Type": "application/json",
+						"Accept": "application/json"
+					},
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					success: function(response) {
+						
+						console.log(response);
+						
+						swal({
+							type: "success",
+							title: "Asignatura Actualizada con exito",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+						}).then((result) => {
+
+							if(result.value) {
+								$(location).attr('href', '/asignatura/list');
+							}
+						});
+					},
+					error: function() {
+						alert('Error al Actualizar Asignatura');
+					}
+				});
 			}
 			
 			else {
 				
-				
+				$.ajax({
+					
+					type: 'POST',
+					url: '/api/asignatura/save',
+					headers: {
+						"Content-Type": "application/json",
+						"Accept": "application/json"
+					},
+					data: JSON.stringify(formData),
+					dataType: 'json',
+					success: function(response) {
+						
+						console.log(response);
+						
+						swal({
+							type: "success",
+							title: "Asignatura: " + response.data.nombreAsignatura + " Registrada con exito",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+						}).then((result) => {
+
+							if(result.value) {
+								$(location).attr('href', '/asignatura/list');
+							}
+						});
+						
+					},
+					error: function() {
+						alert('Error al Registrar Asignatura');
+					}
+				});
 			}
 		}
 		
@@ -169,6 +230,70 @@ $(document).on('ready', function() {
 				}
 			}
 		}
+	});
+	
+	$('#dataTable tbody').on('click', 'button#detalleAsignatura', function() {
+		
+		var asignaturaId = $(this).attr('idasignatura');
+		console.log("asignaturaId: " + asignaturaId);
+		
+		var contenidoAsignatura = document.querySelector('#contenidoAsignatura');
+		
+		var contenidoAsignaturaAlumnos = document.querySelector('#contenidoAsignaturaAlumnos');
+		
+		setTimeout("$('#modalDetalleAsignatura').modal('show');", 1000);
+		
+		contenidoAsignatura.innerHTML = '';
+		
+		$.ajax({
+			
+			type: 'GET',
+			url: '/api/asignatura/asignatura/' + asignaturaId,
+			dataType: 'json',
+			success: function(asignatura) {
+				console.log(asignatura);
+				$('#titleAsignaturaModal').html('Asignatura: ' + asignatura.nombreAsignatura);
+				contenidoAsignatura.innerHTML += '<tr><td>' + asignatura.escuela.nombreEscuela +'</td><td>' + asignatura.periodo +'</td><td>' + asignatura.ciclo + '</td><td>' + asignatura.nombreDocente +'</td></tr>';
+				$('#alertAsignaturaAlumnos').html('Aun no hay Alumnos Asignados a la Asignatura : ' + '<strong>' + asignatura.nombreAsignatura + '</strong>');
+				
+				$.ajax({
+					
+					type: 'GET',
+					url: '/api/asignaturaalumno/asignaturaalumnos/asignatura/' + asignaturaId,
+					dataType: 'json',
+					success: function(response) {
+						
+						if(response != null) {
+							
+							$('.tablaAsignaturaAlumnos').show();
+							$('#alertAsignaturaAlumnos').hide();
+							
+							contenidoAsignaturaAlumnos.innerHTML = '';
+							for(var i = 0; i < response.length; i++) {
+								console.log(response[i]);
+								contenidoAsignaturaAlumnos.innerHTML += '<tr>';
+								contenidoAsignaturaAlumnos.innerHTML += '<td>' + (i+1) + '</td><td>' + response[i].alumno +'</td><td>' + response[i].asunto +'</td><td><div class="btn-group" role="group" aria-label="Basic example"><a href="/api/asignaturaalumno/view/' + response[i].nombreFichero + '" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a><a href="/api/asignaturaalumno/download/' + response[i].nombreFichero + '" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a></div></td></td>';
+								contenidoAsignaturaAlumnos.innerHTML += '</tr>';
+							}
+						}
+						else {
+							console.log("No hay datos");
+							$('.tablaAsignaturaAlumnos').hide();
+							$('#alertAsignaturaAlumnos').show();
+						}
+					}
+				});
+				
+			}
+		});
+	});
+	
+	$('#dataTable tbody').on('click', 'button#asignaturaAsignaturaAlumno', function() {
+		
+		var asignaturaId = $(this).attr('idasignatura');
+		console.log("asignaturaId: " + asignaturaId);
+		
+		$(location).attr('href', '/asignaturaAlumno/formAsignaturaDetalle/' + asignaturaId);
 	});
 	
 	$('#docenteAsignatura').autocomplete({

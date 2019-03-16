@@ -38,13 +38,13 @@ public class AsignaturaAlumnoServiceImpl implements AsignaturaAlumnoService{
 		List<AsignaturaAlumno> asignaturaAlumnos = asignaturaAlumnoDAO.findAll();
 		return asignaturaAlumnos;
 	}
-/*
+	
 	@Override
 	public List<AsignaturaAlumno> findByAsignaturaId(Integer asignaturaId) {
 		List<AsignaturaAlumno> asignaturaAlumnos = asignaturaAlumnoRepository.findByAsignaturaAsignaturaId(asignaturaId);
 		return asignaturaAlumnos;
 	}
-*/
+
 	@Override
 	@Transactional
 	public void saveOrUpdate(AsignaturaAlumno asignaturaAlumno) {
@@ -62,7 +62,8 @@ public class AsignaturaAlumnoServiceImpl implements AsignaturaAlumnoService{
 			asignaturaAlumnoDAO.save(asignaturaAlumno);
 		}
 	}
-/*
+
+	
 	@Override
 	@Transactional
 	public AsignaturaAlumno getAsignaturaAlumnoById(Integer asignaturaDetalleId) {
@@ -74,8 +75,8 @@ public class AsignaturaAlumnoServiceImpl implements AsignaturaAlumnoService{
 		}
 		
 		return asignaturaAlumno;
-	}*/
-/*
+	}
+
 	@Override
 	public AsignaturaAlumno findByAsignaturaAsignaturaIdAndAsignaturaDetalleId(Integer asignaturaId,
 			Integer asignaturaDetalleId) {
@@ -92,7 +93,7 @@ public class AsignaturaAlumnoServiceImpl implements AsignaturaAlumnoService{
 		
 		return asignaturaAlumno;
 	}
-*/
+	
 	@Override
 	public List<AsignaturaAlumno> findByAsignaturaAsignaturaId(Integer asignaturaId) {
 		List<AsignaturaAlumno> asignaturaAlumno = asignaturaAlumnoRepository.findByAsignaturaAsignaturaId(asignaturaId);

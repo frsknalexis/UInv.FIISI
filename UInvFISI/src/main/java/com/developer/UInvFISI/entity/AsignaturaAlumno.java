@@ -30,11 +30,11 @@ public class AsignaturaAlumno extends BaseEntity implements Serializable{
 	@Column(name="alumno", nullable=false, length=200)
 	private String alumno;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="asignatura_id")
 	private Asignatura asignatura;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="documento_id")
 	private Documento documento1;
 	

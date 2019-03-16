@@ -73,16 +73,15 @@
 												<a th:if="${asignatura.habilitado == true}" class="btn btn-danger btn-sm" th:text="'Incompleto'"></a>
                                             	<a th:if="${asignatura.habilitado != true}" class="btn btn-success btn-sm" th:text="'completo'"></a>
 												</td>
-												
-					
 												<td>
-												<a th:if="${asignatura.habilitado == true}" th:href="@{/asignaturaAlumno/formAsignaturaDetalle/} + ${asignatura.asignaturaId}" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus-circle"></i> Asignar Alumno</a>
+												<button th:if="${asignatura.habilitado == true}" id="asignaturaAsignaturaAlumno" th:idAsignatura="${asignatura.asignaturaId}"
+													class="btn btn-outline-primary btn-xs"><i class="fa fa-plus-circle"></i> Asignar Alumno</button>
 												</td>
 												
 												<td>
 													<div class="btn-group" role="group" aria-label="Basic example">
-														<a th:href="@{/asignatura/detail/} + ${asignatura.asignaturaId}"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Ver"></i></a>
-														
+														<button id="detalleAsignatura" th:idAsignatura="${asignatura.asignaturaId}" class="btn btn-outline-info btn-xs" data-toggle="modal">
+														<i class="fa fa-eye" title="Ver"></i></button>
                                             			<a th:if="${asignatura.habilitado == true}" th:href="@{/asignatura/form/} + ${asignatura.asignaturaId}"  class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
                                             			<a th:if="${asignatura.habilitado == true}" th:href="@{/asignatura/delete/} + ${asignatura.asignaturaId}"  class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></a>
                                             			<a th:if="${asignatura.habilitado != true}" th:href="@{/asignatura/enabled/} + ${asignatura.asignaturaId}"  class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></a>
@@ -96,6 +95,53 @@
 						</div>
 					</div>
 					<!-- data table end -->
+					<div class="modal fade" id="modalDetalleAsignatura">
+                     	<div class="modal-dialog modal-lg" role="document">
+                        	<div class="modal-content">
+                            	<div class="modal-header">
+                                 	<h5 class="modal-title" id="titleAsignaturaModal"></h5>
+                                    	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                	<table class="table text-center table-hover" style="width: 760px; margin: 0 auto;">
+									<thead class="bg-primary text-capitalize">
+										<tr>
+											<th>Escuela</th>
+											<th>Periodo</th>
+											<th>Ciclo</th>
+											<th>Docente</th>
+										</tr>
+									</thead>
+									<tbody id="contenidoAsignatura">
+									</tbody>
+								</table>
+									<h5 class="text-center my-2">Alumnos Asignados: </h5>
+									<div class="data-tables">
+									<table id="dataTable" class="table text-center table-hover tablaAsignaturaAlumnos" style="width: 760px; margin: 0 auto;">
+										<thead class="bg-primary text-capitalize">
+											<tr>
+												<th>#</th>
+												<th>Alumno</th>
+												<th>Archivo Adjunto</th>
+												<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody id="contenidoAsignaturaAlumnos">
+										</tbody>
+									</table>
+									</div>
+									<div class="alert-items">
+										<div class="alert alert-primary my-2" role="alert" id="alertAsignaturaAlumnos">
+											
+										</div>
+									</div>
+                                 </div>
+                                 <div class="modal-footer">
+                                  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                 </div>
+                               </div>
+                            </div>
+                         </div>
 				</div>
 			</div>
 		</div>

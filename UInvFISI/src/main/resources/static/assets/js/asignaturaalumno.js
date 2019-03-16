@@ -44,7 +44,110 @@ $(document).on('ready', function() {
 	    }
 	}
 	
-	$('#guardarAsignaturaAlumno').click(function() {
+	$('#guardarAsignaturaAlumno').click(function(e) {
+		
+		e.preventDefault();
+		
+	
+		
+		if($('#alumnoAsignatura').val().match(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/) && $('#documentoAlumno').val().trim() != ""
+			&& $('#nroDocumentoAlumno').val().match(/^[0-9]+$/) && $('#asuntoAsignaturaAlumno').val().match(/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\-\s]+$/)) {
+			
+			var pathname = window.location.pathname;
+			var asignaturaId = pathname.substr(40);
+			console.log("asignaturaId: " + asignaturaId);
+			
+			var form = $('#formAsignaturaAlumno')[0];
+			
+			var data = new FormData(form);
+			
+			var formData = {
+					
+					asignaturaDetalleId: $('#asignaturaAlumnoId').val(),
+					alumno: $('#alumnoAsignatura').val(),
+					documento1: {
+						documentoId: $('#documentoAlumno').val()
+					},
+					nroDocumento: $('#nroDocumentoAlumno').val(),
+					asunto: $('#asuntoAsignaturaAlumno').val()
+			};
+			
+			data.append("alumJson", JSON.stringify(formData));
+			
+			if(formData.asignaturaDetalleId) {
+				
+				var asignaturaId = pathname.substr(-3,1);
+				console.log("asignaturaId: " + asignaturaId);
+				
+				var asignaturaDetalleId = formData.asignaturaDetalleId;
+				console.log("asignaturaDetalleId: " + asignaturaDetalleId);
+				
+				$.ajax({
+					
+					type: 'PUT',
+					url: '/api/asignaturaalumno/update/asignatura/' + asignaturaId + '/asignaturaDetalle/' + asignaturaDetalleId,
+					enctype: 'multipart/form-data',
+					data: data,
+					processData: false,
+					contentType: false,
+					success: function(response) {
+						
+						console.log(response);
+						
+						swal({
+							type: "success",
+							title: "Alumno Actualizado con exito",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+						}).then((result) => {
+
+							if(result.value) {
+								$(location).attr('href', '/asignaturaAlumno/formAsignaturaDetalle/' + asignaturaId);
+							}
+						});
+					},
+					error: function() {
+						alert('Error al Actualizar Alumno');
+					}
+				});
+			}	
+			else {
+				
+
+				$.ajax({
+					
+					type: 'POST',
+					url: '/api/asignaturaalumno/save/asignatura/' + asignaturaId,
+					enctype: 'multipart/form-data',
+		    		data: data,
+		    		processData: false,
+		    		contentType: false,
+					success: function(response) {
+						
+						console.log(response);
+						
+						swal({
+							type: "success",
+							title: "Alumno Registrado con exito",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+						}).then((result) => {
+
+							if(result.value) {
+								$(location).attr('href', '/asignaturaAlumno/formAsignaturaDetalle/' + asignaturaId);
+							}
+						});
+						
+					},
+					error: function() {
+						alert('Error al Registrar Alumno');
+					}
+					
+				});				
+			} 
+		}
 		
 		if($('#alumnoAsignatura').val() == "" && $('#documentoAlumno').val().trim() == ""
 			 && $('#nroDocumentoAlumno').val() == "" && $('#asuntoAsignaturaAlumno').val() == "") {
@@ -149,6 +252,15 @@ $(document).on('ready', function() {
 				}
 			}
 		}
+	});
+	
+	$('#dataTable tbody').on('click', 'button#downloadFileAlumno', function() {
+		
+		var nombreFicheroAlumno = $(this).attr('nombreficheroalumno');
+		
+		console.log("nombreFicheroAlumno: " + nombreFicheroAlumno);
+		
+		$(location).attr('href', '/api/asignaturaalumno/download/' + nombreFicheroAlumno);
 	});
 	
 });

@@ -46,7 +46,19 @@ $(document).on('ready', function() {
 		}
 	}
 	
-	$('#guardarReglamento').click(function() {
+	$('#guardarReglamento').click(function(e) {
+		
+		e.preventDefault();
+		
+		if($('#asuntoReglamento').val().match(/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\-\s]+$/)) {
+			
+			var formData = {
+					reglamentoId: $('#reglamentoId').val(),
+					asunto: $('#asuntoReglamento').val()
+			};
+			
+			console.log(formData);
+		}
 		
 		if($('#asuntoReglamento').val() == "" || $('#asuntoReglamento').val() == 0) {
 			

@@ -12,7 +12,7 @@ public interface AsignaturaAlumnoRepository extends JpaRepository<AsignaturaAlum
 
 	
 	List<AsignaturaAlumno> findByAsignaturaAsignaturaId(Integer asignaturaId);
-	/*
+	
 	AsignaturaAlumno findByAsignaturaAsignaturaIdAndAsignaturaDetalleId(Integer asignaturaId, Integer asignaturaDetalleId);
-	*/
+	
 }

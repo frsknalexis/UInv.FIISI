@@ -24,6 +24,9 @@ $(document).ready(function() {
 		    console.log(formData);
 		    
 		    if(formData.lineaInvestigacionId) {
+		    	   	
+		    	var programaId = pathname.substr(-3,1);
+		    	console.log(programaId);
 		    	
 		    	var lineaInvestigacionId = formData.lineaInvestigacionId;
 		    	console.log("lineaInvestigacionId: " + lineaInvestigacionId);

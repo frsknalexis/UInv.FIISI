@@ -93,6 +93,33 @@ public class AsignaturaAlumnoController {
 		return "asignatura/formAsignatura";
 	}
 	
+	@GetMapping("/formAsignaturaDetalle/{asignaturaId}/{asignaturaDetalleId}")
+	public String updateAsignaturaAlumno(@PathVariable(value="asignaturaDetalleId") Integer asignaturaDetalleId, @PathVariable(value="asignaturaId") Integer asignaturaId,
+			Map<String, Object> model, RedirectAttributes flash) {
+		
+		List<AsignaturaAlumno> asignaturasAlumno = asignaturaAlumnoService.findByAsignaturaAsignaturaId(asignaturaId);
+		List<Documento> documentos = documentoService.findAllEnabled();
+		AsignaturaAlumno asignaturaAlumno = null;
+		Asignatura asignatura = null;
+		
+		if(asignaturaId != null && asignaturaId > 0) {
+			
+			asignatura = asignaturaService.getByAsignaturaId(asignaturaId);
+			if(asignaturaDetalleId != null && asignaturaDetalleId > 0) {
+				asignaturaAlumno = asignaturaAlumnoService.findByAsignaturaAsignaturaIdAndAsignaturaDetalleId(asignaturaId, asignaturaDetalleId);
+			}
+		}
+		
+		asignaturaAlumno.setAsignatura(asignatura);
+		
+		
+		model.put("documentos", documentos);
+		model.put("asignaturaAlumno", asignaturaAlumno);
+		model.put("asignaturasAlumno", asignaturasAlumno);
+		model.put("titulo", "Editar Asignatura Alumno");
+		return "asignatura/formAsignatura";
+	}
+	
 	@PostMapping("/formAsignaturaDetalle")
 	public String AsignaturaAlumno(@Valid AsignaturaAlumno asignaturaAlumno, @RequestParam("fileAlumno") MultipartFile file, 
 			SessionStatus status, RedirectAttributes flash) {
@@ -180,14 +207,6 @@ public class AsignaturaAlumnoController {
 			response.setContentType(mimeType);
 
 			/**
-			 * In a regular HTTP response, the Content-Disposition response header is a
-			 * header indicating if the content is expected to be displayed inline in the
-			 * browser, that is, as a Web page or as part of a Web page, or as an
-			 * attachment, that is downloaded and saved locally.
-			 * 
-			 */
-
-			/**
 			 * Here we have mentioned it to show inline
 			 */
 			response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() + "\""));
@@ -203,68 +222,4 @@ public class AsignaturaAlumnoController {
 		}
 	}
 	
-	
-	/*
-	@GetMapping("/formAsignaturaDetalle/{asignaturaId}")
-	public String createAsignaturaAlumno(@PathVariable(value="asignaturaId") Integer asignaturaId, Map<String, Object> model,
-			RedirectAttributes flash) {
-		
-		List<AsignaturaAlumno> asignaturaAlumnos = asignaturaAlumnoService.findByAsignaturaId(asignaturaId);
-		
-		List<Documento> documentos = documentoService.findAllEnabled();
-		
-		Asignatura asignatura = asignaturaService.getByAsignaturaId(asignaturaId);
-		
-		if(asignatura == null) {
-			
-			flash.addFlashAttribute("error", "La Asignatura no existe");
-			return "redirect:/asignatura/list";
-		}
-		
-		AsignaturaAlumno asignaturaAlumno = new AsignaturaAlumno();
-		asignaturaAlumno.setAsignatura(asignatura);
-		
-		model.put("asignaturaAlumno", asignaturaAlumno);
-		model.put("documentos", documentos);
-		model.put("asignaturaAlumnos", asignaturaAlumnos);
-		model.put("titulo", "Formulario Asignatura Alumno");
-		model.put("subtitulo","LISTADO DE ALUMNOS ASIGNADOS A" + ' ' + asignatura.getNombreAsignatura());
-		return "asignatura/formAsignatura";
-	}
-	
-	@GetMapping("/formAsignaturaDetalle/{asignaturaId}/{asignaturaDetalleId}")
-	public String updateAsignaturaAlumno(@PathVariable(value="asignaturaDetalleId") Integer asignaturaDetalleId, @PathVariable(value="asignaturaId") Integer asignaturaId,
-			Map<String, Object> model, RedirectAttributes flash) {
-		
-		List<Documento> documentos = documentoService.findAllEnabled();
-		AsignaturaAlumno asignaturaAlumno = null;
-		Asignatura asignatura = null;
-		
-		if(asignaturaId != null && asignaturaId > 0) {
-			
-			asignatura = asignaturaService.getByAsignaturaId(asignaturaId);
-			if(asignaturaDetalleId != null && asignaturaDetalleId > 0) {
-				asignaturaAlumno = asignaturaAlumnoService.findByAsignaturaAsignaturaIdAndAsignaturaDetalleId(asignaturaId, asignaturaDetalleId);
-			}
-		}
-		
-		asignaturaAlumno.setAsignatura(asignatura);
-		
-		
-		model.put("documentos", documentos);
-		model.put("asignaturaAlumno", asignaturaAlumno);
-		model.put("titulo", "Editar Asignatura Alumno");
-		return "asignatura/formAsignatura";
-	}
-	
-	@PostMapping("/formAsignaturaDetalle")
-	public String saveAsignaturaAlumno(@Valid AsignaturaAlumno asignaturaAlumno, SessionStatus status,
-			RedirectAttributes flash) {
-		
-		asignaturaAlumnoService.saveOrUpdate(asignaturaAlumno);
-		status.setComplete();
-		flash.addFlashAttribute("success", "Alumno Asignado con exito");
-		return "redirect:/asignaturaAlumno/formAsignaturaDetalle/" + asignaturaAlumno.getAsignatura().getAsignaturaId();
-	}
-	*/
 }
