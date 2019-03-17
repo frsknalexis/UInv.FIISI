@@ -43,32 +43,29 @@
                                 
                                 <a th:href="@{/reglamento/form}" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus-circle"></i> Agregar Reglamento</a>
                                 <hr/>
-                                
-                                    
-                                    
-                                    <table class="table text-center table-hover table-striped table-bordered" style="width: 100%; margin: 0 auto;">
+                                 <table id="dataTable" class="table text-center table-hover table-striped" style="width: 100%; margin: 0 auto;">
 									<thead class="bg-primary text-capitalize">
 										<tr>
-											   <th>Reglamentos</th>
-                                               <th>Nombre Archivo</th>
-                                               <th>Acciones</th>
-											
+											<th>#</th>
+											<th>Reglamentos</th>
+                                            <th>Nombre Archivo</th>
+                                            <th>Acciones</th>
 										</tr>
 									</thead>
 									<tbody>
-									<tr th:each="reglamento : ${reglamentos}">
-										
-												<td th:text="${reglamento.asunto}"></td>
-                                            	<td th:text="${reglamento.nombreFichero}"></td>
-                                            	<td>
+										<tr th:each="reglamento : ${reglamentos}">
+											<td th:text="${reglamento.reglamentoId}"></td>
+											<td th:text="${reglamento.asunto}"></td>
+                                            <td th:text="${reglamento.nombreFichero}"></td>
+                                            <td>
 												<div class="btn-group" role="group" aria-label="Basic example">
-													<a th:href="@{/reglamento/view/} + ${reglamento.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-													<a th:href="@{/reglamento/download/} + ${reglamento.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
-													
+													<a th:href="@{/api/reglamento/view/} + ${reglamento.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+													<button id="downloadReglamento" th:nombreFicheroReglamento="${reglamento.nombreFichero}" class="btn btn-outline-primary btn-xs">
+													<i class="fa fa-download" title="Descargar"></i></button>
+													<button id="editarReglamento" th:idReglamento="${reglamento.reglamentoId}" class="btn btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></button>
 												</div>
 											</td>
-                                            	
-									</tr>
+										</tr>
 									</tbody>
 								</table>
                                 </div>

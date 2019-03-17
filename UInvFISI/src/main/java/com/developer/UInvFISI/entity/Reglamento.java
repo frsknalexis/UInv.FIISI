@@ -30,7 +30,7 @@ public class Reglamento extends BaseEntity implements Serializable {
 	@Column(name="asunto", length=100, nullable=false)
 	private String asunto;
 	
-	@Column(name="nombre_fichero", length=100)
+	@Column(name="nombre_fichero", length=150)
 	private String nombreFichero;
 	
 	@Column(name="tamanio_fichero", length=10)

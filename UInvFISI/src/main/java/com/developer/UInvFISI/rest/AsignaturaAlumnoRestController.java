@@ -95,7 +95,8 @@ public class AsignaturaAlumnoRestController {
 	
 	@PostMapping(value="/save/asignatura/{asignaturaId}", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<ResponseBaseOperacion> saveAsignaturaAlumno(@PathVariable(value="asignaturaId") Integer asignaturaId,
-		@RequestParam(value="alumJson") String alumJson, @RequestParam(value="fileAlumno") MultipartFile file) {
+		@RequestParam(value=Constantes.ASIGNATURA_ALUM_JSON_PARAM, required=true) String alumJson, 
+		@RequestParam(value=Constantes.ASIGNATURA_ALUM_FILE_PARAM, required=true) MultipartFile file) {
 		
 		Asignatura asignatura = null;
 		
@@ -114,7 +115,8 @@ public class AsignaturaAlumnoRestController {
 			
 			if(!file.isEmpty()) {
 			
-				Path rootPath = Paths.get(Constantes.UPLOAD_FOLDER_BASE).resolve(file.getOriginalFilename());
+				Path rootPath = Paths.get(Constantes.UPLOAD_FOLDER_BASE).resolve(Constantes.FOLDER_ARCHIVO_ALUMNOS)
+										.resolve(file.getOriginalFilename());
 				Path rootAbsolutePath = rootPath.toAbsolutePath();
 				
 				try {
@@ -131,7 +133,7 @@ public class AsignaturaAlumnoRestController {
 			
 			asignaturaAlumno.setAsignatura(asignatura);
 			asignaturaAlumnoService.saveOrUpdate(asignaturaAlumno);
-			ResponseBaseOperacion response = new ResponseBaseOperacion("success", asignaturaAlumno);
+			ResponseBaseOperacion response = new ResponseBaseOperacion(Constantes.CREATED_MESSAGE, asignaturaAlumno);
 			return new ResponseEntity<ResponseBaseOperacion>(response, HttpStatus.CREATED);
 		}
 		catch(Exception e) {
@@ -142,8 +144,8 @@ public class AsignaturaAlumnoRestController {
 	
 	@PutMapping(value="/update/asignatura/{asignaturaId}/asignaturaDetalle/{asignaturaDetalleId}", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<ResponseBaseOperacion> updateAsignaturaAlumno(@PathVariable(value="asignaturaId") Integer asignaturaId,
-			@PathVariable(value="asignaturaDetalleId") Integer asignaturaDetalleId, @RequestParam(value="alumJson") String alumJson,
-			@RequestParam(value="fileAlumno") MultipartFile file) {
+			@PathVariable(value="asignaturaDetalleId") Integer asignaturaDetalleId, @RequestParam(value=Constantes.ASIGNATURA_ALUM_JSON_PARAM, required=true) String alumJson,
+			@RequestParam(value=Constantes.ASIGNATURA_ALUM_FILE_PARAM, required=true) MultipartFile file) {
 		
 		Asignatura asignatura = null;
 		AsignaturaAlumno asignaturaAlumnoOld = null;
@@ -165,7 +167,8 @@ public class AsignaturaAlumnoRestController {
 				if(asignaturaAlumnoOld.getAsignaturaDetalleId() != null && asignaturaAlumnoOld.getAsignaturaDetalleId() > 0
 						&& asignaturaAlumnoOld.getNombreFichero() != null && asignaturaAlumnoOld.getNombreFichero().length() > 0) {
 					
-					Path rootPath = Paths.get(Constantes.UPLOAD_FOLDER_BASE).resolve(asignaturaAlumnoOld.getNombreFichero()).toAbsolutePath();
+					Path rootPath = Paths.get(Constantes.UPLOAD_FOLDER_BASE).resolve(Constantes.FOLDER_ARCHIVO_ALUMNOS)
+												.resolve(asignaturaAlumnoOld.getNombreFichero()).toAbsolutePath();
 					File archivo = rootPath.toFile();
 					
 					if(archivo.exists() && archivo.canRead()) {
@@ -173,7 +176,8 @@ public class AsignaturaAlumnoRestController {
 					}					
 				}
 				
-				Path rootPath = Paths.get(Constantes.UPLOAD_FOLDER_BASE).resolve(file.getOriginalFilename());
+				Path rootPath = Paths.get(Constantes.UPLOAD_FOLDER_BASE).resolve(Constantes.FOLDER_ARCHIVO_ALUMNOS)
+										.resolve(file.getOriginalFilename());
 				Path rootAbsolutePath = rootPath.toAbsolutePath();
 				
 				try {
@@ -194,7 +198,7 @@ public class AsignaturaAlumnoRestController {
 			asignaturaAlumnoOld.setNroDocumento(asignaturaAlumno.getNroDocumento());
 			asignaturaAlumnoOld.setAsunto(asignaturaAlumno.getAsunto());
 			asignaturaAlumnoService.saveOrUpdate(asignaturaAlumnoOld);
-			ResponseBaseOperacion response = new ResponseBaseOperacion("updated", asignaturaAlumnoOld);
+			ResponseBaseOperacion response = new ResponseBaseOperacion(Constantes.UPDATED_MESSAGE, asignaturaAlumnoOld);
 			return new ResponseEntity<ResponseBaseOperacion>(response, HttpStatus.OK);
 			
 		}
@@ -205,10 +209,11 @@ public class AsignaturaAlumnoRestController {
 	}
 	
 	
-	@GetMapping("/download/{filename:.+}")
+	@GetMapping(value=Constantes.DOWNLOAD_URI)
 	public ResponseEntity<Resource> downloadFile(@PathVariable String filename, HttpServletRequest request) {
 		
-		Path pathFile = Paths.get(Constantes.UPLOAD_FOLDER_BASE).resolve(filename).toAbsolutePath();
+		Path pathFile = Paths.get(Constantes.UPLOAD_FOLDER_BASE).resolve(Constantes.FOLDER_ARCHIVO_ALUMNOS)
+								.resolve(filename).toAbsolutePath();
 		Resource resource = null;
 		
 		try {
@@ -235,19 +240,20 @@ public class AsignaturaAlumnoRestController {
 		}
 		
 		if(contentType == null) {
-			contentType = "application/octet-stream";
+			contentType = Constantes.DEFAULT_CONTENT_TYPE;
 		}
 		
 		return ResponseEntity.ok()
 				.contentType(MediaType.parseMediaType(contentType))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+				.header(HttpHeaders.CONTENT_DISPOSITION, String.format(Constantes.FILE_DOWNLOAD_HTTP_HEADER, resource.getFilename()))
 				.body(resource);
 	}
 	
-	@GetMapping("/view/{filename:.+}")
+	@GetMapping(value=Constantes.VIEW_PDF_URI)
 	public ResponseEntity<Resource> viewPDF(@PathVariable String filename, HttpServletRequest request) {
 		
-		Path pathFile = Paths.get(Constantes.UPLOAD_FOLDER_BASE).resolve(filename).toAbsolutePath();
+		Path pathFile = Paths.get(Constantes.UPLOAD_FOLDER_BASE).resolve(Constantes.FOLDER_ARCHIVO_ALUMNOS)
+								.resolve(filename).toAbsolutePath();
 		Resource resource = null;
 		
 		try {
@@ -274,12 +280,12 @@ public class AsignaturaAlumnoRestController {
 		}
 		
 		if(contentType == null) {
-			contentType = "application/octet-stream";
+			contentType = Constantes.DEFAULT_CONTENT_TYPE;
 		}
 		
 		return ResponseEntity.ok()
 				.contentType(MediaType.parseMediaType(contentType))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+				.header(HttpHeaders.CONTENT_DISPOSITION, String.format(Constantes.VIEW_PDF_HTTP_HEADER, resource.getFilename()))
 				.body(resource);
 		
 	}

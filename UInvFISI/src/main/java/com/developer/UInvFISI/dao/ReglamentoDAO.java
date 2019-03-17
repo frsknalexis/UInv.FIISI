@@ -10,6 +10,8 @@ public interface ReglamentoDAO {
 	
 	List<Reglamento> findAll();
 	
+	Reglamento findOne(Integer reglamentoId);
+	
 	void save(Reglamento reglamento);
 	
 	void update(Reglamento reglamento);

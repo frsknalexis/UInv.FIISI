@@ -36,4 +36,14 @@ public class ReglamentoDAOImpl implements ReglamentoDAO{
 		}
 	}
 
+	@Override
+	public Reglamento findOne(Integer reglamentoId) {
+		
+		Reglamento reglamento = null;
+		if(reglamentoId != null && reglamentoId > 0) {
+			reglamento =  em.find(Reglamento.class, reglamentoId);
+		}
+		return reglamento;
+	}
+
 }

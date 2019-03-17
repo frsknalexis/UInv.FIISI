@@ -8,6 +8,8 @@ public interface ReglamentoService {
 
 	List<Reglamento> findAll();
 	
+	Reglamento getByReglamentoId(Integer reglamentoId);
+	
 	void saveOrUpdate(Reglamento reglamento);
 	
 	

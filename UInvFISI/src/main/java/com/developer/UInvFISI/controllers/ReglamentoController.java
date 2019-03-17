@@ -67,9 +67,28 @@ public class ReglamentoController {
 		return "reglamento/form";
 	}
 	
+	@GetMapping("/form/{reglamentoId}")
+	public String updateReglamento(@PathVariable(value="reglamentoId") Integer reglamentoId, Map<String, Object> model, RedirectAttributes flash) {
+		
+		Reglamento reglamento = null;
+		if(reglamentoId != null && reglamentoId > 0) {
+			
+			reglamento = reglamentoService.getByReglamentoId(reglamentoId);
+			if(reglamento == null) {
+				flash.addFlashAttribute("error", "Reglamento no encontrado");
+				return "redirect:/reglamento/listar";
+			}
+		}
+		else {
+			flash.addFlashAttribute("error", "Reglamento no encontrado");
+			return "redirect:/reglamento/listar";
+		}
+		
+		model.put("titulo", "Editar Reglamento");
+		model.put("reglamento", reglamento);
+		return "reglamento/form";
+	}
 	
-	
-
 	@PostMapping("/form")
 	public String save(@Valid Reglamento reglamento, SessionStatus status,@RequestParam("fileReglamento") MultipartFile file,  RedirectAttributes flash) {
 
@@ -155,14 +174,6 @@ public class ReglamentoController {
 			}
 
 			response.setContentType(mimeType);
-
-			/**
-			 * In a regular HTTP response, the Content-Disposition response header is a
-			 * header indicating if the content is expected to be displayed inline in the
-			 * browser, that is, as a Web page or as part of a Web page, or as an
-			 * attachment, that is downloaded and saved locally.
-			 * 
-			 */
 
 			/**
 			 * Here we have mentioned it to show inline

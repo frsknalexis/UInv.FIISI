@@ -43,4 +43,16 @@ public class ReglamentoServiceImpl  implements ReglamentoService{
 			reglamentoDAO.save(reglamento);
 		}
 	}
+
+	@Override
+	@Transactional
+	public Reglamento getByReglamentoId(Integer reglamentoId) {
+		
+		Reglamento reglamento = null;
+		if(reglamentoId != null && reglamentoId > 0) {
+			
+			reglamento = reglamentoDAO.findOne(reglamentoId);
+		}
+		return reglamento;
+	}
 }

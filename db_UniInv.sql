@@ -228,7 +228,7 @@ alter sequence tbl_asignatura_detalle_asignatura_detalle_id_seq rename to asigna
 create table tbl_reglamento(
 reglamento_id serial not null,
 asunto varchar(100),
-nombre_fichero varchar(100),
+nombre_fichero varchar(150),
 tamanio_fichero varchar(10),
 formato_fichero varchar(40),
 fecha_registro timestamp,
@@ -236,7 +236,6 @@ fecha_modificacion timestamp,
 habilitado boolean default true,
 constraint pk_reglamento primary key(reglamento_id)
 );
-
 alter sequence tbl_reglamento_reglamento_id_seq rename to reglamento_seq;
 
 CREATE TABLE tbl_trabajo

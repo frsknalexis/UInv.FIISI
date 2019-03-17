@@ -3,6 +3,23 @@
  */
 
 $(document).ready(function() {
+	
+	$('#guardarInvestigacion').click(function(e) {
+		
+		e.preventDefault();
+		
+		if($('#nombreInvestigacion').val() == "" && $('#investigacionLineaInvg').val() == "" && $('#anioInvestigacion').val() == "") {
+			
+			swal({
+                type: 'error',
+                title: 'Ooops',
+                text: 'Debe llenar todos los Campos !'
+            });
+		
+			return false;
+		}
+	});
+	
 	$("#docenteAsignacion").autocomplete({
 		
 		source: function(request, response) {
