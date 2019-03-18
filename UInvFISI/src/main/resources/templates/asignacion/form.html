@@ -42,7 +42,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form th:action="@{/asignacion/form}" th:object="${asignacion}" class="needs-validation" novalidate="" method="post">
+								<form th:object="${asignacion}" class="needs-validation" novalidate="" method="post">
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
 											<label for="nombreInvestigacion">Investigacion</label>
@@ -70,7 +70,7 @@
 												<input type="hidden" class="form-control" id="investigacionLineaInvgId" name="investigacionLineaInvgId"
 												th:field="*{lineaInvestigacion.lineaInvestigacionId}"/>
 												<input type="text" class="form-control" id="investigacionLineaInvg" name="investigacionLineaInvg"
-												required="" aria-describedby="inputGroupInvgLineaInvg"/>
+												required="" aria-describedby="inputGroupInvgLineaInvg" th:field="*{lineaInvestigacion.nombreLineaInvestigacion}"/>
 												<div class="invalid-feedback">Campo obligatorio</div>
 											</div>
 										</div>

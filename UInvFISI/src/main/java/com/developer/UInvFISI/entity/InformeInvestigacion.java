@@ -40,7 +40,7 @@ public class InformeInvestigacion extends BaseEntity implements Serializable {
 	@Column(name="formato_fichero", length=20)
 	private String formatoFichero;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="asignacion_id")
 	private Asignacion asignacion;
 	

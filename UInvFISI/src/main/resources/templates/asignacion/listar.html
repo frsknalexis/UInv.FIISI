@@ -72,7 +72,8 @@
 												<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacionDocente/formAsignacionDetalle/} + ${asignacion.asignacionId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-plus-circle"></i> Asignar Investigador</a>
 												</td>
 												<td>
-												<a th:href="@{/informe/formInformeInvestigacion/} + ${asignacion.asignacionId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-files-o"></i> Adjuntar Informes</a>
+												<button id="adjuntarInformeInvestigacion" th:idAsignacion="${asignacion.asignacionId}" class="btn btn-outline-primary btn-xs">
+												<i class="fa fa-files-o"></i> Adjuntar Informes</button>
 												</td>
 												<td>
 													<div class="btn-group" role="group" aria-label="Basic example">

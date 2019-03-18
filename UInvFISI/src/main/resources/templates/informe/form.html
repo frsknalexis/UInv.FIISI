@@ -41,45 +41,8 @@
 					<div class="col-sm-12 mt-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="header-title text-center" th:text="${informeInvestigacion.asignacion.nombreInvestigacion}"></h4>
-								<p class="card-text">Ficheros en este Item:</p>
-								<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(informesInvestigacion)}" width="100%">
-									<thead class="bg-primary text-capitalize">
-										<tr>
-											<th>Descripcion</th>
-											<th>Fichero</th>
-											<th>Formato</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each=" informe : ${informesInvestigacion}">
-											<td th:text="${informe.asunto}"></td>
-											<td th:text="${informe.nombreFichero}"></td>
-											<td th:text="${informe.formatoFichero}"></td>
-											<td>
-												<div class="btn-group" role="group" aria-label="Basic example">
-													<a th:href="@{/informe/view/} + ${informe.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-													<a th:href="@{/informe/download/} + ${informe.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="alert-items" th:if="${#lists.isEmpty(informesInvestigacion)}">
-									<div class="alert alert-primary my-2" role="alert">
-									Aun no hay ficheros asociados al Proyecto de Investigacion: <strong th:text="${informeInvestigacion.asignacion.nombreInvestigacion}"></strong>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 mt-5">
-						<div class="card">
-							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form th:action="@{/informe/formInformeInvestigacion}" enctype="multipart/form-data" 
-								th:object="${informeInvestigacion}" 
+								<form id="formInformeInvestigacion" enctype="multipart/form-data" th:object="${informeInvestigacion}" 
 								novalidate="" class="needs-validation" method="post">
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
@@ -124,21 +87,63 @@
 													<i class="fa fa-upload"></i></span>
 												</div>
 												<div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="fileInforme"
-                                                    name="fileInforme" required="">
-                                                    <label class="custom-file-label" for="fileInforme">Seleccione un Informe</label>
+                                                    <input type="file" class="custom-file-input" id="fileInformeInvestigacion"
+                                                    name="fileInformeInvestigacion" required="">
+                                                    <label class="custom-file-label" for="fileInformeInvestigacion">Seleccione un Informe</label>
                                                 </div>
                                                 <div class="invalid-feedback">Campo obligatorio, seleccione un archivo</div>
 											</div>
 										</div>
 									</div>
-									<button class="btn btn-outline-primary btn-sm" type="submit">
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<div id="visorInformeInvestigacion"></div>
+										</div>
+									</div>
+									<button id="guardarInformeInvestigacion" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar Informe
 									</button>
 									<a class="btn btn-outline-danger btn-sm"
 										th:href="@{/asignacion/list}"><i
 										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
 								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="header-title text-center" th:text="${informeInvestigacion.asignacion.nombreInvestigacion}"></h4>
+								<p class="card-text">Ficheros en este Item:</p>
+								<table id="dataTable" class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(informesInvestigacion)}" width="100%">
+									<thead class="bg-primary text-capitalize">
+										<tr>
+											<th>Descripcion</th>
+											<th>Fichero</th>
+											<th>Formato</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each=" informe : ${informesInvestigacion}">
+											<td th:text="${informe.asunto}"></td>
+											<td th:text="${informe.nombreFichero}"></td>
+											<td th:text="${informe.formatoFichero}"></td>
+											<td>
+												<div class="btn-group" role="group" aria-label="Basic example">
+													<a th:href="@{/informe/view/} + ${informe.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+													<a th:href="@{/informe/download/} + ${informe.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
+													<a class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="alert-items" th:if="${#lists.isEmpty(informesInvestigacion)}">
+									<div class="alert alert-primary my-2" role="alert">
+									Aun no hay ficheros asociados al Proyecto de Investigacion: <strong th:text="${informeInvestigacion.asignacion.nombreInvestigacion}"></strong>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>	

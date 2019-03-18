@@ -22,8 +22,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tbl_asignacion", schema = "public")
@@ -43,7 +42,7 @@ public class Asignacion extends BaseEntity implements Serializable {
 	@Column(name="nombre_investigacion", nullable=false, length=500)
 	private String nombreInvestigacion;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="linea_investigacion_id")
 	private LineaInvestigacion lineaInvestigacion;
 	
@@ -61,10 +60,11 @@ public class Asignacion extends BaseEntity implements Serializable {
 	private Integer anio;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="asignacion")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<AsignacionDocente> asignacionDocentes;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="asignacion")
+	@JsonIgnore
 	private List<InformeInvestigacion> informesInvestigacion;
 	
 	public Asignacion() {
