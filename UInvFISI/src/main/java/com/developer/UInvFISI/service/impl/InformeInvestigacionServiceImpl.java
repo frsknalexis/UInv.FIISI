@@ -55,4 +55,28 @@ public class InformeInvestigacionServiceImpl implements InformeInvestigacionServ
 		return informesInvestigacion;
 	}
 
+	@Override
+	public InformeInvestigacion findByAsignacionAsignacionIdAndInformeAsignacionId(Integer asignacionId,
+			Integer informeAsignacionId) {
+		
+		InformeInvestigacion informeInvestigacion = null;
+		if(asignacionId != null && asignacionId > 0) {
+			
+			if(informeAsignacionId != null && informeAsignacionId > 0) {
+				informeInvestigacion = informeInvestigacionRepository.findByAsignacionAsignacionIdAndInformeAsignacionId(asignacionId, informeAsignacionId);
+			}
+		}
+		return informeInvestigacion;
+	}
+
+	@Override
+	@Transactional
+	public InformeInvestigacion getByInformeAsignacionId(Integer informeAsignacionId) {
+		
+		InformeInvestigacion informeInvestigacion = null;
+		if(informeAsignacionId != null && informeAsignacionId > 0) {
+			informeInvestigacion = informeInvestigacionDAO.findOne(informeAsignacionId);
+		}
+		return informeInvestigacion;
+	}
 }

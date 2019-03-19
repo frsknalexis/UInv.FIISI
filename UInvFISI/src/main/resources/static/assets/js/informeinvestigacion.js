@@ -71,8 +71,41 @@ $(document).on('ready', function() {
 			
 			if(formData.informeAsignacionId) {
 				
+				var asignacionId = pathname.substr(-3,1);
+				console.log("asignacionId: " + asignacionId);
+				
 				var informeAsignacionId = formData.informeAsignacionId;
 				console.log("informeAsignacionId: " + informeAsignacionId);
+				
+				$.ajax({
+					
+					type: 'PUT',
+					url: '/api/informeinvestigacion/update/asignacion/' + asignacionId + '/informeInvestigacion/' + informeAsignacionId,
+					enctype: 'multipart/form-data',
+					data: data,
+					processData: false,
+					contentType: false,
+					success: function(response) {
+						
+						console.log(response);
+						
+						swal({
+							type: "success",
+							title: "Informe Investigacion Actualizado con exito",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+						}).then((result) => {
+
+							if(result.value) {
+								$(location).attr('href', '/informe/formInformeInvestigacion/' + asignacionId);
+							}
+						});
+					},
+					error: function() {
+						alert('Error al Actualizar Informe Investigacion');
+					}
+				});
 			}
 			
 			else {
@@ -136,5 +169,53 @@ $(document).on('ready', function() {
 		    	return false;
 			} 
 		}
+	});
+	
+	$('#listarInformesInvestigacionPorAsignacionId').on('click', function() {
+		
+		var asignacionId = $(this).attr('idasignacion');
+		console.log("asignacionId: " + asignacionId);
+		
+		$('#modalListadoInformeInvestigacionPorAsignacion').modal('show');
+		
+		var contenidoInformeInvestigacionPorAsignacion = document.querySelector('#contenidoInformeInvestigacionPorAsignacion');
+		
+		$.ajax({
+			
+			type: 'GET',
+			url: '/api/informeinvestigacion/informes/asignacion/' + asignacionId,
+			dataType: 'json',
+			success: function(response) {
+				
+				if(response != null) {
+					
+					$('#tablaInformesInvestigacionPorAsignacion').show();
+					$('#alertInformesInvestigacionPorAsignacion').hide();
+					
+					contenidoInformeInvestigacionPorAsignacion.innerHTML = '';
+					for(var i = 0; i < response.length; i++) {
+						console.log(response[i]);
+						contenidoInformeInvestigacionPorAsignacion.innerHTML += '<tr>';
+						contenidoInformeInvestigacionPorAsignacion.innerHTML += '<td>' + (i+1) +'</td><td>' + response[i].asunto + '</td><td>' + response[i].nombreFichero + '</td><td><div class="btn-group" role="group"><a href="/api/informeinvestigacion/view/' + response[i].nombreFichero + '" target="_blank" class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a><button id="downloadFileInformeInvestigacion" nombreFicheroInformeInvestigacion="' + response[i].nombreFichero +'" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></button><a href="/informe/formInformeInvestigacion/' + response[i].asignacion.asignacionId + '/' + response[i].informeAsignacionId + '" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a></div></td>'; 
+						contenidoInformeInvestigacionPorAsignacion.innerHTML += '</tr>'
+					}
+				}
+				
+				else {
+					console.log('No hay datos');
+					$('#tablaInformesInvestigacionPorAsignacion').hide();
+					$('#alertInformesInvestigacionPorAsignacion').show();
+				}				
+			}
+		});
+	});
+	
+	$('#tablaInformesInvestigacionPorAsignacion tbody').on('click', 'button#downloadFileInformeInvestigacion', function() {
+		
+		var nombreFicheroInformeInvestigacion = $(this).attr('nombreficheroinformeinvestigacion');
+		
+		console.log('nombreFicheroInformeInvestigacion: ' + nombreFicheroInformeInvestigacion);
+		
+		$(location).attr('href', '/api/informeinvestigacion/download/' + nombreFicheroInformeInvestigacion);
 	});
 });

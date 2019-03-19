@@ -296,38 +296,20 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#dataTable tbody').on('click', 'button#asignarInvestigador', function() {
+		
+		var asignacionId = $(this).attr('idasignacion');
+		console.log("asignacionId: " + asignacionId);
+		localStorage.setItem("asignacionId", asignacionId);
+		
+		$(location).attr('href', '/asignacionDocente/formAsignacionDetalle/' + asignacionId);
+	});
+	
 	$('#dataTable tbody').on('click', 'button#adjuntarInformeInvestigacion', function() {
 		
 		var asignacionId = $(this).attr('idasignacion');
 		console.log("asignacionId: " + asignacionId);
 		
 		$(location).attr('href', '/informe/formInformeInvestigacion/' + asignacionId);
-	});
-	
-	$("#docenteAsignacion").autocomplete({
-		
-		source: function(request, response) {
-			$.ajax({
-				url : "/docente/cargar-docentes/" + request.term,
-				dataType : 'json',
-				data : {
-					term : request.term
-				},
-				success : function(data) {
-					console.log(data);
-					response($.map(data, function(item) {
-						return {
-							value: item.docenteId,
-							label: item.nombresDocente + ', ' + item.apellidosDocente,
-						};
-					}));
-				},
-			});
-		},
-		select: function(event, ui) {
-			$("#docenteAsignacion").val(ui.item.label);
-			return false;
-		}
-		
 	});
 });

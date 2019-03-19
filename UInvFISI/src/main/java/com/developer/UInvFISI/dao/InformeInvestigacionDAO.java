@@ -8,6 +8,8 @@ public interface InformeInvestigacionDAO {
 
 	List<InformeInvestigacion> findAll();
 	
+	InformeInvestigacion findOne(Integer informeAsignacionId);
+	
 	void save(InformeInvestigacion informeInvestigacion);
 	
 	void update(InformeInvestigacion informeInvestigacion);

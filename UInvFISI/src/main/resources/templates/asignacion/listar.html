@@ -69,7 +69,8 @@
                                             	<span th:if="${asignacion.habilitado != true}" class="status-p bg-success" th:text="'Terminado'"></span>
 												</td>
 												<td>
-												<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacionDocente/formAsignacionDetalle/} + ${asignacion.asignacionId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-plus-circle"></i> Asignar Investigador</a>
+												<button th:if="${asignacion.habilitado == true}" id="asignarInvestigador" th:idAsignacion="${asignacion.asignacionId}"
+												 class="btn btn-outline-primary btn-xs"><i class="fa fa-plus-circle"></i> Asignar Investigador</button>
 												</td>
 												<td>
 												<button id="adjuntarInformeInvestigacion" th:idAsignacion="${asignacion.asignacionId}" class="btn btn-outline-primary btn-xs">

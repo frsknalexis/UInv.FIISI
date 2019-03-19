@@ -8,7 +8,11 @@ public interface InformeInvestigacionService {
 
 	List<InformeInvestigacion> findAll();
 	
+	InformeInvestigacion getByInformeAsignacionId(Integer informeAsignacionId);
+	
 	void saveOrUpdate(InformeInvestigacion informeInvestigacion);
 	
 	List<InformeInvestigacion> findByAsignacionAsignacionId(Integer asignacionId);
+	
+	InformeInvestigacion findByAsignacionAsignacionIdAndInformeAsignacionId(Integer asignacionId, Integer informeAsignacionId);
 }

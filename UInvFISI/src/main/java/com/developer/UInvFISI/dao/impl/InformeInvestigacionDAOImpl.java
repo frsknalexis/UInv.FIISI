@@ -36,4 +36,15 @@ public class InformeInvestigacionDAOImpl implements InformeInvestigacionDAO {
 		}
 	}
 
+	@Override
+	public InformeInvestigacion findOne(Integer informeAsignacionId) {
+		
+		InformeInvestigacion informeInvestigacion = null;
+		
+		if(informeAsignacionId != null && informeAsignacionId > 0) {
+			informeInvestigacion = em.find(InformeInvestigacion.class, informeAsignacionId);
+		}
+		return informeInvestigacion;
+	}
+
 }

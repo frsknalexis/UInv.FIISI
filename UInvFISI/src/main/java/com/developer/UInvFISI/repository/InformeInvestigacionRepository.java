@@ -11,4 +11,6 @@ import com.developer.UInvFISI.entity.InformeInvestigacion;
 public interface InformeInvestigacionRepository extends JpaRepository<InformeInvestigacion, Integer> {
 
 	List<InformeInvestigacion> findByAsignacionAsignacionId(Integer asignacionId);
+	
+	InformeInvestigacion findByAsignacionAsignacionIdAndInformeAsignacionId(Integer asignacionId, Integer informeAsignacionId);
 }

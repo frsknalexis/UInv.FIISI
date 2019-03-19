@@ -38,7 +38,7 @@
 			<!-- page title area end -->
 			<div class="main-content-inner">
 				<div class="row">
-					<div class="col-sm-12 mt-5">
+					<div class="col-sm-6 mt-5">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
@@ -66,7 +66,7 @@
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="col-md-6 mb-3">
+										<div class="col-md-12 mb-3">
 											<label for="asuntoInformeInvestigacion">Descripcion: </label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -79,7 +79,9 @@
 												<div class="invalid-feedback">Campo obligatorio, ingrese un valor</div>
 											</div>
 										</div>
-										<div class="col-md-6 mb-3">
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
 											<label for="fileInforme">Informe: </label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -110,30 +112,33 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-12 mt-5">
+					<div class="col-sm-6 mt-5">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title text-center" th:text="${informeInvestigacion.asignacion.nombreInvestigacion}"></h4>
 								<p class="card-text">Ficheros en este Item:</p>
-								<table id="dataTable" class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(informesInvestigacion)}" width="100%">
+								<button id="listarInformesInvestigacionPorAsignacionId" class="btn btn-outline-primary btn-block"
+									th:idAsignacion="${informeInvestigacion.asignacion.asignacionId}" data-toggle="modal">Ficheros en este Item</button>
+								<!--<table id="dataTable" class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(informesInvestigacion)}">
 									<thead class="bg-primary text-capitalize">
 										<tr>
+											<th>#</th>
 											<th>Descripcion</th>
 											<th>Fichero</th>
-											<th>Formato</th>
 											<th>Acciones</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each=" informe : ${informesInvestigacion}">
+											<td th:text="${informe.informeAsignacionId}"></td>
 											<td th:text="${informe.asunto}"></td>
 											<td th:text="${informe.nombreFichero}"></td>
-											<td th:text="${informe.formatoFichero}"></td>
 											<td>
 												<div class="btn-group" role="group" aria-label="Basic example">
-													<a th:href="@{/informe/view/} + ${informe.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-													<a th:href="@{/informe/download/} + ${informe.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
-													<a class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+													<a th:href="@{/api/informeinvestigacion/view/} + ${informe.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+													<button id="downloadFileInformeInvestigacion" th:nombreFicheroInformeInvestigacion="${informe.nombreFichero}" class="btn btn-outline-primary btn-xs">
+													<i class="fa fa-download" title="Descargar"></i></button>
+													<a th:href="@{/informe/formInformeInvestigacion/} + ${informe.asignacion.asignacionId} + '/' + ${informe.informeAsignacionId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
 												</div>
 											</td>
 										</tr>
@@ -143,10 +148,46 @@
 									<div class="alert alert-primary my-2" role="alert">
 									Aun no hay ficheros asociados al Proyecto de Investigacion: <strong th:text="${informeInvestigacion.asignacion.nombreInvestigacion}"></strong>
 									</div>
-								</div>
+								</div>-->
 							</div>
 						</div>
-					</div>	
+					</div>
+					
+					<div class="modal fade" id="modalListadoInformeInvestigacionPorAsignacion">
+                     	<div class="modal-dialog modal-lg" role="document">
+                        	<div class="modal-content">
+                            	<div class="modal-header">
+                                 	<h5 class="modal-title" id="titleListadoInformeInvestigacionPorAsignacionModal"
+                                 	   th:text="${informeInvestigacion.asignacion.nombreInvestigacion}"></h5>
+                                    	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+									<h5 class="text-center my-2">Ficheros en este Item: </h5>
+									<table id="tablaInformesInvestigacionPorAsignacion" class="table text-center table-hover table-striped" style="width: 760px; margin: 0 auto;">
+										<thead class="bg-primary text-capitalize">
+											<tr>
+												<th>#</th>
+												<th>Descripcion</th>
+												<th>Fichero</th>
+												<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody id="contenidoInformeInvestigacionPorAsignacion">
+										</tbody>
+									</table>
+									<div class="alert-items">
+										<div class="alert alert-primary my-2" role="alert" id="alertInformesInvestigacionPorAsignacion">
+											Aun no hay ficheros asociados al Proyecto de Investigacion: <strong th:text="${informeInvestigacion.asignacion.nombreInvestigacion}"></strong>
+										</div>
+									</div>
+                                 </div>
+                                 <div class="modal-footer">
+                                  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                 </div>
+                               </div>
+                            </div>
+                         </div>
+						
 				</div>
 			</div>
 		</div>

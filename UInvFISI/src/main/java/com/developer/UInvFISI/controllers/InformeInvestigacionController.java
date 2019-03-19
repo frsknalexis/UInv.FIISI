@@ -86,6 +86,19 @@ public class InformeInvestigacionController {
 		Asignacion asignacion = null;
 		InformeInvestigacion informeInvestigacion = null;
 		
+		if(asignacionId != null && asignacionId > 0) {
+			
+			asignacion = asignacionService.getByAsignacionId(asignacionId);
+			if(informeAsignacionId != null && informeAsignacionId > 0) {
+				informeInvestigacion = informeInvestigacionService.findByAsignacionAsignacionIdAndInformeAsignacionId(asignacionId, informeAsignacionId);
+			}
+		}
+		
+		informeInvestigacion.setAsignacion(asignacion);
+		
+		model.put("informesInvestigacion", informesInvestigacion);
+		model.put("informeInvestigacion", informeInvestigacion);
+		model.put("titulo", "Editar Informe");
 		return "informe/form";
 	}
 	@PostMapping("/formInformeInvestigacion")
