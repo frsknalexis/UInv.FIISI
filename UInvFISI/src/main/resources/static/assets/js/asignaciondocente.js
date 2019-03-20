@@ -167,7 +167,158 @@ $(document).on('ready', function() {
 		var asignacionId = $(this).attr('idasignacion');
 		console.log("asignacionId: " + asignacionId);
 		
+		var contenidoListadoInvestigadoresPorAsignacion = document.querySelector('#contenidoListadoInvestigadoresPorAsignacion');
+		
 		$('#modalListadoInvestigadoresPorAsignacion').modal('show');
+		
+		$.ajax({
+			
+			type: 'GET',
+			url: '/api/asignacioninvestigacion/investigacion/' + asignacionId,
+			dataType: 'json',
+			success: function(response) {
+				
+				console.log(response);
+				
+				$('#titleListadoInvestigadoresPorAsignacionModal').html(response.nombreInvestigacion);
+				$('#listadoInvestigadoresPorAsignacion').html('Aun no hay Investigadores Asignados al Proyecto de Investigacion: <strong>' + response.nombreInvestigacion +'</strong>');
+				
+				$.ajax({
+					
+					type: 'GET',
+					url: '/api/asignaciondocente/asignaciondocentes/asignacion/' + asignacionId,
+					dataType: 'json',
+					success: function(response) {
+						
+						if(response != null) {
+							$('#tablaListadoInvestigadoresPorAsignacion').show();
+							$('#listadoInvestigadoresPorAsignacion').hide();
+							
+							contenidoListadoInvestigadoresPorAsignacion.innerHTML = '';
+							for(var i = 0; i < response.length; i++) {
+								
+								contenidoListadoInvestigadoresPorAsignacion.innerHTML += '<tr>';
+								if(response[i].habilitado == true) {
+									
+									contenidoListadoInvestigadoresPorAsignacion.innerHTML += '<td>' + (i+1) +'</td><td>' + response[i].investigador + '</td><td>' + response[i].facultad.abreviaturaFacultad +'</td><td>' + response[i].condicion.nombreCondicion + '</td><td><span id="investigadorestado" class="status-p bg-success">Activo</span></td><td><div class="btn-group" role="group"><a href="/asignacionDocente/formAsignacionDetalle/' + response[i].asignacion.asignacionId + '/' + response[i].asignacionDetalleId + '" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a><button id="disabledInvestigador" idasignaciondetalle="' + response[i].asignacionDetalleId + '" class="btn btn-outline-danger btn-xs"><i class="fa fa-close" title="Deshabilitar"></i></button></div></td>';
+									console.log(response[i]);
+								}
+								if(response[i].habilitado == false) {
+									console.log(response[i]);
+									contenidoListadoInvestigadoresPorAsignacion.innerHTML += '<td>' + (i+1) +'</td><td>' + response[i].investigador + '</td><td>' + response[i].facultad.abreviaturaFacultad +'</td><td>' + response[i].condicion.nombreCondicion + '</td><td><span id="investigadorestado" class="status-p bg-danger">Inactivo</span></td><td><div class="btn-group" role="group"><button id="enabledInvestigador" idasignaciondetalle="' + response[i].asignacionDetalleId + '" class="btn btn-outline-success btn-xs"><i class="fa fa-check" title="Habilitar"></i></button></div></td>';
+									
+								}
+								contenidoListadoInvestigadoresPorAsignacion.innerHTML += '</tr>';
+							}
+							
+							
+						}
+						else {
+							
+							console.log('No hay datos');
+							$('#tablaListadoInvestigadoresPorAsignacion').hide();
+							$('#listadoInvestigadoresPorAsignacion').show();
+						}					
+					}
+				});
+			}
+		});
+	});
+	
+	$('#tablaListadoInvestigadoresPorAsignacion tbody').on('click', 'button#disabledInvestigador', function() {
+		
+		var asignacionDetalleId = $(this).attr('idasignaciondetalle');
+		console.log('asignacionDetalleId: ' + asignacionDetalleId);
+		
+		swal({
+	        title: '¿Esta Seguro de deshabilitar este Investigador ?',
+	        text: '¡Si no lo esta puede Cancelar la accion!',
+	        type: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        cancelButtonText: 'Cancelar',
+	        confirmButtonText: '¡Si, deshabilitar Investigador !'
+	    }).then((result) => {
+	        if(result.value){
+	           
+	        	 $.ajax({
+	                 url: '/api/asignaciondocente/investigador/disabled/' + asignacionDetalleId,
+	                 type: 'GET',
+	                 success: function(response){
+	                	 
+	                	 console.log(response);
+	                     swal({
+	                         type: "success",
+	                         title: "El Investigador: " + response.data.investigador + " ha sido deshabilitado correctamente",
+	                         showConfirmButton: true,
+	                         confirmButtonText: "Cerrar",
+	                         closeOnConfirm: false
+	                     }).then((result) => {
+	                         if(result.value) {
+	                             $(location).attr("href", '/asignacionDocente/formAsignacionDetalle/' + response.data.asignacion.asignacionId);
+	                         }
+	                     })
+	                 }
+	             });
+	        }
+	        else {
+	            swal({
+	                type: "error",
+	                title: "Cancelado", 
+	                text: "Usted ha cancelado la acción de deshabilitar"
+	            });
+	        }
+	    });
+	});
+	
+	$('#tablaListadoInvestigadoresPorAsignacion tbody').on('click', 'button#enabledInvestigador', function() {
+		
+		var asignacionDetalleId = $(this).attr('idasignaciondetalle');
+		console.log("asignacionDetalleId: " + asignacionDetalleId);
+		
+		swal({
+	        title: '¿Esta Seguro de habilitar este Investigador ?',
+	        text: '¡Si no lo esta puede Cancelar la accion!',
+	        type: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        cancelButtonText: 'Cancelar',
+	        confirmButtonText: '¡Si, habilitar Investigador !'
+	    }).then((result) => {
+	        if(result.value){
+	           
+	        	$.ajax({
+	        		
+	        		url: '/api/asignaciondocente/investigador/enabled/' + asignacionDetalleId ,
+	        		type: 'GET',
+	        		success: function(response){
+	        			
+	        			console.log(response);
+	        			
+	        			swal({
+	        				type: "success",
+	                        title: "El Investigador: " + response.data.investigador + " ha sido habilitado correctamente",
+	                        showConfirmButton: true,
+	                        confirmButtonText: "Cerrar",
+	                        closeOnConfirm: false
+	                       }).then((result) => {
+	                         if(result.value) {
+	                            $(location).attr("href", '/asignacionDocente/formAsignacionDetalle/' + response.data.asignacion.asignacionId);
+	                        }
+	                     })
+	                 }
+	        	});
+	        }
+	        else {
+	            swal({
+	                type: "error",
+	                title: "Cancelado", 
+	                text: "Usted ha cancelado la acción de habilitar"
+	            });
+	        }
+	    });
 	});
 	
 	$('#cancelarAsignacionDocente').on('click', function() {

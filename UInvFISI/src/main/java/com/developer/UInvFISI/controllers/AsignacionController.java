@@ -17,7 +17,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.developer.UInvFISI.entity.Asignacion;
-import com.developer.UInvFISI.entity.AsignacionDocente;
 import com.developer.UInvFISI.entity.LineaInvestigacion;
 import com.developer.UInvFISI.repository.AsignacionDocenteRepository;
 import com.developer.UInvFISI.service.AsignacionDocenteService;

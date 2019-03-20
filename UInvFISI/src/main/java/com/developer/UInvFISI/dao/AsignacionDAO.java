@@ -8,6 +8,8 @@ public interface AsignacionDAO {
 	
 	List<Asignacion> findAll();
 	
+	List<Asignacion> findAllEnabled();
+	
 	void save(Asignacion asignacion);
 	
 	void update(Asignacion asignacion);

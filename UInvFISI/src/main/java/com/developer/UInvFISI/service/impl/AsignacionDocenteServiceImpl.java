@@ -89,6 +89,45 @@ public class AsignacionDocenteServiceImpl implements AsignacionDocenteService {
 		}
 		
 		return asignacionDocente;
+	}
+
+	@Override
+	public void disabled(Integer asignacionDetalleId) {
+		
+		AsignacionDocente asignacionDocente = null;
+		if(asignacionDetalleId != null && asignacionDetalleId > 0) {
+			
+			asignacionDocente = asignacionDocenteDAO.findOne(asignacionDetalleId);
+			asignacionDocente.setFechaModificacion(new Date());
+			asignacionDocente.setHabilitado(false);
+		}
+		
+		asignacionDocenteDAO.disabled(asignacionDocente);
+	}
+	
+	@Override
+	public void enabled(Integer asignacionDetalleId) {
+		
+		AsignacionDocente asignacionDocente = null;
+		if(asignacionDetalleId != null && asignacionDetalleId > 0) {
+			
+			asignacionDocente = asignacionDocenteDAO.findOne(asignacionDetalleId);
+			asignacionDocente.setFechaModificacion(new Date());
+			asignacionDocente.setHabilitado(true);
+		}
+		
+		asignacionDocenteDAO.disabled(asignacionDocente);
+	}
+
+	@Override
+	public List<AsignacionDocente> findByAsignacionIdAndHabilitado(Integer asignacionId) {
+		
+		List<AsignacionDocente> investigadores = null;
+		if(asignacionId != null && asignacionId > 0) {
+			
+			 investigadores = asignacionDocenteDAO.findByAsignacionIdAndHabilitado(asignacionId);
+		}
+		return investigadores;
 	} 
 
 }

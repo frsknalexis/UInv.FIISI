@@ -10,6 +10,7 @@ import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,10 +37,13 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.developer.UInvFISI.entity.Asignacion;
 import com.developer.UInvFISI.entity.AsignacionDocente;
 import com.developer.UInvFISI.entity.InformeTrimestral;
 import com.developer.UInvFISI.service.AsignacionDocenteService;
+import com.developer.UInvFISI.service.AsignacionService;
 import com.developer.UInvFISI.service.InformeTrimestralService;
+import com.developer.UInvFISI.util.Constantes;
 
 
 @Controller
@@ -50,12 +54,36 @@ public class InformeTrimestralController {
 	private static final String UPLOAD_FOLDER = "C://Files//uploads";
 	
 	@Autowired
+	@Qualifier("asignacionService")
+	private AsignacionService asignacionService;
+	
+	@Autowired
 	@Qualifier("asignacionDocenteService")
 	private AsignacionDocenteService asignacionDocenteService;
 	
 	@Autowired
 	@Qualifier("informeTrimestralService")
 	private InformeTrimestralService informeTrimestralService;
+	
+	@GetMapping("/investigaciones")
+	public String listarInvestigaciones(Map<String, Object> model) {
+		
+		List<Asignacion> investigaciones = asignacionService.findAllEnabled();
+		
+		model.put("investigaciones", investigaciones);
+		model.put("titulo", "Proyectos de Investigacion FEDU");
+		return Constantes.INFORME_TRIMESTRAL_VIEW;
+	}
+	
+	@GetMapping("/investigadores/{asignacionId}")
+	public String listarInvestigadores(@PathVariable(value="asignacionId") Integer asignacionId, Map<String, Object> model) {
+		
+		List<AsignacionDocente> investigadores = asignacionDocenteService.findByAsignacionIdAndHabilitado(asignacionId);
+		
+		model.put("titulo", "Investigadores Responsables: ");
+		model.put("investigadores", investigadores);
+		return Constantes.INFORME_TRIMESTRAL_INVESTIGADORES_VIEW;
+	}
 	
 	@GetMapping("/formInformeTrimestral/{asignacionDetalleId}")
 	String createInformeTrimestral(@PathVariable(value="asignacionDetalleId") Integer asignacionDetalleId, Map<String, Object> model,

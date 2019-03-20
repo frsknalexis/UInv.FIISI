@@ -10,7 +10,13 @@ public interface AsignacionDocenteService {
 	
 	List<AsignacionDocente> findByAsignacionId(Integer asignacionId);
 	
+	List<AsignacionDocente> findByAsignacionIdAndHabilitado(Integer asignacionId);
+	
 	void saveOrUpdate(AsignacionDocente asignacionDocente);
+	
+	void disabled(Integer asignacionDetalleId);
+	
+	void enabled(Integer asignacionDetalleId);
 	
 	AsignacionDocente getAsignacionDocenteById(Integer asignacionDetalleId);
 	

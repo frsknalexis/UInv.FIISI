@@ -31,20 +31,21 @@ public class AsignacionDocente extends BaseEntity implements Serializable {
 	@Id
 	@GeneratedValue(generator="asignacionDetalleSeq", strategy=GenerationType.SEQUENCE)
 	@SequenceGenerator(sequenceName="asignacion_detalle_seq", name="asignacionDetalleSeq", schema="public", allocationSize=1)
+	@Column(name="asignacion_detalle_id", unique=true, nullable=false)
 	private Integer asignacionDetalleId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="asignacion_id")
 	private Asignacion asignacion;
 	
 	@Column(name="investigador", nullable=false, length=150)
 	private String investigador;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="condicion_id")
 	private Condicion condicion;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="facultad_id")
 	private Facultad facultad;
 	

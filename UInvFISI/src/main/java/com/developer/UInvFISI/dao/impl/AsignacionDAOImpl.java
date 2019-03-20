@@ -87,4 +87,12 @@ public class AsignacionDAOImpl extends JdbcDaoSupport implements AsignacionDAO {
 		em.remove(asignacion);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Asignacion> findAllEnabled() {
+		
+		List<Asignacion> investigaciones = em.createQuery("from Asignacion a where a.habilitado = true").getResultList();
+		return investigaciones;
+	}
+
 }

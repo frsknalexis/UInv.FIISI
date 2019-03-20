@@ -96,4 +96,12 @@ public class AsignacionServiceImpl implements AsignacionService {
 			asignacionDAO.delete(asignacionId);
 		}
 	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Asignacion> findAllEnabled() {
+		
+		List<Asignacion> asignaciones = asignacionDAO.findAllEnabled();
+		return asignaciones;
+	}
 }

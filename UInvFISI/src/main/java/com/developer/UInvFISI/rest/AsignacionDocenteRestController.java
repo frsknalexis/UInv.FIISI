@@ -55,6 +55,28 @@ public class AsignacionDocenteRestController {
 		}
 	}
 	
+	@GetMapping("/asignaciondocentes/asignacion/{asignacionId}")
+	public ResponseEntity<List<AsignacionDocente>> findAsignacionDocentesByAsignacionId(@PathVariable(value="asignacionId") Integer asignacionId) {
+		
+		try {
+			
+			List<AsignacionDocente> asignacionDocentes = asignacionDocenteService.findByAsignacionId(asignacionId);
+			if(asignacionDocentes.isEmpty()) {
+				
+				return new ResponseEntity<List<AsignacionDocente>>(HttpStatus.NO_CONTENT);
+			}
+			else {
+				
+				return new ResponseEntity<List<AsignacionDocente>>(asignacionDocentes, HttpStatus.OK);
+			}
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<List<AsignacionDocente>>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
 	@PostMapping("/save/asignacion/{asignacionId}")
 	public ResponseEntity<ResponseBaseOperacion> saveAsignacionDocente(@PathVariable(value="asignacionId") Integer asignacionId,
 			@Valid @RequestBody AsignacionDocente asignacionDocente) {
@@ -117,5 +139,71 @@ public class AsignacionDocenteRestController {
 			
 			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@GetMapping("/investigador/disabled/{asignacionDetalleId}")
+	public ResponseEntity<ResponseBaseOperacion> disabledInvestigador(@PathVariable(value="asignacionDetalleId") Integer asignacionDetalleId) {
+		
+		AsignacionDocente asignacionDocente = null;
+		
+		try {
+			
+			if(asignacionDetalleId != null && asignacionDetalleId > 0) {
+				
+				asignacionDocente = asignacionDocenteService.getAsignacionDocenteById(asignacionDetalleId);
+				if(asignacionDocente != null) {
+					
+					if(asignacionDocente.getHabilitado().equals(true)) {
+						
+						asignacionDocenteService.disabled(asignacionDetalleId);
+						ResponseBaseOperacion response = new ResponseBaseOperacion("success", asignacionDocente);
+						return new ResponseEntity<ResponseBaseOperacion>(response, HttpStatus.OK);
+					}
+				}
+				else {
+					
+					return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.NO_CONTENT);
+				}
+			}
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return null;
+	}
+	
+	@GetMapping("/investigador/enabled/{asignacionDetalleId}")
+	public ResponseEntity<ResponseBaseOperacion> enabledInvestigador(@PathVariable(value="asignacionDetalleId") Integer asignacionDetalleId) {
+		
+		AsignacionDocente asignacionDocente = null;
+		
+		try {
+			
+			if(asignacionDetalleId != null && asignacionDetalleId > 0) {
+				
+				asignacionDocente = asignacionDocenteService.getAsignacionDocenteById(asignacionDetalleId);
+				if(asignacionDocente != null) {
+					
+					if(asignacionDocente.getHabilitado().equals(false)) {
+						
+						asignacionDocenteService.enabled(asignacionDetalleId);
+						ResponseBaseOperacion response = new ResponseBaseOperacion("success", asignacionDocente);
+						return new ResponseEntity<ResponseBaseOperacion>(response, HttpStatus.OK);
+					}
+				}
+				else {
+					
+					return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.NO_CONTENT);
+				}
+			}
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return null;
 	}
 }

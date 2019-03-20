@@ -2,6 +2,8 @@ package com.developer.UInvFISI.util;
 
 public class Constantes {
 
+	public static final String INFORME_TRIMESTRAL_VIEW = "informetrimestral/listarinvestigaciones";
+	public static final String INFORME_TRIMESTRAL_INVESTIGADORES_VIEW = "informetrimestral/listarinvestigadoresinformetrimestral";
 	public static final String ISE_VIEW = "error/500"; 
 	
 	public static final String CREATED_MESSAGE = "created";

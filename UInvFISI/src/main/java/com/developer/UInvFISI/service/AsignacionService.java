@@ -8,6 +8,8 @@ public interface AsignacionService {
 
 	List<Asignacion> findAll();
 	
+	List<Asignacion> findAllEnabled();
+	
 	void saveOrUpdate(Asignacion asignacion);
 	
 	Asignacion getByAsignacionId(Integer asignacionId);

@@ -128,36 +128,7 @@
 								<h4 class="header-title text-center" th:text="${asignacionDocente.asignacion.nombreInvestigacion}"></h4>
 								<p class="card-text">Responsable (s):</p>
 								<button id="listarInvestigadoresPorAsignacion" class="btn btn-outline-primary btn-block"
-								 th:idAsignacion="${asignacionDocente.asignacion.asignacionId}" data-toggle="modal">Listar Investigadores</button>
-								<table class="table text-center table-hover table-striped" width="100%" th:if="${not #lists.isEmpty(asignacionDocentes)}">
-									<thead class="bg-primary text-capitalize">
-										<tr>
-											<th>Investigador</th>
-											<th>Facultad</th>
-											<th>Condicion</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-									<tr th:each="asignacionDocente : ${asignacionDocentes}">
-										<td th:text="${asignacionDocente.investigador}"></td>
-										<td th:text="${asignacionDocente.facultad.abreviaturaFacultad}"></td>
-										<td th:text="${asignacionDocente.condicion.nombreCondicion}"></td>
-										<td>
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<a th:href="@{/asignacionDocente/formAsignacionDetalle/} + ${asignacionDocente.asignacion.asignacionId} + '/' + ${asignacionDocente.asignacionDetalleId}" th:if="${asignacionDocente.habilitado == true}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-											</div>
-										</td>
-									</tr>
-									</tbody>
-								</table>
-								
-								<div class="alert-items" th:if="${#lists.isEmpty(asignacionDocentes)}">
-									<div class="alert alert-primary my-2" role="alert" >
-									Aun no hay Investigadores Asignados al Proyecto de Investigacion: <strong th:text="${asignacionDocente.asignacion.nombreInvestigacion}"></strong> 
-									</div>	
-								</div>
-								
+								 th:idAsignacion="${asignacionDocente.asignacion.asignacionId}" data-toggle="modal">Listar Investigadores</button>			
 								<p class="card-text">Informe (s) Trimestral (es):</p>
 								<table class="table text-center table-hover table-striped" width="100%" th:if="${not #lists.isEmpty(informesTrimestrales)}">
 									<thead class="bg-primary text-capitalize">
@@ -197,27 +168,27 @@
                      	<div class="modal-dialog modal-lg" role="document">
                         	<div class="modal-content">
                             	<div class="modal-header">
-                                 	<h5 class="modal-title" id="titleListadoInvestigadoresPorAsignacionModal"
-                                 	   th:text="${asignacionDocente.asignacion.nombreInvestigacion}"></h5>
+                                 	<h5 class="modal-title" id="titleListadoInvestigadoresPorAsignacionModal"></h5>
                                     	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                 </div>
                                 <div class="modal-body">
 									<h5 class="text-center my-2">Investigadores Responsable (s):</h5>
-									<table id="tablaInformesInvestigacionPorAsignacion" class="table text-center table-hover table-striped" style="width: 760px; margin: 0 auto;">
+									<table id="tablaListadoInvestigadoresPorAsignacion" class="table text-center table-hover table-striped" style="width: 760px; margin: 0 auto;">
 										<thead class="bg-primary text-capitalize">
 											<tr>
 												<th>#</th>
-												<th>Descripcion</th>
-												<th>Fichero</th>
+												<th>Investigador</th>
+												<th>Facultad</th>
+												<th>Condicion</th>
+												<th>Estado</th>
 												<th>Acciones</th>
 											</tr>
 										</thead>
-										<tbody id="contenidoInformeInvestigacionPorAsignacion">
+										<tbody id="contenidoListadoInvestigadoresPorAsignacion">
 										</tbody>
 									</table>
 									<div class="alert-items">
-										<div class="alert alert-primary my-2" role="alert" id="alertInformesInvestigacionPorAsignacion">
-											Aun no hay ficheros asociados al Proyecto de Investigacion: <strong th:text="${asignacionDocente.asignacion.nombreInvestigacion}"></strong>
+										<div class="alert alert-primary my-2" role="alert" id="listadoInvestigadoresPorAsignacion">
 										</div>
 									</div>
                                  </div>

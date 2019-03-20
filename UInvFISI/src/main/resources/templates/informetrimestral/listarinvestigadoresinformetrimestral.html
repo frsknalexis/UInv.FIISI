@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/headinc :: head"></head>
+<body>
+
+	<!-- preloader area start -->
+	<div id="preloader">
+		<div class="loader"></div>
+	</div>
+	
+	<!-- page container area start -->
+	<div class="page-container">
+
+		<div th:replace="fragments/sidebar :: sidebar"></div>
+
+		<!-- main content area start -->
+		<div class="main-content">
+
+			<div th:replace="fragments/header-area :: header-area"></div>
+
+			<!-- page title area start -->
+			<div class="page-title-area">
+				<div class="row align-items-center">
+					<div class="col-sm-6">
+						<div class="breadcrumbs-area clearfix">
+							<h4 class="page-title pull-left">Dashboard</h4>
+							<ul class="breadcrumbs pull-left">
+								<li><a th:href="@{/}">Home</a></li>
+								<li><span>Investigadores</span></li>
+							</ul>
+						</div>
+					</div>
+					
+					<div th:replace="fragments/user-profile :: user-profile"></div>
+					
+				</div>
+			</div>
+			<!-- page title area end -->
+			<div class="main-content-inner">
+				<div class="row">
+					<!-- data table start -->
+					<div class="col-12 mt-5">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="header-title" th:text="${titulo}"></h4>
+								<hr />
+								<div class="data-tables">
+									<table id="dataTable" class="text-center progress-table table-hover table-striped" width="100%"
+											th:if="${not #lists.isEmpty(investigadores)}">
+										<thead class="bg-primary text-capitalize">
+											<tr>
+												<th>#</th>
+												<th>Investigador</th>
+												<th>Facultad</th>
+												<th>Condicion</th>
+												<th>Informes Trimestrales</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="investigador : ${investigadores}">
+												<td th:text="${investigador.asignacionDetalleId}"></td>
+												<td th:text="${investigador.investigador}"></td>
+												<td th:text="${investigador.facultad.abreviaturaFacultad}"></td>
+												<td th:text="${investigador.condicion.nombreCondicion}"></td>
+												<td>
+													<button class="btn btn-outline-primary btn-sm">
+														<i class="fa fa-files-o"></i> Adjuntar Informes Trimestrales</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="alert-items" th:if="${#lists.isEmpty(investigadores)}">
+									<div class="alert alert-primary my-2" role="alert">
+										Aun no hay Investigadores adjuntados al Proyecto de Investigacion
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- data table end -->
+				</div>
+			</div>
+		</div>
+		<!-- main content area end -->
+		<footer th:replace="fragments/footer :: footer"></footer>
+
+	</div>
+	<!-- page container area end -->
+
+	<th:block th:replace="fragments/script"></th:block>
+
+</body>
+</html>
