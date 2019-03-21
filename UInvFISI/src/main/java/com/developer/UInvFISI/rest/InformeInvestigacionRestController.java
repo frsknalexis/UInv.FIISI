@@ -139,7 +139,7 @@ public class InformeInvestigacionRestController {
 		}
 	}
 	
-	@PutMapping(value="/update/asignacion/{asignacionId}/informeInvestigacion/{informeAsignacionId}")
+	@PutMapping(value="/update/asignacion/{asignacionId}/informeInvestigacion/{informeAsignacionId}", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<ResponseBaseOperacion> updateInformeInvestigacion(@PathVariable(value="asignacionId") Integer asignacionId,
 			@PathVariable(value="informeAsignacionId") Integer informeAsignacionId, @RequestParam(value=Constantes.INFORME_INVESTIGACION_JSON_PARAM, required=true) String informeJson,
 			@RequestParam(value=Constantes.INFORME_INVESTIGACION_FILE_PARAM, required=true) MultipartFile file) {

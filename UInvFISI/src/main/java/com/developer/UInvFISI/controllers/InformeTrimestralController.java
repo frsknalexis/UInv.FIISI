@@ -79,8 +79,9 @@ public class InformeTrimestralController {
 	public String listarInvestigadores(@PathVariable(value="asignacionId") Integer asignacionId, Map<String, Object> model) {
 		
 		List<AsignacionDocente> investigadores = asignacionDocenteService.findByAsignacionIdAndHabilitado(asignacionId);
-		
-		model.put("titulo", "Investigadores Responsables: ");
+		Asignacion investigacion = asignacionService.getByAsignacionId(asignacionId);
+		model.put("titulo", investigacion.getNombreInvestigacion());
+		model.put("investigacion", investigacion);
 		model.put("investigadores", investigadores);
 		return Constantes.INFORME_TRIMESTRAL_INVESTIGADORES_VIEW;
 	}
@@ -106,6 +107,27 @@ public class InformeTrimestralController {
 		
 		model.put("informeTrimestral", informeTrimestral);
 		model.put("titulo", "Cargar Informe Trimestral");
+		return "informetrimestral/form";
+	}
+	
+	@GetMapping("/formInformeTrimestral/{asignacionDetalleId}/{informeTrimestralId}")
+	public String updateInformeTrimestral(@PathVariable(value="asignacionDetalleId") Integer asignacionDetalleId,
+			@PathVariable(value="informeTrimestralId") Integer informeTrimestralId, Map<String, Object> model) {
+		
+		AsignacionDocente asignacionDetalle = null;
+		InformeTrimestral informeTrimestral = null;
+		
+		if(asignacionDetalleId != null && asignacionDetalleId > 0) {
+			
+			asignacionDetalle = asignacionDocenteService.getAsignacionDocenteById(asignacionDetalleId);
+			if(informeTrimestralId != null && informeTrimestralId > 0) {
+				informeTrimestral = informeTrimestralService.findByAsignacionDetalleAsignacionDetalleIdAndInformeTrimestralId(asignacionDetalleId, informeTrimestralId);
+			}
+		}
+		
+		informeTrimestral.setAsignacionDetalle(asignacionDetalle);
+		model.put("informeTrimestral", informeTrimestral);
+		model.put("titulo", "Editar Informe Trimestral");
 		return "informetrimestral/form";
 	}
 	

@@ -61,5 +61,39 @@ public class InformeTrimestralServiceImpl implements InformeTrimestralService {
 		return informesTrimestrales;
 	}
 
-	
+	@Override
+	public List<InformeTrimestral> findByAsignacionDetalleAsignacionDetalleId(Integer asignacionDetalleId) {
+		
+		List<InformeTrimestral> informesTrimestrales = null;
+		if(asignacionDetalleId != null && asignacionDetalleId > 0) {
+			
+			informesTrimestrales = informeTrimestralRepository.findByAsignacionDetalleAsignacionDetalleId(asignacionDetalleId);
+		}
+		return informesTrimestrales;
+	}
+
+	@Override
+	public InformeTrimestral findByAsignacionDetalleAsignacionDetalleIdAndInformeTrimestralId(
+			Integer asignacionDetalleId, Integer informeTrimestralId) {
+		
+		InformeTrimestral informeTrimestral = null;
+		if(asignacionDetalleId != null && asignacionDetalleId > 0) {
+			
+			if(informeTrimestralId != null && informeTrimestralId > 0) {
+				informeTrimestral = informeTrimestralRepository.findByAsignacionDetalleAsignacionDetalleIdAndInformeTrimestralId(asignacionDetalleId, informeTrimestralId);
+			}
+		}
+		return informeTrimestral;
+	}
+
+	@Override
+	public InformeTrimestral getInformeTrimestralById(Integer informeTrimestralId) {
+		
+		InformeTrimestral informeTrimestral = null;
+		if(informeTrimestralId != null && informeTrimestralId > 0) {
+			
+			informeTrimestral = informeTrimestralDAO.findOne(informeTrimestralId);
+		}
+		return informeTrimestral;
+	}	
 }

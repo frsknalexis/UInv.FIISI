@@ -8,6 +8,8 @@ public interface InformeTrimestralDAO {
 
 	List<InformeTrimestral> findAll();
 	
+	InformeTrimestral findOne(Integer informeTrimestralId);
+	
 	void save(InformeTrimestral informeTrimestral);
 	
 	void update(InformeTrimestral informeTrimestral);

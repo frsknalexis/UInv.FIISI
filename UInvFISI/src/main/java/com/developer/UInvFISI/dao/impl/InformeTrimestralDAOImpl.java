@@ -39,4 +39,15 @@ public class InformeTrimestralDAOImpl implements InformeTrimestralDAO {
 		
 	}
 
+	@Override
+	public InformeTrimestral findOne(Integer informeTrimestralId) {
+		
+		InformeTrimestral informeTrimestral = null;
+		if(informeTrimestralId != null && informeTrimestralId > 0) {
+			
+			informeTrimestral = em.find(InformeTrimestral.class, informeTrimestralId);
+		}
+		return informeTrimestral;
+	}
+
 }

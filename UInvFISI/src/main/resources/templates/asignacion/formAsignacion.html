@@ -129,37 +129,6 @@
 								<p class="card-text">Responsable (s):</p>
 								<button id="listarInvestigadoresPorAsignacion" class="btn btn-outline-primary btn-block"
 								 th:idAsignacion="${asignacionDocente.asignacion.asignacionId}" data-toggle="modal">Listar Investigadores</button>			
-								<p class="card-text">Informe (s) Trimestral (es):</p>
-								<table class="table text-center table-hover table-striped" width="100%" th:if="${not #lists.isEmpty(informesTrimestrales)}">
-									<thead class="bg-primary text-capitalize">
-										<tr>
-											<th>Encargado</th>
-											<th>Descripcion</th>
-											<th>Trimestre</th>
-											<th>Fichero</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="informeTrimestral : ${informesTrimestrales}">
-											<td th:text="${informeTrimestral.asignacionDetalle.investigador}"></td>
-											<td th:text="${informeTrimestral.descripcion}"></td>
-											<td th:text="${informeTrimestral.trimestre}"></td>
-											<td th:text="${informeTrimestral.nombreFichero}"></td>
-											<td>
-												<div class="btn-group" role="group" aria-label="Basic example">
-													<a th:href="@{/informeTrimestral/view/} + ${informeTrimestral.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-													<a th:href="@{/informeTrimestral/download/} + ${informeTrimestral.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="alert-items" th:if="${#lists.isEmpty(informesTrimestrales)}">
-									<div class="alert alert-primary my-2" role="alert">
-										Aun no hay Informes Trimestrales adjuntados al Proyecto de Investigacion <strong th:text="${asignacionDocente.asignacion.nombreInvestigacion}"></strong>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>	

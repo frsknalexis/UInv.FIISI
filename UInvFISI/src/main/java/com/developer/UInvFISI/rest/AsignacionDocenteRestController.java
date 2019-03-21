@@ -55,6 +55,30 @@ public class AsignacionDocenteRestController {
 		}
 	}
 	
+	@GetMapping("/asignaciondocente/{asignacionDetalleId}")
+	public ResponseEntity<AsignacionDocente> getByAsignacionDetalleId(@PathVariable(value="asignacionDetalleId") Integer asignacionDetalleId) {
+		
+		AsignacionDocente asignacionDetalle = null;
+		
+		try {
+			
+			if(asignacionDetalleId != null && asignacionDetalleId > 0) {
+				
+				asignacionDetalle = asignacionDocenteService.getAsignacionDocenteById(asignacionDetalleId);
+				if(asignacionDetalle == null) {
+					
+					return new ResponseEntity<AsignacionDocente>(HttpStatus.NO_CONTENT);
+				}
+			}
+			
+			return new ResponseEntity<AsignacionDocente>(asignacionDetalle, HttpStatus.OK);
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<AsignacionDocente>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@GetMapping("/asignaciondocentes/asignacion/{asignacionId}")
 	public ResponseEntity<List<AsignacionDocente>> findAsignacionDocentesByAsignacionId(@PathVariable(value="asignacionId") Integer asignacionId) {
 		

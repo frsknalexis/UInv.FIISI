@@ -28,7 +28,7 @@ public class InformeTrimestral extends BaseEntity implements Serializable {
 	@Column(name="informe_trimestral_id", nullable=false, unique=true)
 	private Integer informeTrimestralId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="asignacion_detalle_id")
 	private AsignacionDocente asignacionDetalle;
 	

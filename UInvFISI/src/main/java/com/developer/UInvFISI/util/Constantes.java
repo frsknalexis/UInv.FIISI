@@ -3,7 +3,7 @@ package com.developer.UInvFISI.util;
 public class Constantes {
 
 	public static final String INFORME_TRIMESTRAL_VIEW = "informetrimestral/listarinvestigaciones";
-	public static final String INFORME_TRIMESTRAL_INVESTIGADORES_VIEW = "informetrimestral/listarinvestigadoresinformetrimestral";
+	public static final String INFORME_TRIMESTRAL_INVESTIGADORES_VIEW = "informetrimestral/listarinvestigadoresinforme";
 	public static final String ISE_VIEW = "error/500"; 
 	
 	public static final String CREATED_MESSAGE = "created";
@@ -13,6 +13,7 @@ public class Constantes {
 	public static final String FOLDER_REGLAMENTO = "reglamentos";
 	public static final String FOLDER_ARCHIVO_ALUMNOS = "archivoalumnos";
 	public static final String FOLDER_INFORMES_INVESTIGACION = "informesinvestigacion";
+	public static final String FOLDER_INFORMES_TRIMESTRALES = "informestrimestrales";
 	
 	public static final String ASIGNATURA_ALUM_JSON_PARAM = "alumJson";
 	public static final String ASIGNATURA_ALUM_FILE_PARAM = "fileAlumno";
@@ -20,6 +21,8 @@ public class Constantes {
 	public static final String REGLAMENTO_FILE_PARAM = "fileReglamento";
 	public static final String INFORME_INVESTIGACION_JSON_PARAM = "informeJson";
 	public static final String INFORME_INVESTIGACION_FILE_PARAM = "fileInformeInvestigacion";
+	public static final String INFORME_TRIMESTRAL_JSON_PARAM = "informeTrimestralJson";
+	public static final String INFORME_TRIMESTRAL_FILE_PARAM = "fileInformeTrimestral";
 	
 	public static final String DOWNLOAD_URI = "/download/{filename:.+}";
 	public static final String VIEW_PDF_URI = "/view/{filename:.+}";

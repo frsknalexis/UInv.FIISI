@@ -119,36 +119,6 @@
 								<p class="card-text">Ficheros en este Item:</p>
 								<button id="listarInformesInvestigacionPorAsignacionId" class="btn btn-outline-primary btn-block"
 									th:idAsignacion="${informeInvestigacion.asignacion.asignacionId}" data-toggle="modal">Ficheros en este Item</button>
-								<!--<table id="dataTable" class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(informesInvestigacion)}">
-									<thead class="bg-primary text-capitalize">
-										<tr>
-											<th>#</th>
-											<th>Descripcion</th>
-											<th>Fichero</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each=" informe : ${informesInvestigacion}">
-											<td th:text="${informe.informeAsignacionId}"></td>
-											<td th:text="${informe.asunto}"></td>
-											<td th:text="${informe.nombreFichero}"></td>
-											<td>
-												<div class="btn-group" role="group" aria-label="Basic example">
-													<a th:href="@{/api/informeinvestigacion/view/} + ${informe.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-													<button id="downloadFileInformeInvestigacion" th:nombreFicheroInformeInvestigacion="${informe.nombreFichero}" class="btn btn-outline-primary btn-xs">
-													<i class="fa fa-download" title="Descargar"></i></button>
-													<a th:href="@{/informe/formInformeInvestigacion/} + ${informe.asignacion.asignacionId} + '/' + ${informe.informeAsignacionId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="alert-items" th:if="${#lists.isEmpty(informesInvestigacion)}">
-									<div class="alert alert-primary my-2" role="alert">
-									Aun no hay ficheros asociados al Proyecto de Investigacion: <strong th:text="${informeInvestigacion.asignacion.nombreInvestigacion}"></strong>
-									</div>
-								</div>-->
 							</div>
 						</div>
 					</div>

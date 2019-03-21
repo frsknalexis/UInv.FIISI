@@ -48,6 +48,7 @@
 									<table id="dataTable" class="text-center progress-table table-hover table-striped" width="100%">
 										<thead class="text-capitalize">
 											<tr>
+												<th>#</th>
 												<th>Investigacion</th>
 												<th>Programa</th>
 												<th>Linea Investigacion</th>
@@ -57,6 +58,7 @@
 										</thead>
 										<tbody>
 											<tr th:each="investigacion : ${investigaciones}">
+												<td th:text="${investigacion.asignacionId}"></td>
 												<td th:text="${investigacion.nombreInvestigacion}"></td>
 												<td th:text="${investigacion.lineaInvestigacion.programa.nombrePrograma}"></td>
 												<td th:text="${investigacion.lineaInvestigacion.nombreLineaInvestigacion}"></td>

@@ -26,7 +26,7 @@
 							<h4 class="page-title pull-left">Dashboard</h4>
 							<ul class="breadcrumbs pull-left">
 								<li><a th:href="@{/}">Home</a></li>
-								<li><span>Proyecto Investigacion</span></li>
+								<li><span>Informe Trimestral</span></li>
 							</ul>
 						</div>
 					</div>
@@ -38,12 +38,12 @@
 			<!-- page title area end -->
 			<div class="main-content-inner">
 				<div class="row">
-					<div class="col-sm-12 mt-5">
+					<div class="col-sm-7 mt-5">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form th:action="@{/informeTrimestral/formInformeTrimestral}"  th:object="${informeTrimestral}" 
-								novalidate="" class="needs-validation" enctype="multipart/form-data" method="post">
+								<form id="formInformeTrimestral" th:object="${informeTrimestral}" novalidate="" class="needs-validation" 
+								     enctype="multipart/form-data" method="post">
 								
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
@@ -82,7 +82,7 @@
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="col-md-6 mb-3">
+										<div class="col-md-12 mb-3">
 											<label for="descripcionInformeTrimestral">Descripcion:</label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -95,7 +95,9 @@
 												<div class="invalid-feedback">Campo obligatorio, ingrese un valor</div>
 											</div>
 										</div>
-										<div class="col-md-6 mb-3">
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
 											<label for="trimestreInformeTrimestral">Trimestre:</label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -110,7 +112,7 @@
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="col-md-6 mb-3">
+										<div class="col-md-12 mb-3">
 											<label for="fileInformeTrimestral"> Informe:</label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -126,16 +128,66 @@
 											</div>
 										</div>
 									</div>
-									<button class="btn btn-outline-primary btn-sm" type="submit">
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<div id="visorInformeTrimestral"></div>
+										</div>
+									</div>
+									<button id="guardarInformeTrimestral" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar Informe Trimestral
 									</button>
-									<a class="btn btn-outline-danger btn-sm"
-										th:href="@{/asignacionDocente/formAsignacionDetalle/} + ${informeTrimestral.asignacionDetalle.asignacion.asignacionId}"><i
-										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
+									<button type="button" id="cancelarInformeTrimestral" class="btn btn-outline-danger btn-sm"
+										th:idAsignacion="${informeTrimestral.asignacionDetalle.asignacion.asignacionId}"><i
+										class="fa fa-arrow-circle-o-left"></i> Cancelar</button>
 								</form>
 							</div>
 						</div>
-					</div>	
+					</div>
+					<div class="col-sm-5 mt-5">
+						<div class="card">
+							<div class="card-body">
+							<h4 class="header-title text-center" th:text="'Investigador encargado: ' +${informeTrimestral.asignacionDetalle.investigador}"></h4>
+							<p class="card-text">Ficheros en este Item:</p>
+							<button id="listarInformesTrimestralesPorAsignacionDocente" class="btn btn-outline-primary btn-block"
+									th:idAsignacionDetalle="${informeTrimestral.asignacionDetalle.asignacionDetalleId}" data-toggle="modal">Ficheros en este Item</button>
+							</div>
+						</div>
+					</div>
+					
+					<div class="modal fade" id="modalListadoInformesTrimestralesPorAsignacionDocente">
+                     	<div class="modal-dialog modal-lg" role="document">
+                        	<div class="modal-content">
+                            	<div class="modal-header">
+                                 	<h5 class="modal-title" id="titleListadoInformesTrimestralesPorAsignacionDocenteModal"></h5>
+                                    	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+									<h5 class="text-center my-2">Informe Trimestral (es): </h5>
+									<table id="tablaInformesTrimestralesPorAsignacionDocente" class="table text-center table-hover table-striped" style="width: 760px; margin: 0 auto;">
+										<thead class="bg-primary text-capitalize">
+											<tr>
+												<th>#</th>
+												<th>Descripcion</th>
+												<th>Trimestre</th>
+												<th>Fichero</th>
+												<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody id="contenidoInformesTrimestralesPorAsignacionDocente">
+										</tbody>
+									</table>
+									<div class="alert-items">
+										<div class="alert alert-primary my-2" role="alert" id="alertListadoInformesTrimestralesPorAsignacionDocente">
+										</div>
+									</div>
+                                 </div>
+                                 <div class="modal-footer">
+                                  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                 </div>
+                               </div>
+                            </div>
+                         </div>
+						
 				</div>
 			</div>
 		</div>

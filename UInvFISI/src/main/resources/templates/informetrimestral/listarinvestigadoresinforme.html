@@ -42,8 +42,9 @@
 					<div class="col-12 mt-5">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="header-title" th:text="${titulo}"></h4>
-								<hr />
+								<h4 class="header-title" th:text="${titulo}"></h4>				
+								<h5 class="text-center">Investigadores Responsable (s): </h5>
+								<hr/>
 								<div class="data-tables">
 									<table id="dataTable" class="text-center progress-table table-hover table-striped" width="100%"
 											th:if="${not #lists.isEmpty(investigadores)}">
@@ -63,8 +64,8 @@
 												<td th:text="${investigador.facultad.abreviaturaFacultad}"></td>
 												<td th:text="${investigador.condicion.nombreCondicion}"></td>
 												<td>
-													<button class="btn btn-outline-primary btn-sm">
-														<i class="fa fa-files-o"></i> Adjuntar Informes Trimestrales</button>
+													<button id="adjuntarInformeTrimestral" th:idAsignacionDetalle="${investigador.asignacionDetalleId}" 
+													class="btn btn-outline-primary btn-sm"><i class="fa fa-files-o"></i> Adjuntar Informes Trimestrales</button>
 												</td>
 											</tr>
 										</tbody>
@@ -72,9 +73,11 @@
 								</div>
 								<div class="alert-items" th:if="${#lists.isEmpty(investigadores)}">
 									<div class="alert alert-primary my-2" role="alert">
-										Aun no hay Investigadores adjuntados al Proyecto de Investigacion
+										Aun no hay Investigadores adjuntados al Proyecto de Investigacion: <strong th:text="${investigacion.nombreInvestigacion}"></strong>
 									</div>
 								</div>
+								<a class="btn btn-outline-primary btn-sm" th:href="@{/informeTrimestral/investigaciones}">
+								<i class="fa fa-arrow-circle-o-left"></i> Volver</a>
 							</div>
 						</div>
 					</div>
