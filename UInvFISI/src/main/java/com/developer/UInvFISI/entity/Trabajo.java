@@ -23,6 +23,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -70,10 +71,11 @@ public class Trabajo extends BaseEntity implements Serializable{
 	private Integer cantidadHojas;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="trabajo")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Autor> autor;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="trabajo")
+	@JsonIgnore
 	private List<InformeTrabajo> informesTrabajo;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

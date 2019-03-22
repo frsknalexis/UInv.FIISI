@@ -115,7 +115,7 @@
 													<span class="input-group-text" id="inputGroupNombreTrabajo"><i
 														class="fa fa-book"></i></span>
 												</div>
-												<input type="text" class="form-control" id="denominacionI" aria-describedby="inputGroupDenominacion" 
+												<input type="text" class="form-control" id="denominacion" aria-describedby="inputGroupDenominacion" 
 													th:field="*{denominacion}" required="" />
 												<div class="invalid-feedback">Campo obligatorio,
 													ingrese un valor</div>
@@ -129,7 +129,7 @@
 													<span class="input-group-text" id="inputGroupFechaInicio">
 													<i class="fa fa-calendar-plus-o"></i></span>
 												</div>
-												<input type="date" class="form-control" id="fechaInicio" aria-describedby="inputGroupFechaInicio"
+												<input type="date" class="form-control" id="fechaSustentacion" aria-describedby="inputGroupFechaInicio"
 												  th:field="*{fechaSustentacion}" required=""/>
 												<div class="invalid-feedback">Campo obligatorio, ingrese una fecha</div>
 											</div>
@@ -165,7 +165,7 @@
 														class="fa fa-book"></i></span>
 												</div>
 												<select th:field="*{gradoAcademico}"
-													id="tipoTrabajo" class="form-control">
+													id="gradoAcademicoTrabajo" class="form-control">
 													<option value="">Seleccione Grado Academico</option>
 													<option th:value="'BACHILLER'" th:utext="'BACHILLER'" />
 													<option th:value="'TITULO PROFESIONAL'" th:utext="'TITULO PROFESIONAL'" />
@@ -200,7 +200,7 @@
 														class="fa fa-book"></i></span>
 												</div>
 												<select th:field="*{areaConocimiento}"
-													id="tipoTrabajo" class="form-control">
+													id="areaConocimiento" class="form-control">
 													<option value="">Seleccione Area de Conocimiento</option>
 													<option th:value="'CIENCIAS AGRICOLAS'" th:utext="'CIENCIAS AGRICOLAS'" />
 													<option th:value="'CIENCIAS MEDICAS Y DE SALUD'" th:utext="'CIENCIAS MEDICAS Y DE SALUD'" />
@@ -221,7 +221,7 @@
 										</div>
 									</div>
 									
-									<button class="btn btn-outline-primary btn-sm" type="submit">
+									<button id="guardarTrabajo" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar Trabajo
 									</button>
 									<a class="btn btn-outline-danger btn-sm"
