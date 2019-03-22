@@ -69,6 +69,28 @@ public class InformeTrimestralRestController {
 		}
 	}
 	
+	@GetMapping("/informestrimestrales/asignacion/{asignacionId}")
+	public ResponseEntity<List<InformeTrimestral>> findInformesTrimestralesByAsignacionId(@PathVariable(value="asignacionId") Integer asignacionId) {
+		
+		try {
+			
+			List<InformeTrimestral> informesTrimestrales = informeTrimestralService.findByAsignacionDetalleAsignacionAsignacionId(asignacionId);
+			if(informesTrimestrales.isEmpty()) {
+				
+				return new ResponseEntity<List<InformeTrimestral>>(HttpStatus.NO_CONTENT);
+			}
+			else {
+				
+				return ResponseEntity.ok()
+						.body(informesTrimestrales);
+			}
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<List<InformeTrimestral>>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@GetMapping("/informestrimestrales/asignacionDocente/{asignacionDetalleId}")
 	public ResponseEntity<List<InformeTrimestral>> findInformesTrimestralesByAsignacionDetalleId(@PathVariable(value="asignacionDetalleId") Integer asignacionDetalleId) {
 		
@@ -199,7 +221,7 @@ public class InformeTrimestralRestController {
 			informeTrimestralOld.setDescripcion(informeTrimestral.getDescripcion());
 			informeTrimestralOld.setTrimestre(informeTrimestral.getTrimestre());
 			informeTrimestralService.saveOrUpdate(informeTrimestralOld);
-			ResponseBaseOperacion response = new ResponseBaseOperacion(Constantes.CREATED_MESSAGE, informeTrimestralOld);
+			ResponseBaseOperacion response = new ResponseBaseOperacion(Constantes.UPDATED_MESSAGE, informeTrimestralOld);
 			return ResponseEntity.ok()
 					.body(response);
 			

@@ -72,6 +72,37 @@ $(document).on('ready', function() {
 				
 				var informeTrimestralId = formData.informeTrimestralId;
 				console.log("informeTrimestralId: " + informeTrimestralId);
+				
+				$.ajax({
+					
+					type: 'PUT',
+					url: '/api/informetrimestral/update/asignacionDocente/' + asignacionDetalleId + '/informeTrimestral/' + informeTrimestralId,
+					enctype: 'multipart/form-data',
+					data: data,
+					processData: false,
+					contentType: false,
+					success: function(response) {
+						
+						console.log(response);
+						
+						swal({
+							type: "success",
+							title: "Informe Trimestral Actualizado con exito",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+						}).then((result) => {
+
+							if(result.value) {
+								$(location).attr('href', '/informeTrimestral/formInformeTrimestral/' + asignacionDetalleId);
+							}
+						});
+					},
+					error: function() {
+						alert('Erro al Actualizar Informe Trimestral');
+					}
+					
+				});
 			}
 			
 			else {
@@ -97,7 +128,7 @@ $(document).on('ready', function() {
 						}).then((result) => {
 
 							if(result.value) {
-								$(location).attr('href', '/informeTrimestral/formInformeTrimestral/' + response.data.asignacionDetalle.asignacionDetalleId);
+								$(location).attr('href', '/informeTrimestral/formInformeTrimestral/' + asignacionDetalleId);
 							}
 						});
 					},
@@ -197,7 +228,7 @@ $(document).on('ready', function() {
 				console.log(response);
 				
 				$('#titleListadoInformesTrimestralesPorAsignacionDocenteModal').html('Investigador encargado: ' + response.investigador);
-				$('#alertListadoInformesTrimestralesPorAsignacionDocente').html('Aun no hay Informes Trimestrales adjuntados al Proyecto de Investigacion: <strong>' + response.asignacion.nombreInvestigacion + '</strong>');
+				$('#alertListadoInformesTrimestralesPorAsignacionDocente').html('Aun no hay Informes Trimestrales adjuntados por el Investigador: <strong>' + response.investigador + '</strong>');
 				
 				$.ajax({
 					

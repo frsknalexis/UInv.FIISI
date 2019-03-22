@@ -54,6 +54,7 @@
 												<th>Linea Investigacion</th>
 												<th>Periodo</th>
 												<th>Investigadores</th>
+												<th>Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -66,6 +67,12 @@
 												<td>
 													<a th:href="@{/informeTrimestral/investigadores/} + ${investigacion.asignacionId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-users"></i> Investigadores</a>
 												</td>
+												<td>
+													<div class="btn-group" role="group">
+														<button id="detalleInvestigacion" th:idAsignacion="${investigacion.asignacionId}"
+															data-toggle="modal" class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Ver"></i></button> 
+													</div>
+												</td>
 											</tr>
 										</tbody>
 									</table>
@@ -74,6 +81,66 @@
 						</div>
 					</div>
 					<!-- data table end -->
+					<div class="modal fade" id="modalDetalleInvestigacionInforme">
+                     	<div class="modal-dialog modal-lg" role="document">
+                        	<div class="modal-content">
+                            	<div class="modal-header">
+                                 	<h5 class="modal-title" id="titleDetalleInvestigacionInformeModal"></h5>
+                                    	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                	<h5 class="text-center my-2" id="detalleNombreInvestigacionInforme"></h5>
+                                	<table class="table text-center table-hover" style="width: 760px; margin: 0 auto;">
+									<thead class="bg-primary text-capitalize">
+										<tr>
+											<th>Programa</th>
+											<th>Linea de Accion Prioritarias</th>
+										</tr>
+									</thead>
+									<tbody id="contenidoInvestigacion">
+									</tbody>
+									</table>
+									<h5 class="text-center my-2">Investigadores Responsable (s):</h5>
+                                	<table id="tablaInvestigacionInformeInvestigadores" class="table text-center table-hover" style="width: 760px; margin: 0 auto;">
+									<thead class="bg-primary text-capitalize">
+										<tr>
+											<th>Investigador</th>
+											<th>Facultad</th>
+											<th>Condicion</th>
+										</tr>
+									</thead>
+									<tbody id="contenidoInvestigacionInformeInvestigadores">
+									</tbody>
+									</table>
+									<div class="alert-items">
+										<div class="alert alert-primary my-2" role="alert" id="alertDetalleInvestigacionInformeInvestigadores">
+										</div>
+									</div>
+									<h5 class="text-center my-2">Informe Trimestral (es): </h5>
+									<table id="tablaInvestigadoresInformesTrimestrales" class="table text-center table-hover table-striped" style="width: 760px; margin: 0 auto;">
+										<thead class="bg-primary text-capitalize">
+											<tr>
+												<th>#</th>
+												<th>Descripcion</th>
+												<th>Trimestre</th>
+												<th>Fichero</th>
+												<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody id="contenidoInvestigadoresInformesTrimestrales">
+										</tbody>
+									</table>
+									<div class="alert-items">
+										<div class="alert alert-primary my-2" role="alert" id="alertDetalleInvestigacionInformesTrimestrales">
+										</div>
+									</div>
+                                 </div>
+                                 <div class="modal-footer">
+                                  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                 </div>
+                               </div>
+                            </div>
+                         </div>
 				</div>
 			</div>
 		</div>

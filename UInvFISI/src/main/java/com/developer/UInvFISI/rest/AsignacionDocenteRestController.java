@@ -100,6 +100,27 @@ public class AsignacionDocenteRestController {
 		}
 	}
 	
+	@GetMapping("/asignaciondocenteshabilitados/asignacion/{asignacionId}")
+	public ResponseEntity<List<AsignacionDocente>> findAsignacionDocentesByAsignacionIdAndHabilitado(@PathVariable(value="asignacionId") Integer asignacionId) {
+		
+		try {
+			
+			List<AsignacionDocente> asignacionDocentes = asignacionDocenteService.findByAsignacionIdAndHabilitado(asignacionId);
+			if(asignacionDocentes.isEmpty()) {
+				
+				return new ResponseEntity<List<AsignacionDocente>>(HttpStatus.NO_CONTENT);
+			}
+			else {
+				
+				return ResponseEntity.ok()
+						.body(asignacionDocentes);
+			}
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<List<AsignacionDocente>>(HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	@PostMapping("/save/asignacion/{asignacionId}")
 	public ResponseEntity<ResponseBaseOperacion> saveAsignacionDocente(@PathVariable(value="asignacionId") Integer asignacionId,
