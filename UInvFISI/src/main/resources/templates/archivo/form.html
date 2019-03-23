@@ -38,48 +38,11 @@
 			<!-- page title area end -->
 			<div class="main-content-inner">
 				<div class="row">
-					<div class="col-sm-12 mt-5">
-						<div class="card">
-							<div class="card-body">
-								<h4 class="header-title text-center" th:text="${informeTrabajo.trabajo.nombre}"></h4>
-								<p class="card-text">Ficheros en este Item:</p>
-								<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(informesTrabajo)}" width="100%">
-									<thead class="bg-primary text-capitalize">
-										<tr>
-											<th>Descripcion</th>
-											<th>Fichero</th>
-											<th>Formato</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each=" archivo : ${informesTrabajo}">
-											<td th:text="${archivo.asunto}"></td>
-											<td th:text="${archivo.nombreFichero}"></td>
-											<td th:text="${archivo.formatoFichero}"></td>
-											<td>
-												<div class="btn-group" role="group" aria-label="Basic example">
-													<a th:href="@{/archivo/view/} + ${archivo.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-													<a th:href="@{/archivo/download/} + ${archivo.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
-													<a class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="alert-items" th:if="${#lists.isEmpty(informesTrabajo)}">
-									<div class="alert alert-primary my-2" role="alert">
-									Aun no hay ficheros asociados a la Tesis: <strong th:text="${informeTrabajo.trabajo.nombre}"></strong>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 mt-5">
+					<div class="col-sm-6 mt-5">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form th:action="@{/archivo/formInformeTrabajo}" enctype="multipart/form-data" 
+								<form id="formInformeTrabajo" enctype="multipart/form-data" 
 								th:object="${informeTrabajo}" 
 								novalidate="" class="needs-validation" method="post">
 									<div class="form-row">
@@ -104,7 +67,7 @@
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="col-md-6 mb-3">
+										<div class="col-md-12 mb-3">
 											<label for="asuntoInformeTrabajo">Descripcion: </label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -117,7 +80,9 @@
 												<div class="invalid-feedback">Campo obligatorio, ingrese un valor</div>
 											</div>
 										</div>
-										<div class="col-md-6 mb-3">
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
 											<label for="fileArchivo">Informe: </label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -125,21 +90,62 @@
 													<i class="fa fa-upload"></i></span>
 												</div>
 												<div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="fileArchivo"
-                                                    name="fileArchivo" required="">
+                                                    <input type="file" class="custom-file-input" id="fileInformeTrabajo"
+                                                    name="fileInformeTrabajo" required="">
                                                     <label class="custom-file-label" for="fileArchivo">Seleccione un archivo</label>
                                                 </div>
                                                 <div class="invalid-feedback">Campo obligatorio, seleccione un archivo</div>
 											</div>
 										</div>
 									</div>
-									<button class="btn btn-outline-primary btn-sm" type="submit">
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<div id="visorInformeTrabajo"></div>
+										</div>
+									</div>
+									<button id="guardarInformeTrabajo" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar Archivo
 									</button>
-									<a class="btn btn-outline-danger btn-sm"
-										th:href="@{/trabajo/list}"><i
-										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
+									<button type="button" id="cancelarInformeTrabajo" class="btn btn-outline-danger btn-sm">
+									<i class="fa fa-arrow-circle-o-left"></i> Cancelar</button>
 								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 mt-5">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="header-title text-center" th:text="${informeTrabajo.trabajo.nombre}"></h4>
+								<p class="card-text">Ficheros en este Item:</p>
+								<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(informesTrabajo)}" width="100%">
+									<thead class="bg-primary text-capitalize">
+										<tr>
+											<th>Descripcion</th>
+											<th>Fichero</th>
+											<th>Formato</th>
+											<th>Acciones</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each=" archivo : ${informesTrabajo}">
+											<td th:text="${archivo.asunto}"></td>
+											<td th:text="${archivo.nombreFichero}"></td>
+											<td th:text="${archivo.formatoFichero}"></td>
+											<td>
+												<div class="btn-group" role="group" aria-label="Basic example">
+													<a th:href="@{/archivo/view/} + ${archivo.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+													<a th:href="@{/archivo/download/} + ${archivo.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
+													<a th:href="@{/archivo/formInformeTrabajo/} + ${archivo.trabajo.trabajoId} + '/' + ${archivo.informeTrabajoId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="alert-items" th:if="${#lists.isEmpty(informesTrabajo)}">
+									<div class="alert alert-primary my-2" role="alert">
+									Aun no hay ficheros asociados a la Tesis: <strong th:text="${informeTrabajo.trabajo.nombre}"></strong>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>	

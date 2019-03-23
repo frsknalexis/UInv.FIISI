@@ -8,6 +8,8 @@ public interface InformeTrabajoService {
 
 	List<InformeTrabajo> findAll();
 	
+	InformeTrabajo findByTrabajoTrabajoIdAndInformeTrabajoId(Integer trabajoId, Integer informeTrabajoId);
+	
 	void saveOrUpdate(InformeTrabajo informeTrabajo);
 	
 	List<InformeTrabajo> findByTrabajoTrabajoId(Integer trabajoId);

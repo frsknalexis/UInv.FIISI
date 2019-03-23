@@ -22,9 +22,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "tbl_trabajo", schema = "public")
@@ -78,7 +76,7 @@ public class Trabajo extends BaseEntity implements Serializable{
 	@JsonIgnore
 	private List<InformeTrabajo> informesTrabajo;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="escuela_id")
 	private Escuela escuela;
 

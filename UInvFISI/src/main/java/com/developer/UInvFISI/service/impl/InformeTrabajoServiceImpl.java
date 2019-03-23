@@ -55,4 +55,18 @@ public class InformeTrabajoServiceImpl implements InformeTrabajoService {
 		return informesTrabajo;
 	}
 
+	@Override
+	public InformeTrabajo findByTrabajoTrabajoIdAndInformeTrabajoId(Integer trabajoId, Integer informeTrabajoId) {
+		
+		InformeTrabajo informeTrabajo = null;
+		if(trabajoId != null && trabajoId > 0) {
+			
+			if(informeTrabajoId != null && informeTrabajoId > 0) {
+				
+				informeTrabajo = informeTrabajoRepository.findByTrabajoTrabajoIdAndInformeTrabajoId(trabajoId, informeTrabajoId);
+			}
+		}
+		return informeTrabajo;
+	}
+
 }

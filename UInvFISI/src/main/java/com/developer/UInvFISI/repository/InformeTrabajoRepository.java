@@ -11,4 +11,6 @@ import com.developer.UInvFISI.entity.InformeTrabajo;
 public interface InformeTrabajoRepository extends JpaRepository<InformeTrabajo, Integer> {
 
 	List<InformeTrabajo> findByTrabajoTrabajoId(Integer trabajoId);
+	
+	InformeTrabajo findByTrabajoTrabajoIdAndInformeTrabajoId(Integer trabajoId, Integer informeTrabajoId);
 }

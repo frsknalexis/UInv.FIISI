@@ -40,7 +40,7 @@ public class InformeTrabajo extends BaseEntity implements Serializable{
 	@Column(name="formato_fichero", length=75)
 	private String formatoFichero;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="trabajo_id")
 	private Trabajo trabajo;
 	

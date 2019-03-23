@@ -52,14 +52,14 @@
 									<table id="dataTable" class="text-center progress-table table-hover table-striped" width="100%">
 										<thead class="text-capitalize">
 											<tr>
-												<th>TITULO TESIS</th>
-												<th>TIPO TRABAJO</th>
-												<th>ESCUELA</th>
-												<th>FECHA DE SUSTENTACION</th>
-												<th>AREA</th>
-												<th>AUTORES</th>
-												<th>INFORME</th>
-												<th>ACCIONES</th>
+												<th>Titulo Trabajo</th>
+												<th>Tipo Trabajo</th>
+												<th>Escuela</th>
+												<th>Fecha Sustentacion</th>
+												<th>Area</th>
+												<th>Autores</th>
+												<th>Archivos</th>
+												<th>Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -73,14 +73,17 @@
 												<a th:if="${trabajo.habilitado == true}" th:href="@{/autor/formAutorDetalle/} + ${trabajo.trabajoId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-plus-circle"></i> Asignar Autores</a>
 												</td>
 												<td>
-												<a th:href="@{/archivo/formInformeTrabajo/} + ${trabajo.trabajoId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-files-o"></i> Adjuntar archivos</a>
+												<button th:if="${trabajo.habilitado == true}" id="adjuntarArchivos" th:idTrabajo="${trabajo.trabajoId}" class="btn btn-outline-primary btn-xs">
+												<i class="fa fa-files-o"></i> Adjuntar archivo</button>
 												</td>
 												<td>
 													<div class="btn-group" role="group" aria-label="Basic example">
 														<a th:href="@{/trabajo/detail/} + ${trabajo.trabajoId}"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Ver"></i></a>
                                             			<a th:if="${trabajo.habilitado == true}" th:href="@{/trabajo/form/} + ${trabajo.trabajoId}"  class="btn btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-                                            			<a th:if="${trabajo.habilitado == true}" th:href="@{/trabajo/delete/} + ${trabajo.trabajoId}"  class="btn btn-outline-danger btn-xs"><i class="fa fa-close" title="Deshabilitar"></i></a>
-                                            			<a th:if="${trabajo.habilitado != true}" th:href="@{/trabajo/enabled/} + ${trabajo.trabajoId}"  class="btn btn-outline-success btn-xs"><i class="fa fa-check" title="Habilitar"></i></a>
+                                            			<button th:if="${trabajo.habilitado == true}" id="disabledTrabajo" th:idTrabajo="${trabajo.trabajoId}" class="btn btn-outline-danger btn-xs">
+                                            			<i class="fa fa-close" title="Deshabilitar"></i></button>
+                                            			<button th:if="${trabajo.habilitado != true}" id="enabledTrabajo" th:idTrabajo="${trabajo.trabajoId}" class="btn btn-outline-success btn-xs">
+                                            			<i class="fa fa-check" title="Habilitar"></i></button>
 													</div>
 												</td>
 											</tr>

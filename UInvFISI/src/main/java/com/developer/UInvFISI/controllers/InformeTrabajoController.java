@@ -78,6 +78,31 @@ public class InformeTrabajoController {
 		return "archivo/form";
 	}
 	
+	@GetMapping("/formInformeTrabajo/{trabajoId}/{informeTrabajoId}")
+	public String updateInformeTrabajo(@PathVariable(value="trabajoId") Integer trabajoId, 
+			@PathVariable(value="informeTrabajoId") Integer informeTrabajoId, Map<String, Object> model) {
+		
+		List<InformeTrabajo> informesTrabajo = informeTrabajoService.findByTrabajoTrabajoId(trabajoId);
+		Trabajo trabajo = null;
+		InformeTrabajo informeTrabajo = null;
+		
+		if(trabajoId != null && trabajoId > 0) {
+			
+			trabajo = trabajoService.getByTrabajoId(trabajoId);
+			if(informeTrabajoId != null && informeTrabajoId > 0) {
+				
+				informeTrabajo = informeTrabajoService.findByTrabajoTrabajoIdAndInformeTrabajoId(trabajoId, informeTrabajoId);
+			}
+		}
+		
+		informeTrabajo.setTrabajo(trabajo);
+		
+		model.put("informesTrabajo", informesTrabajo);
+		model.put("informeTrabajo", informeTrabajo);
+		model.put("titulo", "Editar Informe");
+		return "archivo/form";
+	}
+	
 	@PostMapping("/formInformeTrabajo")
 	public String saveInformeTrabajo(@Valid InformeTrabajo informeTrabajo, @RequestParam("fileArchivo") MultipartFile file, 
 			SessionStatus status, RedirectAttributes flash) {
@@ -163,14 +188,6 @@ public class InformeTrabajoController {
 			}
 
 			response.setContentType(mimeType);
-
-			/**
-			 * In a regular HTTP response, the Content-Disposition response header is a
-			 * header indicating if the content is expected to be displayed inline in the
-			 * browser, that is, as a Web page or as part of a Web page, or as an
-			 * attachment, that is downloaded and saved locally.
-			 * 
-			 */
 
 			/**
 			 * Here we have mentioned it to show inline
