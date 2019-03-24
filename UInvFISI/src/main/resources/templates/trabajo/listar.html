@@ -49,7 +49,7 @@
 									class="fa fa-plus-circle"></i> Asignar Proyecto de TESIS</a>
 								<hr />
 								<div class="data-tables datatable-primary">
-									<table id="dataTable" class="text-center progress-table table-hover table-striped" width="100%">
+									<table id="dataTable" class="table text-center table-responsive progress-table table-hover table-striped" width="100%">
 										<thead class="text-capitalize">
 											<tr>
 												<th>Titulo Trabajo</th>
@@ -70,7 +70,8 @@
 												<td th:text="${trabajo.fechaSustentacion}"></td>
 												<td th:text="${trabajo.areaConocimiento}"></td>
 												<td>
-												<a th:if="${trabajo.habilitado == true}" th:href="@{/autor/formAutorDetalle/} + ${trabajo.trabajoId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-plus-circle"></i> Asignar Autores</a>
+												<button th:if="${trabajo.habilitado == true}" id="adjuntarAutores" th:idTrabajo="${trabajo.trabajoId}" class="btn btn-outline-primary btn-xs">
+												<i class="fa fa-plus-circle"></i> Asignar Autores</button>
 												</td>
 												<td>
 												<button th:if="${trabajo.habilitado == true}" id="adjuntarArchivos" th:idTrabajo="${trabajo.trabajoId}" class="btn btn-outline-primary btn-xs">

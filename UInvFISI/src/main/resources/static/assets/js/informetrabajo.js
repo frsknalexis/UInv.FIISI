@@ -77,6 +77,32 @@ $(document).on('ready', function() {
 				
 				$.ajax({
 					
+					type: 'PUT',
+					url: '/api/informetrabajo/update/trabajo/' + trabajoId + '/informeTrabajo/' + informeTrabajoId,
+					enctype: 'multipart/form-data',
+					data: data,
+					processData: false,
+					contentType: false,
+					success: function(response) {
+						
+						console.log(response);
+						
+						swal({
+							type: "success",
+							title: "Informe Academico Actualizado con exito",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+						}).then((result) => {
+
+							if(result.value) {
+								$(location).attr('href', '/archivo/formInformeTrabajo/' + trabajoId);
+							}
+						});
+					},
+					error: function() {
+						alert('Error al Actualizar Informe Academico');
+					}
 				});
 			}
 			else {
@@ -140,5 +166,66 @@ $(document).on('ready', function() {
 		    	return false;
 			}
 		}
+	});
+	
+	$('#listarInformesTrabajosPorTrabajo').on('click', function() {
+		
+		var trabajoId = $(this).attr('idtrabajo');
+		console.log("trabajoId: " + trabajoId);
+		
+		$('#modalListadoInformesTrabajosPorTrabajo').modal('show');
+		
+		var contenidoInformesTrabajosPorTrabajo = document.querySelector('#contenidoInformesTrabajosPorTrabajo');
+		
+		$.ajax({
+			
+			type: 'GET',
+			url: '/api/trabajo/trabajo/' + trabajoId,
+			dataType: 'json',
+			success: function(response) {
+				
+				console.log(response);
+				$('#titleListadoInformesTrabajosPorTrabajoModal').html(response.nombre);
+				$('#alertInformesTrabajosPorTrabajo').html('Aun no hay ficheros asociados al Trabajo: <strong>' + response.nombre + '</strong>')
+			}
+		});
+		
+		$.ajax({
+			
+			type: 'GET',
+			url: '/api/informetrabajo/informestrabajos/trabajo/' + trabajoId,
+			dataType: 'json',
+			success: function(response) {
+				
+				if(response != null) {
+					
+					$('#tablaInformesTrabajosPorTrabajo').show();
+					$('#alertInformesTrabajosPorTrabajo').hide();
+					
+					contenidoInformesTrabajosPorTrabajo.innerHTML = '';
+					for(var i = 0; i < response.length; i++) {
+						
+						console.log(response[i]);
+						contenidoInformesTrabajosPorTrabajo.innerHTML += '<tr>';
+						contenidoInformesTrabajosPorTrabajo.innerHTML += '<td>'+ (i+1) +'</td><td>'+ response[i].asunto +'</td><td>'+ response[i].nombreFichero +'</td><td><div class="btn-group" role="group"><a href="/api/informetrabajo/view/'+ response[i].nombreFichero +'" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a><button id="downloadFileInformeTrabajo" nombreFicheroInformeTrabajo="' + response[i].nombreFichero +'" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></button><a href="/archivo/formInformeTrabajo/'+ response[i].trabajo.trabajoId +'/'+ response[i].informeTrabajoId +'" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a></div></td>';
+						contenidoInformesTrabajosPorTrabajo.innerHTML += '</tr>';
+					}
+				}
+				else {
+					
+					$('#tablaInformesTrabajosPorTrabajo').hide();
+					$('#alertInformesTrabajosPorTrabajo').show();
+					console.log('No hay datos');
+				}
+			}
+		});
+	});
+	
+	$('#tablaInformesTrabajosPorTrabajo tbody').on('click', 'button#downloadFileInformeTrabajo', function() {
+		
+		var nombreFicheroInformeTrabajo = $(this).attr('nombreficheroinformetrabajo');
+		console.log("nombreFicheroInformeTrabajo: " + nombreFicheroInformeTrabajo);
+		
+		$(location).attr('href', '/api/informetrabajo/download/' + nombreFicheroInformeTrabajo);
 	});
 });

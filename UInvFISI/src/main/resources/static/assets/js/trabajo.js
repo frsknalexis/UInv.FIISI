@@ -428,4 +428,13 @@ $(document).on('ready', function(){
 		
 		$(location).attr('href', '/archivo/formInformeTrabajo/' + trabajoId);
 	});
+	
+	$('#dataTable tbody').on('click', 'button#adjuntarAutores', function() {
+		
+		var trabajoId = $(this).attr('idtrabajo');
+		console.log("trabajoId: " + trabajoId);
+		localStorage.setItem("trabajoId", trabajoId);
+		
+		$(location).attr('href', '/autor/formAutorDetalle/' + trabajoId);
+	});
 });

@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table(name = "tbl_autor", schema = "public")
 public class Autor extends BaseEntity implements Serializable{
@@ -42,18 +40,16 @@ public class Autor extends BaseEntity implements Serializable{
 	@Column(name="email", nullable=true)
 	private String email;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="trabajo_id")
-	@JsonBackReference
 	private Trabajo trabajo;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="documento_id")
 	private Documento documento;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="condicion_id")
-	@JsonBackReference
 	private Condicion condicion;
 	
 	public Autor() {

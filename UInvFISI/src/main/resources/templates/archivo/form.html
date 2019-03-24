@@ -117,38 +117,45 @@
 							<div class="card-body">
 								<h4 class="header-title text-center" th:text="${informeTrabajo.trabajo.nombre}"></h4>
 								<p class="card-text">Ficheros en este Item:</p>
-								<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(informesTrabajo)}" width="100%">
-									<thead class="bg-primary text-capitalize">
-										<tr>
-											<th>Descripcion</th>
-											<th>Fichero</th>
-											<th>Formato</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each=" archivo : ${informesTrabajo}">
-											<td th:text="${archivo.asunto}"></td>
-											<td th:text="${archivo.nombreFichero}"></td>
-											<td th:text="${archivo.formatoFichero}"></td>
-											<td>
-												<div class="btn-group" role="group" aria-label="Basic example">
-													<a th:href="@{/archivo/view/} + ${archivo.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-													<a th:href="@{/archivo/download/} + ${archivo.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
-													<a th:href="@{/archivo/formInformeTrabajo/} + ${archivo.trabajo.trabajoId} + '/' + ${archivo.informeTrabajoId}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="alert-items" th:if="${#lists.isEmpty(informesTrabajo)}">
-									<div class="alert alert-primary my-2" role="alert">
-									Aun no hay ficheros asociados a la Tesis: <strong th:text="${informeTrabajo.trabajo.nombre}"></strong>
-									</div>
-								</div>
+								<button id="listarInformesTrabajosPorTrabajo" class="btn btn-outline-primary btn-block"
+									th:idTrabajo="${informeTrabajo.trabajo.trabajoId}" data-toggle="modal">Ficheros en este Item</button>
 							</div>
 						</div>
-					</div>	
+					</div>
+					
+					<div class="modal fade" id="modalListadoInformesTrabajosPorTrabajo">
+                     	<div class="modal-dialog modal-lg" role="document">
+                        	<div class="modal-content">
+                            	<div class="modal-header">
+                                 	<h5 class="modal-title" id="titleListadoInformesTrabajosPorTrabajoModal"></h5>
+                                    	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+									<h5 class="text-center my-2">Ficheros en este Item: </h5>
+									<table id="tablaInformesTrabajosPorTrabajo" class="table text-center table-hover table-striped" style="width: 100%; margin: 0 auto;">
+										<thead class="bg-primary text-capitalize">
+											<tr>
+												<th>#</th>
+												<th>Descripcion</th>
+												<th>Fichero</th>
+												<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody id="contenidoInformesTrabajosPorTrabajo">
+										</tbody>
+									</table>
+									<div class="alert-items">
+										<div class="alert alert-primary my-2" role="alert" id="alertInformesTrabajosPorTrabajo">
+										</div>
+									</div>
+                                 </div>
+                                 <div class="modal-footer">
+                                  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                 </div>
+                               </div>
+                            </div>
+                         </div>
+						
 				</div>
 			</div>
 		</div>

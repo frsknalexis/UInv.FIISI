@@ -37,7 +37,129 @@
 			<!-- page title area end -->
 			<div class="main-content-inner">
 				<div class="row">
-					<div class="col-sm-12 mt-5">
+					<div class="col-sm-7 mt-5">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="header-title" th:text="${titulo}"></h4>
+								<form th:object="${autor}"  
+								novalidate="" class="needs-validation" method="post">
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<div class="input-group">
+												<input type="hidden" class="form-control" id="autor-id"
+												th:field="*{autorId}" required=""/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="inputGroupNombreInvestigacion"><i
+														class="fa fa-book"></i></span>
+												</div>
+												<input type="text" class="form-control" placeholder="Nombre Tesis"
+													id="nombreTesisAsignado" aria-describedby="inputGroupNombreTesis" 
+													 disabled="disabled"  th:value="${autor.trabajo.nombre}" />
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<label for="autorAsignacion">Nombres: </label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupAutorAsignacion"><i
+														class="fa fa-user"></i></span>
+												</div>
+												<input type="text" class="form-control" name="autorAsignacion" required="" id="autorAsignacion"
+												aria-describedby="inputGroupAutorAsignacion" th:field="*{nombre}"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-6 mb-3">
+											<label for="emailAsignacion">Email: </label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupEmailAsignacion"><i
+														class="fa fa-user"></i></span>
+												</div>
+												<input type="text" class="form-control" name="emailAsignacion" required="" id="emailAsignacion"
+												aria-describedby="inputGroupEmailAsignacion" th:field="*{email}"/>
+											</div>
+										</div>
+										<div class="col-md-6 mb-3">
+											<label for="celularAsignacion">Celular: </label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupCelularAsignacion"><i
+														class="fa fa-user"></i></span>
+												</div>
+												<input type="text" class="form-control" name="celularAsignacion" required="" id="celularAsignacion"
+												aria-describedby="inputGroupCelularAsignacion" th:field="*{celular}"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-6 mb-3">
+											<label for="documentodAsignacion">Documento: </label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+													id="inputGroupDocumentoAsignacion">
+													<i class="fa fa-bookmark"></i></span>
+												</div>
+												<select th:field="*{documento.documentoId}" id="documentoAsignacion" class="form-control">
+													<option value="">Seleccione Tipo Documento</option>
+													<option th:each="documento : ${documento}" th:value="${documento.documentoId}"
+													th:text="${documento.abreviatura}"/>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6 mb-3">
+											<label for="nmrAsignacion">Numero Documento: </label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupNmrAsignacion"><i
+														class="fa fa-user"></i></span>
+												</div>
+												<input type="text" class="form-control" name="nmrAsignacion" required="" id="nmrAsignacion"
+												aria-describedby="inputGroupNmrAsignacion" th:field="*{nroDocumento}"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-6 mb-3">
+											<label for="condicionDocenteAsignacion">Condicion: </label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"
+														id="inputGroupCondicionDocenteAsignacion"><i
+														class="fa fa-suitcase"></i></span>
+												</div>
+												<select th:field="*{condicion.condicionId}" id="condicionDocenteAsignacion" class="form-control">
+													<option value="">Seleccione una Condicion</option>
+													<option th:each="condicion : ${condiciones}" th:value="${condicion.condicionId}"
+													 	th:text="${condicion.nombreCondicion}"/>
+												</select>
+											</div>	
+										</div>
+									</div>
+									<button id="guardarTrabajoAutor" class="btn btn-outline-primary btn-sm" type="submit">
+										<i class="fa fa-check-circle"></i> Guardar Autor
+									</button>
+									<button type="button" class="btn btn-outline-danger btn-sm"
+									id="cancelarTrabajoAutor"><i class="fa fa-arrow-circle-o-left"></i> Cancelar</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-5 mt-5">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title text-center" th:text="${autor.trabajo.nombre}"></h4>
@@ -67,125 +189,6 @@
 									Aun no hay Autores Asignados al Proyecto de Tesis: <strong th:text="${autor.trabajo.nombre}"></strong> 
 									</div>	
 								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 mt-5">
-						<div class="card">
-							<div class="card-body">
-								<h4 class="header-title" th:text="${titulo}"></h4>
-								<form th:action="@{/autor/formAutorDetalle}" th:object="${autor}"  
-								novalidate="" class="needs-validation" method="post">
-									<div class="form-row">
-										<div class="col-md-12 mb-3">
-											<div class="input-group">
-												<input type="hidden" class="form-control" id="autor-id"
-												th:field="*{autorId}" required=""/>
-											</div>
-										</div>
-									</div>
-									<div class="form-row">
-										<div class="col-md-12 mb-3">
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text" id="inputGroupNombreInvestigacion"><i
-														class="fa fa-book"></i></span>
-												</div>
-												<input type="text" class="form-control" placeholder="Nombre Tesis"
-													id="nombreTesisAsignado" aria-describedby="inputGroupNombreTesis" 
-													 disabled="disabled"  th:value="${autor.trabajo.nombre}" />
-											</div>
-										</div>
-									</div>
-									<div class="form-row">
-										<div class="col-md-4 mb-3">
-											<label for="autorAsignacion">Nombres: </label>
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"
-														id="inputGroupAutorAsignacion"><i
-														class="fa fa-user"></i></span>
-												</div>
-												<input type="text" class="form-control" name="autorAsignacion" required="" id="autorAsignacion"
-												aria-describedby="inputGroupAutorAsignacion" th:field="*{nombre}"/>
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<label for="emailAsignacion">Email: </label>
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"
-														id="inputGroupEmailAsignacion"><i
-														class="fa fa-user"></i></span>
-												</div>
-												<input type="text" class="form-control" name="emailAsignacion" required="" id="emailAsignacion"
-												aria-describedby="inputGroupEmailAsignacion" th:field="*{email}"/>
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<label for="celularAsignacion">Celular: </label>
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"
-														id="inputGroupCelularAsignacion"><i
-														class="fa fa-user"></i></span>
-												</div>
-												<input type="text" class="form-control" name="celularAsignacion" required="" id="celularAsignacion"
-												aria-describedby="inputGroupCelularAsignacion" th:field="*{celular}"/>
-											</div>
-										</div>
-									</div>
-									<div class="form-row">
-										<div class="col-md-4 mb-3">
-											<label for="documentodAsignacion">Documento: </label>
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"
-													id="inputGroupDocumentoAsignacion">
-													<i class="fa fa-bookmark"></i></span>
-												</div>
-												<select th:field="*{documento.documentoId}" id="documentoAsignacion" class="form-control">
-													<option value="">Seleccione Tipo Documento</option>
-													<option th:each="documento : ${documento}" th:value="${documento.documentoId}"
-													th:text="${documento.abreviatura}"/>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<label for="nmrAsignacion">Numero Documento: </label>
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"
-														id="inputGroupNmrAsignacion"><i
-														class="fa fa-user"></i></span>
-												</div>
-												<input type="text" class="form-control" name="nmrAsignacion" required="" id="nmrAsignacion"
-												aria-describedby="inputGroupNmrAsignacion" th:field="*{nroDocumento}"/>
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<label for="condicionDocenteAsignacion">Condicion: </label>
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"
-														id="inputGroupCondicionDocenteAsignacion"><i
-														class="fa fa-suitcase"></i></span>
-												</div>
-												<select th:field="*{condicion.condicionId}" id="condicionDocenteAsignacion" class="form-control">
-													<option value="">Seleccione una Condicion</option>
-													<option th:each="condicion : ${condiciones}" th:value="${condicion.condicionId}"
-													 	th:text="${condicion.nombreCondicion}"/>
-												</select>
-											</div>	
-										</div>
-									</div>
-									<button class="btn btn-outline-primary btn-sm" type="submit">
-										<i class="fa fa-check-circle"></i> Guardar Autor
-									</button>
-									<a class="btn btn-outline-danger btn-sm"
-										th:href="@{/trabajo/list}"><i
-										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
-								</form>
 							</div>
 						</div>
 					</div>	

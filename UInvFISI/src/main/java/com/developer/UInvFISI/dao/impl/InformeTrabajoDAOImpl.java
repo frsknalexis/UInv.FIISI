@@ -36,4 +36,16 @@ public class InformeTrabajoDAOImpl implements InformeTrabajoDAO {
 		}
 	}
 
+	@Override
+	public InformeTrabajo findOne(Integer informeTrabajoId) {
+		
+		InformeTrabajo informeTrabajo = null;
+		if(informeTrabajoId != null && informeTrabajoId > 0) {
+			
+			informeTrabajo = em.find(InformeTrabajo.class, informeTrabajoId);
+		}
+		
+		return informeTrabajo;
+	}
+
 }

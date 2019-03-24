@@ -69,4 +69,16 @@ public class InformeTrabajoServiceImpl implements InformeTrabajoService {
 		return informeTrabajo;
 	}
 
+	@Override
+	public InformeTrabajo getByInformeTrabajoId(Integer informeTrabajoId) {
+	
+		InformeTrabajo informeTrabajo = null;
+		if(informeTrabajoId != null && informeTrabajoId > 0) {
+			
+			informeTrabajo = informeTrabajoDAO.findOne(informeTrabajoId);
+		}
+		
+		return informeTrabajo;
+	}
+
 }

@@ -51,6 +51,30 @@ public class TrabajoRestController {
 		}
 	}
 	
+	@GetMapping("/trabajo/{trabajoId}")
+	public ResponseEntity<Trabajo> getByTrabajoId(@PathVariable(value="trabajoId") Integer trabajoId) {
+		
+		Trabajo trabajo = null;
+		
+		try {
+			
+			if(trabajoId != null && trabajoId > 0) {
+				
+				trabajo = trabajoService.getByTrabajoId(trabajoId);
+				if(trabajo == null) {
+					
+					return new ResponseEntity<Trabajo>(HttpStatus.NO_CONTENT);
+				}
+			}
+			
+			return new ResponseEntity<Trabajo>(trabajo, HttpStatus.OK);
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<Trabajo>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/save")
 	public ResponseEntity<ResponseBaseOperacion> saveTrabajo(@Valid @RequestBody Trabajo trabajo) {
 		
