@@ -55,6 +55,27 @@ public class AutorRestController {
 		}
 	}
 	
+	@GetMapping("/autores/trabajo/{trabajoId}")
+	public ResponseEntity<List<Autor>> getAutoresByTrabajoId(@PathVariable(value="trabajoId") Integer trabajoId) {
+		
+		try {
+			
+			List<Autor> autores = autorService.findByTrabajoId(trabajoId);
+			if(autores.isEmpty()) {
+				
+				return new ResponseEntity<List<Autor>>(HttpStatus.NO_CONTENT);
+			}
+			else {
+				
+				return new ResponseEntity<List<Autor>>(autores, HttpStatus.OK);
+			}
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<List<Autor>>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/save/trabajo/{trabajoId}")
 	public ResponseEntity<ResponseBaseOperacion> saveAutor(@PathVariable(value="trabajoId") Integer trabajoId, @Valid @RequestBody Autor autor) {
 		
@@ -119,5 +140,72 @@ public class AutorRestController {
 			
 			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@GetMapping("/autor/disabled/{autorId}")
+	public ResponseEntity<ResponseBaseOperacion> disabledAutor(@PathVariable(value="autorId") Integer autorId) {
+		
+		Autor autor = null;
+		
+		try {
+			
+			if(autorId != null && autorId > 0) {
+				
+				autor = autorService.getAutorById(autorId);
+				if(autor != null) {
+					
+					if(autor.getHabilitado().equals(true)) {
+						
+						autorService.disabled(autorId);
+						ResponseBaseOperacion response = new ResponseBaseOperacion(Constantes.SUCCESS_MESSAGE, autor);
+						return new ResponseEntity<ResponseBaseOperacion>(response, HttpStatus.OK);
+					}
+				}
+				else {
+					
+					return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.NO_CONTENT);
+				}
+			}
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return null;
+	}
+	
+	@GetMapping("/autor/enabled/{autorId}")
+	public ResponseEntity<ResponseBaseOperacion> enabledAutor(@PathVariable(value="autorId") Integer autorId) {
+		
+		Autor autor = null;
+		
+		try {
+			
+			if(autorId != null && autorId > 0) {
+				
+				autor = autorService.getAutorById(autorId);
+				if(autor != null) {
+					
+					if(autor.getHabilitado().equals(false)) {
+						
+						autorService.enabled(autorId);
+						ResponseBaseOperacion response = new ResponseBaseOperacion(Constantes.SUCCESS_MESSAGE, autor);
+						return new ResponseEntity<ResponseBaseOperacion>(response, HttpStatus.OK);
+					}
+				}
+				else {
+					
+					return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.NO_CONTENT);
+				}
+			}
+			
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return null;
 	}
 }

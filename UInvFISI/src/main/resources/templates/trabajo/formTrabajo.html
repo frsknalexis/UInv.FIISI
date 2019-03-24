@@ -164,34 +164,45 @@
 							<div class="card-body">
 								<h4 class="header-title text-center" th:text="${autor.trabajo.nombre}"></h4>
 								<p class="card-text">Responsable (s):</p>
-								<table class="table text-center table-hover table-striped" width="100%" th:if="${not #lists.isEmpty(autores)}">
-									<thead class="bg-primary text-capitalize">
-										<tr>
-											<th>Nombres</th>
-											<th>Condicion</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-									<tr th:each="autor : ${autores}">
-										<td th:text="${autor.nombre}"></td>
-										<td th:text="${autor.condicion.nombreCondicion}"></td>
-										<td>
-											<div class="btn-group" role="group" aria-label="Basic example">
-												<a th:href="@{/autor/formAutorDetalle/} + ${autor.trabajo.trabajoId} + '/' + ${autor.autorId}" th:if="${autor.habilitado == true}" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-											</div>
-										</td>
-									</tr>
-									</tbody>
-								</table>
-								<div class="alert-items" th:if="${#lists.isEmpty(autores)}">
-									<div class="alert alert-primary my-2" role="alert" >
-									Aun no hay Autores Asignados al Proyecto de Tesis: <strong th:text="${autor.trabajo.nombre}"></strong> 
-									</div>	
-								</div>
+								<button id="listarAutoresPorTrabajo" class="btn btn-outline-primary btn-block"
+								 th:idTrabajo="${autor.trabajo.trabajoId}" data-toggle="modal">Listar Autores</button>	
 							</div>
 						</div>
-					</div>	
+					</div>
+					<div class="modal fade" id="modalListadoAutoresPorTrabajo">
+                     	<div class="modal-dialog modal-lg" role="document">
+                        	<div class="modal-content">
+                            	<div class="modal-header">
+                                 	<h5 class="modal-title" id="titleListadoAutoresPorTrabajoModal"></h5>
+                                    	<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+									<h5 class="text-center my-2">Investigadores Responsable (s):</h5>
+									<table id="tablaListadoAutoresPorTrabajo" class="table text-center table-hover table-striped" style="width: 100%; margin: 0 auto;">
+										<thead class="bg-primary text-capitalize">
+											<tr>
+												<th>#</th>
+												<th>Nombres</th>
+												<th>Email</th>
+												<th>Condicion</th>
+												<th>Estado</th>
+												<th>Acciones</th>
+											</tr>
+										</thead>
+										<tbody id="contenidoListadoAutoresPorTrabajo">
+										</tbody>
+									</table>
+									<div class="alert-items">
+										<div class="alert alert-primary my-2" role="alert" id="alertlistadoAutoresPorTrabajo">
+										</div>
+									</div>
+                                 </div>
+                                 <div class="modal-footer">
+                                  	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                 </div>
+                               </div>
+                            </div>
+                         </div>	
 				</div>
 			</div>
 		</div>

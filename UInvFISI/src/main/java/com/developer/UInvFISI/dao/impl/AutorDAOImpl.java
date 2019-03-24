@@ -4,15 +4,23 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.developer.UInvFISI.dao.AutorDAO;
 import com.developer.UInvFISI.entity.Autor;
 
 @Repository("autorRepository")
-public class AutorDAOImpl implements AutorDAO {
+public class AutorDAOImpl extends JdbcDaoSupport implements AutorDAO {
 
+	@Autowired
+	public AutorDAOImpl(DataSource dataSource) {
+		setDataSource(dataSource);
+	}
+	
 	@PersistenceContext
 	private EntityManager em;
 	
@@ -48,5 +56,24 @@ public class AutorDAOImpl implements AutorDAO {
 		}
 		
 		return autor;
+	}
+
+	@Override
+	public void disabled(Autor autor) {
+		
+		try {
+			
+			StringBuilder builder = new StringBuilder();
+			builder.append(" UPDATE tbl_autor SET fecha_modificacion = ?, habilitado = ? WHERE autor_id = ?");
+			getJdbcTemplate().update(builder.toString(), new Object[] {
+				
+					autor.getFechaModificacion(),
+					autor.getHabilitado(),
+					autor.getAutorId()
+			});
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

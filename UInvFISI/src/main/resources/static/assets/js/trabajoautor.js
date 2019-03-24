@@ -255,4 +255,159 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	$('#listarAutoresPorTrabajo').on('click', function() {
+		
+		var trabajoId = $(this).attr('idtrabajo');
+		console.log("trabajoId: " + trabajoId);
+		
+		$('#modalListadoAutoresPorTrabajo').modal('show');
+		
+		var contenidoListadoAutoresPorTrabajo = document.querySelector('#contenidoListadoAutoresPorTrabajo');
+		
+		$.ajax({
+			
+			type: 'GET',
+			url: '/api/trabajo/trabajo/' + trabajoId,
+			dataType: 'json',
+			success: function(response) {
+				
+				console.log(response);
+				$('#titleListadoAutoresPorTrabajoModal').html(response.nombre);
+				$('#alertlistadoAutoresPorTrabajo').html('Aun no hay Autores Asignados al Trabajo: <strong>' + response.nombre + '</strong>')
+			}
+		});
+		
+		$.ajax({
+			
+			type: 'GET',
+			url: '/api/autor/autores/trabajo/' + trabajoId,
+			dataType: 'json',
+			success: function(response) {
+				
+				if(response != null) {
+					$('#tablaListadoAutoresPorTrabajo').show();
+					$('#alertlistadoAutoresPorTrabajo').hide();
+					
+					contenidoListadoAutoresPorTrabajo.innerHTML = '';
+					for(var i = 0; i < response.length; i++) {
+						
+						
+						contenidoListadoAutoresPorTrabajo.innerHTML += '<tr>';
+						if(response[i].habilitado == true) {
+							contenidoListadoAutoresPorTrabajo.innerHTML += '<td>'+ (i+1) +'</td><td>'+ response[i].nombre +'</td><td>'+ response[i].email +'</td><td>'+ response[i].condicion.nombreCondicion+'</td><td><span class="status-p bg-success">Activo</span></td><td><div class="btn-group" role="group"><a href="/autor/formAutorDetalle/'+ response[i].trabajo.trabajoId +'/'+ response[i].autorId +'" class="btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a><button id="disabledAutor" idautor="' + response[i].autorId + '" class="btn btn-outline-danger btn-xs"><i class="fa fa-close" title="Deshabilitar"></i></button></div></td>';
+							console.log(response[i]);
+						}
+						if(response[i].habilitado == false) {
+							contenidoListadoAutoresPorTrabajo.innerHTML += '<td>'+ (i+1) +'</td><td>'+ response[i].nombre +'</td><td>'+ response[i].email +'</td><td>'+ response[i].condicion.nombreCondicion+'</td><td><span class="status-p bg-danger">Inactivo</span></td><td><div class="btn-group" role="group"><button id="enabledAutor" idautor="' + response[i].autorId + '" class="btn btn-outline-success btn-xs"><i class="fa fa-check" title="Habilitar"></i></button></div></td>';
+							console.log(response[i]);
+						}	
+						contenidoListadoAutoresPorTrabajo.innerHTML += '</tr>';
+					}
+					
+				}
+				else {
+					$('#tablaListadoAutoresPorTrabajo').hide();
+					$('#alertlistadoAutoresPorTrabajo').show();
+					console.log('No hay datos');
+				}
+			}
+		});
+	});
+	
+	$('#tablaListadoAutoresPorTrabajo tbody').on('click', 'button#disabledAutor', function() {
+		
+		var autorId = $(this).attr('idautor');
+		console.log("autorId: " + autorId);
+		
+		swal({
+	        title: '¿Esta Seguro de deshabilitar este Autor ?',
+	        text: '¡Si no lo esta puede Cancelar la accion!',
+	        type: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        cancelButtonText: 'Cancelar',
+	        confirmButtonText: '¡Si, deshabilitar Autor !'
+	    }).then((result) => {
+	        if(result.value){
+	           
+	        	 $.ajax({
+	                 url: '/api/autor/autor/disabled/' + autorId,
+	                 type: 'GET',
+	                 success: function(response){
+	                	 
+	                	 console.log(response);
+	                     swal({
+	                         type: "success",
+	                         title: "El Autor: " + response.data.nombre + " ha sido deshabilitado correctamente",
+	                         showConfirmButton: true,
+	                         confirmButtonText: "Cerrar",
+	                         closeOnConfirm: false
+	                     }).then((result) => {
+	                         if(result.value) {
+	                             $(location).attr("href", '/autor/formAutorDetalle/' + response.data.trabajo.trabajoId);
+	                         }
+	                     })
+	                 }
+	             });
+	        }
+	        else {
+	            swal({
+	                type: "error",
+	                title: "Cancelado", 
+	                text: "Usted ha cancelado la acción de deshabilitar"
+	            });
+	        }
+	    });
+	});
+	
+	$('#tablaListadoAutoresPorTrabajo tbody').on('click', 'button#enabledAutor', function() {
+		
+		var autorId = $(this).attr('idautor');
+		console.log("autorId: " + autorId);
+		
+		swal({
+	        title: '¿Esta Seguro de habilitar este Autor ?',
+	        text: '¡Si no lo esta puede Cancelar la accion!',
+	        type: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        cancelButtonText: 'Cancelar',
+	        confirmButtonText: '¡Si, habilitar Autor !'
+	    }).then((result) => {
+	        if(result.value){
+	           
+	        	$.ajax({
+	        		
+	        		url: '/api/autor/autor/enabled/' + autorId,
+	        		type: 'GET',
+	        		success: function(response){
+	        			
+	        			console.log(response);
+	        			
+	        			swal({
+	        				type: "success",
+	                        title: "El Autor: " + response.data.nombre + " ha sido habilitado correctamente",
+	                        showConfirmButton: true,
+	                        confirmButtonText: "Cerrar",
+	                        closeOnConfirm: false
+	                       }).then((result) => {
+	                         if(result.value) {
+	                            $(location).attr("href", '/autor/formAutorDetalle/' + response.data.trabajo.trabajoId);
+	                        }
+	                     })
+	                 }
+	        	});
+	        }
+	        else {
+	            swal({
+	                type: "error",
+	                title: "Cancelado", 
+	                text: "Usted ha cancelado la acción de habilitar"
+	            });
+	        }
+	    });
+	});
 });

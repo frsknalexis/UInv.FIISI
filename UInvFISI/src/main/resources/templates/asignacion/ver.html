@@ -104,8 +104,8 @@
 											<td th:text="${informeInv.formatoFichero}"></td>
 											<td>
 												<div class="btn-group" role="group" aria-label="Basic example">
-													<a th:href="@{/informe/view/} + ${informeInv.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-													<a th:href="@{/informe/download/} + ${informeInv.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
+													<a th:href="@{/api/informeinvestigacion/view/} + ${informeInv.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+													<a th:href="@{/api/informeinvestigacion/download/} + ${informeInv.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
 												</div>
 											</td>
 										</tr>

@@ -49,14 +49,13 @@
 									class="fa fa-plus-circle"></i> Asignar Proyecto de TESIS</a>
 								<hr />
 								<div class="data-tables datatable-primary">
-									<table id="dataTable" class="table text-center table-responsive progress-table table-hover table-striped" width="100%">
+									<table id="dataTable" class="table text-center progress-table table-hover table-striped" width="100%">
 										<thead class="text-capitalize">
 											<tr>
 												<th>Titulo Trabajo</th>
 												<th>Tipo Trabajo</th>
 												<th>Escuela</th>
-												<th>Fecha Sustentacion</th>
-												<th>Area</th>
+												<th>Estado</th>
 												<th>Autores</th>
 												<th>Archivos</th>
 												<th>Acciones</th>
@@ -67,8 +66,10 @@
 												<td th:text="${trabajo.nombre}"></td>
 												<td th:text="${trabajo.tipoTrabajo}"></td>
 												<td th:text="${trabajo.escuela.nombreEscuela}"></td>
-												<td th:text="${trabajo.fechaSustentacion}"></td>
-												<td th:text="${trabajo.areaConocimiento}"></td>
+												<td>
+												<span th:if="${trabajo.habilitado == true}" class="status-p bg-warning" th:text="'Iniciado'"></span>
+                                            	<span th:if="${trabajo.habilitado != true}" class="status-p bg-success" th:text="'Terminado'"></span>
+												</td>
 												<td>
 												<button th:if="${trabajo.habilitado == true}" id="adjuntarAutores" th:idTrabajo="${trabajo.trabajoId}" class="btn btn-outline-primary btn-xs">
 												<i class="fa fa-plus-circle"></i> Asignar Autores</button>

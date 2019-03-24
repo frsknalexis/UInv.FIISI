@@ -14,5 +14,7 @@ public interface AutorDAO {
 	
 	Autor findOne(Integer autorId);
 	
+	void disabled(Autor autor);
+	
 	
 }

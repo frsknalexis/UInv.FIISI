@@ -50,16 +50,18 @@
 								<p class="text-center card-text">Titulo: </p>
 								<h5 class="title text-center" th:text="${trabajo.nombre}"></h5>
 								<p class="text-center card-text">Responsable (s): </p>
-								<table class="table text-center table-hover table-striped"  style="width: 700px; margin: 0 auto;" th:if="${not #lists.isEmpty(trabajo.autor)}">
+								<table class="table text-center table-hover table-striped" th:if="${not #lists.isEmpty(trabajo.autor)}">
 									<thead class="bg-primary text-capitalize">
 										<tr>
 											<th>Nombres</th>
+											<th>Email</th>
 											<th>Condicion</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each="trabajoD : ${trabajo.autor}">
 											<td th:text="${trabajoD.nombre}"></td>
+											<td th:text="${trabajoD.email}"></td>
 											<td th:text="${trabajoD.condicion.nombreCondicion}"></td>
 										</tr>
 									</tbody>
@@ -69,7 +71,7 @@
 										Aun no hay Autor Asignados al Proyecto de Tesis: <strong th:text="${trabajo.nombre}"></strong>.<a th:href="@{/autor/formAutorDetalle/} + ${trabajo.trabajoId}"> Click aqui para asignar Autor</a>
 									</div>
 								</div>
-								<table class="table text-center table-hover table-striped table-bordered" style="width: 700px; margin: 0 auto;">
+								<table class="table text-center table-hover table-striped table-bordered">
 									<thead class="bg-primary text-capitalize">
 										<tr>
 											<th>Tipo de Trabajo</th>
@@ -123,8 +125,8 @@
 											<td th:text="${informetrab.formatoFichero}"></td>
 											<td>
 												<div class="btn-group" role="group" aria-label="Basic example">
-													<a th:href="@{/archivo/view/} + ${informetrab.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
-													<a th:href="@{/archivo/download/} + ${informetrab.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
+													<a th:href="@{/api/informetrabajo/view/} + ${informetrab.nombreFichero}" target="_blank"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Visualizar PDF"></i></a>
+													<a th:href="@{/api/informetrabajo/download/} + ${informetrab.nombreFichero}" class="btn btn-outline-primary btn-xs"><i class="fa fa-download" title="Descargar"></i></a>
 												</div>
 											</td>
 										</tr>

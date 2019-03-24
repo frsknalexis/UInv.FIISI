@@ -89,6 +89,34 @@ public class AutorServiceImpl implements AutorService {
 		}
 		
 		return autor;
+	}
+
+	@Override
+	public void disabled(Integer autorId) {
+		
+		Autor autor = null;
+		if(autorId != null && autorId > 0) {
+			
+			autor = autorDAO.findOne(autorId);
+			autor.setFechaModificacion(new Date());
+			autor.setHabilitado(false);
+		}
+		
+		autorDAO.disabled(autor);
+	}
+
+	@Override
+	public void enabled(Integer autorId) {
+		
+		Autor autor = null;
+		if(autorId != null && autorId > 0) {
+			
+			autor = autorDAO.findOne(autorId);
+			autor.setFechaModificacion(new Date());
+			autor.setHabilitado(true);
+		}
+		
+		autorDAO.disabled(autor);
 	} 
 
 }

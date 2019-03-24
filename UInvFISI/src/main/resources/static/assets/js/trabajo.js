@@ -328,14 +328,14 @@ $(document).on('ready', function(){
 		console.log('trabajoId: ' + trabajoId);
 		
 		swal({
-	        title: '¿Esta Seguro de deshabilitar este Trabajo Academico ?',
+	        title: '¿Esta Seguro de finalizar el Proceso de este Trabajo Academico ?',
 	        text: '¡Si no lo esta puede Cancelar la accion!',
 	        type: 'warning',
 	        showCancelButton: true,
 	        confirmButtonColor: '#3085d6',
 	        cancelButtonColor: '#d33',
 	        cancelButtonText: 'Cancelar',
-	        confirmButtonText: '¡Si, deshabilitar Trabajo !'
+	        confirmButtonText: '¡Si, finalizar Proceso !'
 	    }).then((result) => {
 	        if(result.value){
 	           
@@ -348,7 +348,7 @@ $(document).on('ready', function(){
 	                	 console.log(response);
 	                     swal({
 	                         type: "success",
-	                         title: "El Trabajo Academico: " + response.nombre + " ha sido deshabilitado correctamente",
+	                         title: "El Proceso del Trabajo Academico: " + response.data.nombre + " ha sido finalizado correctamente",
 	                         showConfirmButton: true,
 	                         confirmButtonText: "Cerrar",
 	                         closeOnConfirm: false
@@ -364,7 +364,7 @@ $(document).on('ready', function(){
 	            swal({
 	                type: "error",
 	                title: "Cancelado", 
-	                text: "Usted ha cancelado la acción de deshabilitar"
+	                text: "Usted ha cancelado la acción de finalizar Proceso"
 	            });
 	        }
 	    });
@@ -398,7 +398,7 @@ $(document).on('ready', function(){
 	        			
 	        			swal({
 	        				type: "success",
-	                        title: "El Trabajo Academico: " + response.nombre + " ha sido habilitado correctamente",
+	                        title: "El Trabajo Academico: " + response.data.nombre + " ha sido habilitado correctamente",
 	                        showConfirmButton: true,
 	                        confirmButtonText: "Cerrar",
 	                        closeOnConfirm: false

@@ -12,6 +12,10 @@ public interface AutorService {
 	
 	void saveOrUpdate(Autor autor);
 	
+	void disabled(Integer autorId);
+	
+	void enabled(Integer autorId);
+	
 	Autor getAutorById(Integer autorDetalleId);
 	
 	Autor findByTrabajoTrabajoIdAndAutorDetalleId(Integer TrabajoId, Integer autorDetalleId);
