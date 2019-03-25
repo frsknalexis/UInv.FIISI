@@ -1,9 +1,12 @@
 package com.developer.UInvFISI.controllers;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +30,15 @@ public class UsuarioController {
 		Usuario usuario = new Usuario();
 		model.addAttribute("usuario", usuario);
 		return "usuario/registerForm";
+	}
+	
+	@GetMapping("/perfil")
+	String perfilUsuario(Authentication authentication, Map<String, Object> model) {
+		
+		Usuario usuario = usuarioService.findByEmail(authentication.getName());
+		model.put("titulo", "Perfil Usuario");
+		model.put("usuario", usuario);
+		return "usuario/perfil";
 	}
 	
 	@PostMapping("/register")

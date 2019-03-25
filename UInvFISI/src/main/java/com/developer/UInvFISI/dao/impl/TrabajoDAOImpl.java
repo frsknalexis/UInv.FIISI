@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,13 @@ public class TrabajoDAOImpl extends JdbcDaoSupport implements TrabajoDAO {
 		}
 		
 		em.remove(trabajo);
+	}
+
+	@Override
+	public Long obtenerTotalTrabajos() {
+		
+		Query query = em.createQuery("select count(t) from Trabajo t");
+		return (Long) query.getSingleResult();
 	}
 
 }

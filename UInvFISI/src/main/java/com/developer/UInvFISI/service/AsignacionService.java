@@ -14,6 +14,8 @@ public interface AsignacionService {
 	
 	Asignacion getByAsignacionId(Integer asignacionId);
 	
+	Long obtenerTotalRegistrosAsignacion();
+	
 	void enabled(Integer asignacionId);
 	
 	void delete(Integer asignacionId);

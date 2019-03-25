@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -81,6 +82,13 @@ public class DocenteDAOImpl extends JdbcDaoSupport implements DocenteDAO {
 	public List<Docente> findAllEnabled() {
 		
 		return em.createQuery("from Docente d where d.habilitado = true").getResultList();
+	}
+
+	@Override
+	public Long obtenerTotalRegistrosDocentes() {
+		
+		Query query = em.createQuery("select count(d) from Docente d");
+		return (Long) query.getSingleResult();
 	}
 	
 }

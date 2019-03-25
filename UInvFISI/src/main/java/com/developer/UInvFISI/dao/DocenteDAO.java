@@ -14,6 +14,8 @@ public interface DocenteDAO {
 	
 	Docente findOne(Integer docenteId);
 	
+	Long obtenerTotalRegistrosDocentes();
+	
 	void disabled(Docente docente);
 	
 	void delete(Integer docenteId);

@@ -12,6 +12,8 @@ public interface TrabajoDAO {
 	
 	void update(Trabajo trabajo);
 	
+	Long obtenerTotalTrabajos();
+	
 	Trabajo findOne(Integer trabajoId);
 	
 	void disabled(Trabajo trabajo);

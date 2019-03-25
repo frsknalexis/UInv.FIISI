@@ -100,4 +100,11 @@ public class DocenteServiceImpl implements DocenteService {
 		List<Docente> docentes = docenteRepository.findByNombresDocente(termino);
 		return docentes;
 	}
+
+	@Override
+	public Long obtenerTotalRegistrosDocentes() {
+		
+		Long totalDocentes = docenteDAO.obtenerTotalRegistrosDocentes();
+		return totalDocentes;
+	}
 }

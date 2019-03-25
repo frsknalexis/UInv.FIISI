@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8" />
 <title>Insert title here</title>
@@ -7,14 +7,14 @@
 <body>
 
 	<div class="col-sm-6 clearfix" th:fragment="user-profile">
-		<div class="user-profile pull-right">
+		<div class="user-profile pull-right" sec:authorize="isAuthenticated()">
 			<img class="avatar user-thumb" th:src="@{/assets/images/author/avatar.png}"
 				alt="avatar">
 			<h4 class="user-name dropdown-toggle" data-toggle="dropdown">
-				Administrador <i class="fa fa-angle-down"></i>
+				<span th:text="${#authentication.name}"></span> <i class="fa fa-angle-down"></i>
 			</h4>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="#">Settings</a> 
+				<a class="dropdown-item" th:href="@{/perfil}">Perfil</a> 
 				<form method="post" th:action="@{/logout}">
 				<button class="dropdown-item" type="submit">Log Out</button>
 				</form>

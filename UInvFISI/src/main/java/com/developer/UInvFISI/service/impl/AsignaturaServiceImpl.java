@@ -17,7 +17,6 @@ import com.developer.UInvFISI.service.AsignaturaService;
 public class AsignaturaServiceImpl implements AsignaturaService {
 
 	
-	
 	@Autowired
 	@Qualifier("asignaturaRepository")
 	private AsignaturaDAO asignaturaDAO;
@@ -98,6 +97,10 @@ public class AsignaturaServiceImpl implements AsignaturaService {
 		}
 	}
 
-	
-
+	@Override
+	public Long obtenerTotalAsignaturas() {
+		
+		Long totalAsignaturas = asignaturaDAO.obtenerTotalAsignaturas();
+		return totalAsignaturas;
+	}
 }

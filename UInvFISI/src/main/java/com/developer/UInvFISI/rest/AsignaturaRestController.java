@@ -72,6 +72,20 @@ public class AsignaturaRestController {
 		}
 	}
 	
+	@GetMapping("/totalAsignatura")
+	public ResponseEntity<Long> obtenerTotalAsignaturas() {
+		
+		try {
+			
+			Long totalAsignaturas = asignaturaService.obtenerTotalAsignaturas();
+			return new ResponseEntity<Long>(totalAsignaturas, HttpStatus.OK);
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<Long>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/save")
 	public ResponseEntity<ResponseBaseOperacion> saveAsignatura(@Valid @RequestBody Asignatura asignatura) {
 		

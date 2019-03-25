@@ -312,4 +312,103 @@ $(document).ready(function() {
 		
 		$(location).attr('href', '/informe/formInformeInvestigacion/' + asignacionId);
 	});
+	
+	$('#dataTable tbody').on('click', 'button#disabledAsignacion', function() {
+		
+		var asignacionId = $(this).attr('idasignacion');
+		console.log("asignacionId: " + asignacionId);
+		
+		swal({
+	        title: '¿Esta Seguro de finalizar el Proceso de este Proyecto Investigacion ?',
+	        text: '¡Si no lo esta puede Cancelar la accion!',
+	        type: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        cancelButtonText: 'Cancelar',
+	        confirmButtonText: '¡Si, finalizar Proceso !'
+	    }).then((result) => {
+	        if(result.value){
+	           
+	        	 $.ajax({
+	                 url: '/api/asignacioninvestigacion/asignacion/disabled/' + asignacionId,
+	                 type: 'GET',
+	                 dataType: 'json',
+	                 success: function(response){
+	                	 
+	                	 console.log(response);
+	                     swal({
+	                         type: "success",
+	                         title: "El Proceso del Proyecto Investigacion: " + response.data.nombreInvestigacion + " ha sido finalizado correctamente",
+	                         showConfirmButton: true,
+	                         confirmButtonText: "Cerrar",
+	                         closeOnConfirm: false
+	                     }).then((result) => {
+	                         if(result.value) {
+	                             $(location).attr("href", '/asignacion/list');
+	                         }
+	                     })
+	                 }
+	             });
+	        }
+	        else {
+	            swal({
+	                type: "error",
+	                title: "Cancelado", 
+	                text: "Usted ha cancelado la acción de finalizar Proceso"
+	            });
+	        }
+	    });
+	});
+	
+	$('#dataTable tbody').on('click', 'button#enabledAsignacion', function() {
+		
+		var asignacionId = $(this).attr('idasignacion');
+		console.log("asignacionId: "+ asignacionId);
+		
+		swal({
+	        title: '¿Esta Seguro de habilitar este Proyecto Investigacion ?',
+	        text: '¡Si no lo esta puede Cancelar la accion!',
+	        type: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        cancelButtonText: 'Cancelar',
+	        confirmButtonText: '¡Si, habilitar Proyecto !'
+	    }).then((result) => {
+	        if(result.value){
+	           
+	        	$.ajax({
+	        		
+	        		url: '/api/asignacioninvestigacion/asignacion/enabled/' + asignacionId,
+	        		type: 'GET',
+	        		dataType: 'json',
+	        		success: function(response){
+	        			
+	        			console.log(response);
+	        			
+	        			swal({
+	        				type: "success",
+	                        title: "El Proyecto Investigacion: " + response.data.nombreInvestigacion + " ha sido habilitado correctamente",
+	                        showConfirmButton: true,
+	                        confirmButtonText: "Cerrar",
+	                        closeOnConfirm: false
+	                       }).then((result) => {
+	                         if(result.value) {
+	                            $(location).attr("href", '/asignacion/list');
+	                        }
+	                     })
+	                 }
+	        	});
+	        }
+	        else {
+	            swal({
+	                type: "error",
+	                title: "Cancelado", 
+	                text: "Usted ha cancelado la acción de habilitar"
+	            });
+	        }
+	    });
+		
+	});
 });

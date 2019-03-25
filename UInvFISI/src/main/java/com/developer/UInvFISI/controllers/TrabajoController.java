@@ -17,7 +17,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.developer.UInvFISI.entity.Trabajo;
-import com.developer.UInvFISI.entity.Autor;
 import com.developer.UInvFISI.entity.Escuela;
 import com.developer.UInvFISI.repository.AutorRepository;
 import com.developer.UInvFISI.service.AutorService;
@@ -59,14 +58,12 @@ public class TrabajoController {
 	@Autowired
 	@Qualifier("autorAsRepository")
 	private AutorRepository autorRepository;
-
 	
 	@GetMapping("/list")
 	public String listarTrabajos(Map<String, Object> model) {
 		
 		
 		List<Trabajo> trabajo = trabajoService.findAll();
-		
 		model.put("trabajo", trabajo);
 		model.put("titulo", "PROYECTOS DE TESIS");
 		return "trabajo/listar";
@@ -117,24 +114,6 @@ public class TrabajoController {
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
 		return "redirect:/trabajo/list";
-	}
-	
-	@GetMapping("/delete/{trabajoId}")
-	public String delete(@PathVariable(value="trabajoId") Integer trabajoId) {
-		
-		if(trabajoId != null && trabajoId > 0) {
-			trabajoService.delete(trabajoId);
-		}
-		return "redirect:/trabajo/list";
-	}
-	
-	@GetMapping("/enabled/{trabajoId}")
-	public String enabled(@PathVariable(value="trabajoId") Integer trabajoId) {
-		
-		if(trabajoId != null && trabajoId > 0) {
-			trabajoService.enabled(trabajoId);
-		}
-		return "redirect:/trabajo/list"; 
 	}
 	
 	@GetMapping("/detail/{trabajoId}")

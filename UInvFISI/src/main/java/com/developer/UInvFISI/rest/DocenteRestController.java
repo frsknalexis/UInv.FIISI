@@ -100,6 +100,20 @@ public class DocenteRestController {
 		
 	}
 	
+	@GetMapping("/contadorDocentes")
+	public ResponseEntity<Long> obtenertotalDocentes() {
+		
+		try {
+			
+			Long totalDocentes = docenteService.obtenerTotalRegistrosDocentes();
+			return new ResponseEntity<Long>(totalDocentes, HttpStatus.OK);
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<Long>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/save")
 	public ResponseEntity<ResponseBaseOperacion> saveDocente(@Valid @RequestBody Docente docente) {
 		

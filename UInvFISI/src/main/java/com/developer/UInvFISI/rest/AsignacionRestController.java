@@ -73,6 +73,20 @@ public class AsignacionRestController {
 		}
 	}
 	
+	@GetMapping("/totalAsignacion")
+	public ResponseEntity<Long> obtenerTotalRegistrosAsignacion() {
+		
+		try {
+			
+			Long totalAsignacion = asignacionService.obtenerTotalRegistrosAsignacion();
+			return new ResponseEntity<Long>(totalAsignacion, HttpStatus.OK);
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<Long>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/save")
 	public ResponseEntity<ResponseBaseOperacion> saveAsignacion(@Valid @RequestBody Asignacion asignacion) {
 		
@@ -117,5 +131,71 @@ public class AsignacionRestController {
 			
 			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@GetMapping("/asignacion/disabled/{asignacionId}")
+	public ResponseEntity<ResponseBaseOperacion> disabledAsignacion(@PathVariable(value="asignacionId") Integer asignacionId) {
+		
+		Asignacion asignacion = null;
+		
+		try {
+			
+			if(asignacionId != null && asignacionId > 0) {
+				
+				asignacion = asignacionService.getByAsignacionId(asignacionId);
+				if(asignacion != null) {
+					
+					if(asignacion.getHabilitado().equals(true)) {
+						
+						asignacionService.delete(asignacionId);
+						ResponseBaseOperacion response = new ResponseBaseOperacion(Constantes.SUCCESS_MESSAGE, asignacion);
+						return new ResponseEntity<ResponseBaseOperacion>(response, HttpStatus.OK);
+					}
+				}
+				else {
+					
+					return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.NO_CONTENT);
+				}
+			}
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.NO_CONTENT);
+		}
+		
+		return null;
+	}
+	
+	@GetMapping("/asignacion/enabled/{asignacionId}")
+	public ResponseEntity<ResponseBaseOperacion> enabledAsignacion(@PathVariable(value="asignacionId") Integer asignacionId) {
+		
+		Asignacion asignacion = null;
+		
+		try {
+			
+			if(asignacionId != null && asignacionId > 0) {
+				
+				asignacion = asignacionService.getByAsignacionId(asignacionId);
+				if(asignacion != null) {
+					
+					if(asignacion.getHabilitado().equals(false)) {
+						
+						asignacionService.enabled(asignacionId);
+						ResponseBaseOperacion response = new ResponseBaseOperacion(Constantes.SUCCESS_MESSAGE, asignacion);
+						return new ResponseEntity<ResponseBaseOperacion>(response, HttpStatus.OK);
+					}
+				}
+				else {
+					
+					return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.NO_CONTENT);
+				}
+			}
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return null;
 	}
 }

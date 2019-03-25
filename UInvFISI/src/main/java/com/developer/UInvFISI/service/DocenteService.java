@@ -18,6 +18,8 @@ public interface DocenteService {
 	
 	void remove(Integer docenteId);
 	
+	Long obtenerTotalRegistrosDocentes();
+	
 	List<Docente> findAllEnabled();
 	
 	List<Docente> findByNombresDocente(String termino);

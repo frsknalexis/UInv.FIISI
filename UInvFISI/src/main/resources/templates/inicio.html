@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="es" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/headinc :: head"></head>
 
@@ -47,8 +47,8 @@
                                 <div class="card">
                                     <div class="seo-fact sbg1">
                                         <div class="p-4 d-flex justify-content-between align-items-center">
-                                            <div class="seofct-icon"><i class="ti-thumb-up"></i> Likes</div>
-                                            <h2>2,315</h2>
+                                            <div class="seofct-icon"><i class="ti-user"></i> Docentes DINA Y ORCID</div>
+                                            <h2 id="totalDocentes"></h2>
                                         </div>
                                         <canvas id="seolinechart1" height="50"></canvas>
                                     </div>
@@ -58,8 +58,8 @@
                                 <div class="card">
                                     <div class="seo-fact sbg2">
                                         <div class="p-4 d-flex justify-content-between align-items-center">
-                                            <div class="seofct-icon"><i class="ti-share"></i> Share</div>
-                                            <h2>3,984</h2>
+                                            <div class="seofct-icon"><i class="ti-bookmark-alt"></i> Proyecto Investigacion</div>
+                                            <h2 id="totalInvestigaciones"></h2>
                                         </div>
                                         <canvas id="seolinechart2" height="50"></canvas>
                                     </div>
@@ -69,17 +69,19 @@
                                 <div class="card">
                                     <div class="seo-fact sbg3">
                                         <div class="p-4 d-flex justify-content-between align-items-center">
-                                            <div class="seofct-icon">Impressions</div>
+                                            <div class="seofct-icon"><i class="ti-bookmark-alt"></i> Trabajo Academico</div>
+                                            <h2 id="totalTrabajos"></h2>
                                             <canvas id="seolinechart3" height="60"></canvas>
-                                        </div>
+                                        </div> 
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-lg-0">
                                 <div class="card">
                                     <div class="seo-fact sbg4">
                                         <div class="p-4 d-flex justify-content-between align-items-center">
-                                            <div class="seofct-icon">New Users</div>
+                                            <div class="seofct-icon"><i class="ti-pencil-alt"></i> Asignaturas</div>
+                                            <h2 id="totalAsignaturas"></h2>
                                             <canvas id="seolinechart4" height="60"></canvas>
                                         </div>
                                     </div>
@@ -109,6 +111,7 @@
     <!-- page container area end -->
 
 	<th:block th:replace="fragments/script"></th:block>
+	<script type="text/javascript" th:src="@{/assets/js/inicio.js}"></script>
     
 </body>
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,13 @@ public class AsignacionDAOImpl extends JdbcDaoSupport implements AsignacionDAO {
 		
 		List<Asignacion> investigaciones = em.createQuery("from Asignacion a where a.habilitado = true").getResultList();
 		return investigaciones;
+	}
+
+	@Override
+	public Long obtenerTotalRegistrosAsignacion() {
+		
+		Query query = em.createQuery("select count(a) from Asignacion a");
+		return (Long) query.getSingleResult();
 	}
 
 }

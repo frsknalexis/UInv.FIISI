@@ -96,4 +96,11 @@ public class TrabajoServiceImpl implements TrabajoService {
 			trabajoDAO.delete(trabajoId);
 		}
 	}
+
+	@Override
+	public Long obtenerTotalTrabajos() {
+		
+		Long totalTrabajos = trabajoDAO.obtenerTotalTrabajos();
+		return totalTrabajos;
+	}
 }

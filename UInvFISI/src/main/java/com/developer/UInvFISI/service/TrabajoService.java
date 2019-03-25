@@ -12,6 +12,8 @@ public interface TrabajoService {
 	
 	Trabajo getByTrabajoId(Integer trabajoId);
 	
+	Long obtenerTotalTrabajos();
+	
 	void enabled(Integer trabajoId);
 	
 	void delete(Integer trabajoId);

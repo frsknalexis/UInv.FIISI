@@ -104,4 +104,11 @@ public class AsignacionServiceImpl implements AsignacionService {
 		List<Asignacion> asignaciones = asignacionDAO.findAllEnabled();
 		return asignaciones;
 	}
+
+	@Override
+	public Long obtenerTotalRegistrosAsignacion() {
+		
+		Long totalRegistros = asignacionDAO.obtenerTotalRegistrosAsignacion();
+		return totalRegistros;
+	}
 }

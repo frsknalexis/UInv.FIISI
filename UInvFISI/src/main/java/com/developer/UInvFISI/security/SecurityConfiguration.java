@@ -45,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.antMatchers("/inicio").hasAnyAuthority("SUPER_USER", "ADMIN_USER")
 					.anyRequest().authenticated()
 					.and()
-					.csrf().disable().formLogin()
+					.formLogin()
 					.loginPage("/login")
 					.failureUrl("/login?error=true")
 					.defaultSuccessUrl("/inicio")
@@ -54,7 +54,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.and()
 					.logout()
 					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-					.logoutSuccessUrl("/login");
+					.logoutSuccessUrl("/login")
+					.and()
+					.exceptionHandling().accessDeniedPage("/404");
 	}
 	
 	@Override

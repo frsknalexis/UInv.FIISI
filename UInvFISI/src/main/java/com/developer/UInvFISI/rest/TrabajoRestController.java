@@ -75,6 +75,20 @@ public class TrabajoRestController {
 		}
 	}
 	
+	@GetMapping("/totalTrabajos")
+	public ResponseEntity<Long> obtenerTotalTrabajos() {
+		
+		try {
+			
+			Long totalTrabajos = trabajoService.obtenerTotalTrabajos();
+			return new ResponseEntity<Long>(totalTrabajos, HttpStatus.OK);
+		}
+		catch(Exception e) {
+			
+			return new ResponseEntity<Long>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 	@PostMapping("/save")
 	public ResponseEntity<ResponseBaseOperacion> saveTrabajo(@Valid @RequestBody Trabajo trabajo) {
 		

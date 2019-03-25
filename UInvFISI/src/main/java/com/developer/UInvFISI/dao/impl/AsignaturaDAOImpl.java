@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,13 @@ public class AsignaturaDAOImpl extends JdbcDaoSupport implements AsignaturaDAO {
 		}
 		
 		em.remove(asignatura);
+	}
+
+	@Override
+	public Long obtenerTotalAsignaturas() {
+		
+		Query query = em.createQuery("select count(a) from Asignatura a");
+		return (Long) query.getSingleResult();
 	}
 
 }

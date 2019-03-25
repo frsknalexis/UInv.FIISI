@@ -12,6 +12,8 @@ public interface AsignaturaService {
 	
 	Asignatura getByAsignaturaId(Integer asignaturaId);
 	
+	Long obtenerTotalAsignaturas();
+	
 	void enabled(Integer asignaturaId);
 	
 	void delete(Integer asignaturaId);

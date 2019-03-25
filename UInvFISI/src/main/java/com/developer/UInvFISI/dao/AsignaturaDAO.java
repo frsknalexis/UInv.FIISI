@@ -12,6 +12,8 @@ public interface AsignaturaDAO {
 	
 	void update(Asignatura asignatura);
 	
+	Long obtenerTotalAsignaturas();
+	
 	Asignatura findOne(Integer asignaturaId);
 	
 	void disabled(Asignatura asignatura);

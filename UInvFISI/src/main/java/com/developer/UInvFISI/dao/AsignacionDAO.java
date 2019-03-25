@@ -14,6 +14,8 @@ public interface AsignacionDAO {
 	
 	void update(Asignacion asignacion);
 	
+	Long obtenerTotalRegistrosAsignacion();
+	
 	Asignacion findOne(Integer asignacionId);
 	
 	void disabled(Asignacion asignacion);

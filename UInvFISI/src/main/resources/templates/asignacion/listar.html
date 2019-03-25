@@ -73,15 +73,17 @@
 												 class="btn btn-outline-primary btn-xs"><i class="fa fa-plus-circle"></i> Asignar Investigador</button>
 												</td>
 												<td>
-												<button id="adjuntarInformeInvestigacion" th:idAsignacion="${asignacion.asignacionId}" class="btn btn-outline-primary btn-xs">
+												<button th:if="${asignacion.habilitado == true}" id="adjuntarInformeInvestigacion" th:idAsignacion="${asignacion.asignacionId}" class="btn btn-outline-primary btn-xs">
 												<i class="fa fa-files-o"></i> Adjuntar Informes</button>
 												</td>
 												<td>
 													<div class="btn-group" role="group" aria-label="Basic example">
 														<a th:href="@{/asignacion/detail/} + ${asignacion.asignacionId}"  class="btn btn-outline-info btn-xs"><i class="fa fa-eye" title="Ver"></i></a>
                                             			<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacion/form/} + ${asignacion.asignacionId}"  class="btn btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
-                                            			<a th:if="${asignacion.habilitado == true}" th:href="@{/asignacion/delete/} + ${asignacion.asignacionId}"  class="btn btn-outline-danger btn-xs"><i class="fa fa-close" title="Deshabilitar"></i></a>
-                                            			<a th:if="${asignacion.habilitado != true}" th:href="@{/asignacion/enabled/} + ${asignacion.asignacionId}"  class="btn btn-outline-success btn-xs"><i class="fa fa-check" title="Habilitar"></i></a>
+                                            			<button th:if="${asignacion.habilitado == true}" id="disabledAsignacion" th:idAsignacion="${asignacion.asignacionId}" class="btn btn-outline-danger btn-xs">
+                                            			<i class="fa fa-close" title="Deshabilitar"></i></button>
+                                            			<button th:if="${asignacion.habilitado != true}" id="enabledAsignacion" th:idAsignacion="${asignacion.asignacionId}" class="btn btn-outline-success btn-xs">
+                                            			<i class="fa fa-check" title="Habilitar"></i></button>
 													</div>
 												</td>
 											</tr>
