@@ -45,6 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.antMatchers("/inicio").hasAnyAuthority("SUPER_USER", "ADMIN_USER")
 					.anyRequest().authenticated()
 					.and()
+					.csrf().disable()
 					.formLogin()
 					.loginPage("/login")
 					.failureUrl("/login?error=true")

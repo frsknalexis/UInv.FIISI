@@ -275,8 +275,7 @@ $(document).on('ready', function() {
 	$('#dataTable tbody').on('click', 'button#programaLineaInvestigacion', function() {
 		
 		var programaId = $(this).attr('idprograma');
-		
+		localStorage.setItem("programaId", programaId);
 		$(location).attr('href', '/linea/formLineaInvestigacion/' + programaId);
-		console.log('programaId: ' + programaId);
 	});
 });

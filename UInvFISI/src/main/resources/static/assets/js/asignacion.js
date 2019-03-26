@@ -309,6 +309,7 @@ $(document).ready(function() {
 		
 		var asignacionId = $(this).attr('idasignacion');
 		console.log("asignacionId: " + asignacionId);
+		localStorage.setItem("asignacionId", asignacionId);
 		
 		$(location).attr('href', '/informe/formInformeInvestigacion/' + asignacionId);
 	});

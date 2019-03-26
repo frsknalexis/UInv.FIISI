@@ -51,8 +51,7 @@ $(document).on('ready', function() {
 		
 		if($('#asuntoInformeInvestigacion').val().match(/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\,.-\s]+$/)) {
 			
-			var pathname = window.location.pathname;
-			var asignacionId = pathname.substr(34);
+			var asignacionId = localStorage.getItem("asignacionId");
 			console.log("asignacionId: " + asignacionId);
 			
 			var form = $('#formInformeInvestigacion')[0];
@@ -70,10 +69,7 @@ $(document).on('ready', function() {
 			console.log(formData);
 			
 			if(formData.informeAsignacionId) {
-				
-				var asignacionId = pathname.substr(-3,1);
-				console.log("asignacionId: " + asignacionId);
-				
+						
 				var informeAsignacionId = formData.informeAsignacionId;
 				console.log("informeAsignacionId: " + informeAsignacionId);
 				
@@ -208,6 +204,12 @@ $(document).on('ready', function() {
 				}				
 			}
 		});
+	});
+	
+	$('#cancelarInformeInvestigacion').on('click', function() {
+		
+		localStorage.removeItem("asignacionId");
+		$(location).attr('href', '/asignacion/list');
 	});
 	
 	$('#tablaInformesInvestigacionPorAsignacion tbody').on('click', 'button#downloadFileInformeInvestigacion', function() {

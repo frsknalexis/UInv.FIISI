@@ -39,7 +39,7 @@ $(document).on('ready', function() {
 			var visor = new FileReader();
 			visor.onload = function(e) {
 				
-				$('#visorArchivoReglamento').html('<embed src="' + e.target.result + '" width="600" height="600">');
+				$('#visorArchivoReglamento').html('<embed src="' + e.target.result + '" width="100%" height="800">');
 			};
 			
 			visor.readAsDataURL(input.files[0]);

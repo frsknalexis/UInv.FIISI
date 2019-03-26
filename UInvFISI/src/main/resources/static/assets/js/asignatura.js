@@ -292,7 +292,7 @@ $(document).on('ready', function() {
 		
 		var asignaturaId = $(this).attr('idasignatura');
 		console.log("asignaturaId: " + asignaturaId);
-		
+		localStorage.setItem("asignaturaId", asignaturaId);
 		$(location).attr('href', '/asignaturaAlumno/formAsignaturaDetalle/' + asignaturaId);
 	});
 	

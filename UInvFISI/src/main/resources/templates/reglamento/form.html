@@ -36,12 +36,10 @@
 			<div class="main-content-inner">
 				<div class="row">
 					<!-- accordion style 1 start -->
-					<div class="col-sm-12 mt-5">
+					<div class="col-sm-6 mt-5">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-								
-									
 									<form id="formReglamento" enctype="multipart/form-data" th:object="${reglamento}" novalidate="" 
 									class="needs-validation"  method="post">
 									<div class="form-row">
@@ -52,9 +50,8 @@
 											</div>
 										</div>
 									</div>
-									
 									<div class="form-row">
-										<div class="col-md-6 mb-3">
+										<div class="col-md-12 mb-3">
 											<label for="asuntoReglamento">Descripcion: </label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -67,7 +64,9 @@
 												<div class="invalid-feedback">Campo obligatorio, ingrese un valor</div>
 											</div>
 										</div>
-										<div class="col-md-6 mb-3">
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
 											<label for="fileReglamento">Reglamento: </label>
 											<div class="input-group">
 												<div class="input-group-prepend">
@@ -83,26 +82,28 @@
 											</div>
 										</div>
 									</div>
-									<div class="form-row">
-										<div class="col-md-12 mb-3">
-											<div id="visorArchivoReglamento"></div>
-										</div>
-									</div>
 									<button id="guardarReglamento" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar Reglamento
 									</button>
 									<a class="btn btn-outline-danger btn-sm"
 										th:href="@{/reglamento/listar}"><i
 										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
-									
-								
 								</form>
-
 							</div>
 						</div>
 					</div>
 					<!-- accordion style 1 end -->
-
+					<div class="col-sm-6 mt-5">
+						<div class="card">
+							<div class="card-body">
+								<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<div id="visorArchivoReglamento"></div>
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

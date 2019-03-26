@@ -9,10 +9,8 @@ $(document).ready(function() {
 		e.preventDefault();
 		
 		if($('#nombreLineaInvestigacion').val().match(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\.,-\s]+$/)) {
-			
-			var pathname = window.location.pathname;
-		    //alert(pathname);
-			var programaId = pathname.substr(30);
+
+			var programaId = localStorage.getItem("programaId");
 		    console.log("programaId: " + programaId);
 		    
 		    var formData = {
@@ -24,10 +22,7 @@ $(document).ready(function() {
 		    console.log(formData);
 		    
 		    if(formData.lineaInvestigacionId) {
-		    	   	
-		    	var programaId = pathname.substr(-3,1);
-		    	console.log(programaId);
-		    	
+    	
 		    	var lineaInvestigacionId = formData.lineaInvestigacionId;
 		    	console.log("lineaInvestigacionId: " + lineaInvestigacionId);
 		    	
@@ -205,7 +200,7 @@ $(document).ready(function() {
 	        			
 	        			swal({
 	        				type: "success",
-	                        title: "El Programa: " + response.data.nombreLineaInvestigacion + " ha sido habilitado correctamente",
+	                        title: "La Linea Investigacion: " + response.data.nombreLineaInvestigacion + " ha sido habilitado correctamente",
 	                        showConfirmButton: true,
 	                        confirmButtonText: "Cerrar",
 	                        closeOnConfirm: false
@@ -255,6 +250,12 @@ $(document).ready(function() {
 			$("#investigacionLineaInvgId").val(ui.item.value);
 			return false;
 		}
+	});
+	
+	$('#cancelarLinea').on('click', function() {
+		
+		localStorage.removeItem("programaId");
+		$(location).attr('href', '/programa/listar');
 	});
 	
 });

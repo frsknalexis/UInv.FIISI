@@ -73,9 +73,8 @@
 									<button id="guardarLineaInvestigacion" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar Linea Investigacion
 									</button>
-									<a class="btn btn-outline-danger btn-sm"
-										th:href="@{/programa/listar}"><i
-										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
+									<button id="cancelarLinea" type="button" class="btn btn-outline-danger btn-sm">
+									<i class="fa fa-arrow-circle-o-left"></i> Cancelar</button>
 								</form>
 							</div>
 						</div>
@@ -97,8 +96,8 @@
 										<tr th:each="lineaInvg : ${lineasInvestigacion}">
 											<td th:text="${lineaInvg.nombreLineaInvestigacion}"></td>
 											<td>
-												<a th:if="${lineaInvg.habilitado == true}" class="btn btn-success btn-xs" th:text="'Activo'"></a>
-                                        		<a th:if="${lineaInvg.habilitado != true}" class="btn btn-danger btn-xs" th:text="'Inactivo'"></a>
+                                        		<span th:if="${lineaInvg.habilitado == true}" class="status-p bg-success" th:text="'Activo'"></span>
+                                            	<span th:if="${lineaInvg.habilitado != true}" class="status-p bg-danger" th:text="'Inactivo'"></span>
 											</td>
 											<td>
 												<div class="btn-group" role="group" aria-label="Basic example">

@@ -49,8 +49,8 @@
 									class="fa fa-plus-circle"></i> Asignar Asignatura</a>
 								<hr/>
 								<div class="data-tables">
-									<table id="dataTable" class="text-center" width="100%">
-										<thead class="bg-light text-capitalize">
+									<table id="dataTable" class="text-center table table-hover table-striped" width="100%">
+										<thead class="bg-primary text-capitalize">
 											<tr>
 												<th>Periodo</th>
 												<th>Asignatura</th>
@@ -69,8 +69,8 @@
 												
 												<td th:text="${asignatura.ciclo}"></td>												
 												<td>
-												<a th:if="${asignatura.habilitado == true}" class="btn btn-danger btn-sm" th:text="'Incompleto'"></a>
-                                            	<a th:if="${asignatura.habilitado != true}" class="btn btn-success btn-sm" th:text="'completo'"></a>
+                                            	<span th:if="${asignatura.habilitado != true}" class="status-p bg-success" th:text="'Completo'"></span>
+                                            	<span th:if="${asignatura.habilitado == true}" class="status-p bg-danger" th:text="'Incompleto'"></span>
 												</td>
 												<td>
 												<button th:if="${asignatura.habilitado == true}" id="asignaturaAsignaturaAlumno" th:idAsignatura="${asignatura.asignaturaId}"

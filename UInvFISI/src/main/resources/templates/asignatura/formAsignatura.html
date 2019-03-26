@@ -148,9 +148,8 @@
 									<button id="guardarAsignaturaAlumno" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar Alumno
 									</button>
-									<a class="btn btn-outline-danger btn-sm"
-										th:href="@{/asignatura/list}"><i
-										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
+									<button type="button" id="cancelarAsignaturaAlumno" class="btn btn-outline-danger btn-sm">
+									<i class="fa fa-arrow-circle-o-left"></i> Cancelar</button>
 								</form>
 							</div>
 						</div>
@@ -159,7 +158,7 @@
 					<h4 class="header-title text-center" th:text="${asignaturaAlumno.asignatura.nombreAsignatura}"></h4>
 					<h4 class="header-title text-center" th:text="${subtitulo}"></h4>
 						<div class="data-tables">
-						<table id="dataTable" class="table text-center table-hover" th:if="${not #lists.isEmpty(asignaturasAlumno)}" width="100%">
+						<table id="dataTable" class="table text-center table-hover table-hover table-striped" th:if="${not #lists.isEmpty(asignaturasAlumno)}" width="100%">
 							<thead class="bg-primary text-capitalize">
 								<tr>
 									<th>Alumno</th>

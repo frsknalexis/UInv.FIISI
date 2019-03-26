@@ -53,8 +53,7 @@ $(document).on('ready', function() {
 		if($('#alumnoAsignatura').val().match(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/) && $('#documentoAlumno').val().trim() != ""
 			&& $('#nroDocumentoAlumno').val().match(/^[0-9]+$/) && $('#asuntoAsignaturaAlumno').val().match(/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\-\s]+$/)) {
 			
-			var pathname = window.location.pathname;
-			var asignaturaId = pathname.substr(40);
+			var asignaturaId = localStorage.getItem("asignaturaId");
 			console.log("asignaturaId: " + asignaturaId);
 			
 			var form = $('#formAsignaturaAlumno')[0];
@@ -75,9 +74,6 @@ $(document).on('ready', function() {
 			data.append("alumJson", JSON.stringify(formData));
 			
 			if(formData.asignaturaDetalleId) {
-				
-				var asignaturaId = pathname.substr(-3,1);
-				console.log("asignaturaId: " + asignaturaId);
 				
 				var asignaturaDetalleId = formData.asignaturaDetalleId;
 				console.log("asignaturaDetalleId: " + asignaturaDetalleId);
@@ -261,6 +257,12 @@ $(document).on('ready', function() {
 		console.log("nombreFicheroAlumno: " + nombreFicheroAlumno);
 		
 		$(location).attr('href', '/api/asignaturaalumno/download/' + nombreFicheroAlumno);
+	});
+	
+	$('#cancelarAsignaturaAlumno').on('click', function(){
+		
+		localStorage.removeItem("asignaturaId");
+		$(location).attr('href', '/asignatura/list');
 	});
 	
 });
