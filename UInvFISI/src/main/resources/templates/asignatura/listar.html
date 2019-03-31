@@ -2,22 +2,16 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/headinc :: head"></head>
 <body>
-
 	<!-- preloader area start -->
 	<div id="preloader">
 		<div class="loader"></div>
 	</div>
-	
 	<!-- page container area start -->
 	<div class="page-container">
-
 		<div th:replace="fragments/sidebar :: sidebar"></div>
-
 		<!-- main content area start -->
 		<div class="main-content">
-
 			<div th:replace="fragments/header-area :: header-area"></div>
-
 			<!-- page title area start -->
 			<div class="page-title-area">
 				<div class="row align-items-center">
@@ -30,9 +24,7 @@
 							</ul>
 						</div>
 					</div>
-					
 					<div th:replace="fragments/user-profile :: user-profile"></div>
-					
 				</div>
 			</div>
 			<!-- page title area end -->
@@ -43,7 +35,6 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-
 								<a th:href="@{/asignatura/form}"
 									class="btn btn-outline-primary btn-sm"><i
 									class="fa fa-plus-circle"></i> Asignar Asignatura</a>
@@ -66,11 +57,10 @@
 												<td th:text="${asignatura.periodo}"></td>
 												<td th:text="${asignatura.nombreAsignatura}"></td>
 												<td th:text="${asignatura.escuela.nombreEscuela}"></td>
-												
 												<td th:text="${asignatura.ciclo}"></td>												
 												<td>
                                             	<span th:if="${asignatura.habilitado != true}" class="status-p bg-success" th:text="'Completo'"></span>
-                                            	<span th:if="${asignatura.habilitado == true}" class="status-p bg-danger" th:text="'Incompleto'"></span>
+                                            	<span th:if="${asignatura.habilitado == true}" class="status-p bg-warning" th:text="'Iniciado'"></span>
 												</td>
 												<td>
 												<button th:if="${asignatura.habilitado == true}" id="asignaturaAsignaturaAlumno" th:idAsignatura="${asignatura.asignaturaId}"
@@ -81,9 +71,11 @@
 													<div class="btn-group" role="group" aria-label="Basic example">
 														<button id="detalleAsignatura" th:idAsignatura="${asignatura.asignaturaId}" class="btn btn-outline-info btn-xs" data-toggle="modal">
 														<i class="fa fa-eye" title="Ver"></i></button>
-                                            			<a th:if="${asignatura.habilitado == true}" th:href="@{/asignatura/form/} + ${asignatura.asignaturaId}"  class="btn btn btn-outline-primary btn-sm"><i class="fa fa-pencil" title="Editar"></i></a>
-                                            			<a th:if="${asignatura.habilitado == true}" th:href="@{/asignatura/delete/} + ${asignatura.asignaturaId}"  class="btn btn-outline-danger btn-sm"><i class="fa fa-close" title="Deshabilitar"></i></a>
-                                            			<a th:if="${asignatura.habilitado != true}" th:href="@{/asignatura/enabled/} + ${asignatura.asignaturaId}"  class="btn btn-outline-success btn-sm"><i class="fa fa-check" title="Habilitar"></i></a>
+                                            			<a th:if="${asignatura.habilitado == true}" th:href="@{/asignatura/form/} + ${asignatura.asignaturaId}"  class="btn btn btn-outline-primary btn-xs"><i class="fa fa-pencil" title="Editar"></i></a>
+                                            			<button th:if="${asignatura.habilitado == true}" id="disabledAsignatura" th:idAsignatura="${asignatura.asignaturaId}" class="btn btn-outline-danger btn-xs">
+                                            			<i class="fa fa-close" title="Deshabilitar"></i></button>
+                                            			<button th:if="${asignatura.habilitado != true}" id="enabledAsignatura" th:idAsignatura="${asignatura.asignaturaId}" class="btn btn-outline-success btn-xs">
+                                            			<i class="fa fa-check" title="Habilitar"></i></button>
 													</div>
 												</td>
 											</tr>
@@ -146,11 +138,8 @@
 		</div>
 		<!-- main content area end -->
 		<footer th:replace="fragments/footer :: footer"></footer>
-
 	</div>
 	<!-- page container area end -->
-
-	<th:block th:replace="fragments/script"></th:block>
-
+	<th:block th:replace="fragments/script :: script"></th:block>
 </body>
 </html>

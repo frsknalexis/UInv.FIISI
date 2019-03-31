@@ -1,74 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block th:fragment="script">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
+		<!-- jquery latest version -->
+		<script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+    	<script th:src="@{/assets/js/vendor/jquery-2.2.4.min.js}"></script>
+    	<!-- bootstrap 4 js -->
+    	<script th:src="@{/assets/js/popper.min.js}"></script>
+    	<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+    	<script th:src="@{/assets/js/owl.carousel.min.js}"></script>
+    	<script th:src="@{/assets/js/metisMenu.min.js}"></script>
+    	<script th:src="@{/assets/js/jquery.slimscroll.min.js}"></script>
+    	<script th:src="@{/assets/js/jquery.slicknav.min.js}"></script>
+    	<!-- Start datatable js -->
+    	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    	<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    	<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    	<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+    	<!-- start chart js -->
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    	<!-- start highcharts js -->
+    	<script src="https://code.highcharts.com/highcharts.js"></script>
+    	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+    	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+    	<!-- start amcharts -->
+    	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    	<script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+    	<script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+    	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    	<!-- all line chart activation -->
+    	<script th:src="@{/assets/js/line-chart.js}"></script>
+    	<!-- all pie chart -->
+    	<script th:src="@{/assets/js/pie-chart.js}"></script>
+    	<!-- all bar chart -->
+    	<script th:src="@{/assets/js/bar-chart.js}"></script>
+   	 	<!-- others plugins -->
+    	<script th:src="@{/assets/js/plugins.js}"></script>
+    	<script th:src="@{/assets/js/scripts.js}"></script>
+    	<script th:src="@{/assets/js/jquery-ui.min.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/sweetalert2/sweetalert2.all.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/documento.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/categoriadocente.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/condiciondocente.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/regimendedicacion.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/facultad.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/programa.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/escuelas.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/asignatura.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/asignaturaalumno.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/reglamento.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/asignacion.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/asignaciondocente.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/informeinvestigacion.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/lineaInvestigacion.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/informetrimestralinvestigadores.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/informetrimestral.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/informetrimestralinvestigaciones.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/trabajo.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/trabajoautor.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/informetrabajo.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/docente.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/plantilla.js}"></script>
+    	<script type="text/javascript" th:src="@{/assets/js/register.js}"></script>
+	</th:block>
+</body>
+</html>	
 	
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-	
-	
-	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
-	
-	<!-- jquery latest version -->
-	<script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
-    <script th:src="@{/assets/js/vendor/jquery-2.2.4.min.js}"></script>
-    <!-- bootstrap 4 js -->
-    <script th:src="@{/assets/js/popper.min.js}"></script>
-    <script th:src="@{/assets/js/bootstrap.min.js}"></script>
-    <script th:src="@{/assets/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/assets/js/metisMenu.min.js}"></script>
-    <script th:src="@{/assets/js/jquery.slimscroll.min.js}"></script>
-    <script th:src="@{/assets/js/jquery.slicknav.min.js}"></script>
-
-    <!-- Start datatable js -->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-    
-    <!-- start chart js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <!-- start highcharts js -->
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <!-- start amcharts -->
-    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-    <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
-    <script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
-    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
-    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-    <!-- all line chart activation -->
-    <script th:src="@{/assets/js/line-chart.js}"></script>
-    <!-- all pie chart -->
-    <script th:src="@{/assets/js/pie-chart.js}"></script>
-    <!-- all bar chart -->
-    <script th:src="@{/assets/js/bar-chart.js}"></script>
-    
-    <!-- others plugins -->
-    <script th:src="@{/assets/js/plugins.js}"></script>
-    <script th:src="@{/assets/js/scripts.js}"></script>
-    <script th:src="@{/assets/js/jquery-ui.min.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/sweetalert2/sweetalert2.all.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/documento.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/categoriadocente.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/condiciondocente.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/regimendedicacion.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/facultad.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/programa.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/escuelas.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/asignatura.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/asignaturaalumno.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/reglamento.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/asignacion.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/asignaciondocente.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/informeinvestigacion.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/lineaInvestigacion.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/informetrimestralinvestigadores.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/informetrimestral.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/informetrimestralinvestigaciones.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/trabajo.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/trabajoautor.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/informetrabajo.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/docente.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/plantilla.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/register.js}"></script>

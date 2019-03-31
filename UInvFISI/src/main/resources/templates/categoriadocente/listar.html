@@ -6,17 +6,12 @@
 	<div id="preloader">
 		<div class="loader"></div>
 	</div>
-
 	<!-- page container area start -->
 	<div class="page-container">
-
 		<div th:replace="fragments/sidebar :: sidebar"></div>
-
 		<!-- main content area start -->
 		<div class="main-content">
-
 			<div th:replace="fragments/header-area :: header-area"></div>
-
 			<!-- page title area start -->
 			<div class="page-title-area">
 				<div class="row align-items-center">
@@ -29,9 +24,7 @@
 							</ul>
 						</div>
 					</div>
-					
 					<div th:replace="fragments/user-profile :: user-profile"></div>
-					
 				</div>
 			</div>
 			<!-- page title area end -->
@@ -42,14 +35,13 @@
 						<div class="card">
 							<div class="card-body">
 								<h4 class="header-title" th:text="${titulo}"></h4>
-
 								<a th:href="@{/categoriadoc/form}"
 									class="btn btn-outline-primary btn-sm"><i
 									class="fa fa-plus-circle"></i> Agregar Categoria</a>
 								<hr />
 								<div class="data-tables">
 									<table id="dataTable" class="text-center" width="100%">
-										<thead class="bg-light text-capitalize">
+										<thead class="bg-primary text-capitalize">
 											<tr>
 												<th>#</th>
 												<th>Categoria</th>
@@ -62,8 +54,8 @@
 												<td th:text="${categoria.categoriaDocenteId}"></td>
 												<td th:text="${categoria.nombreCategoria}"></td>
 												<td>
-												<a th:if="${categoria.habilitado == true}" class="btn btn-success btn-sm" th:text="'Activo'"></a>
-                                            	<a th:if="${categoria.habilitado != true}" class="btn btn-danger btn-sm" th:text="'Inactivo'"></a>
+                                            	<span th:if="${categoria.habilitado == true}" class="status-p bg-success" th:text="'Activo'"></span>
+                                            	<span th:if="${categoria.habilitado != true}" class="status-p bg-danger" th:text="'Inactivo'"></span>
 												</td>
 												<td>
 													<div class="btn-group" role="group" aria-label="Basic example">
@@ -81,7 +73,6 @@
 						</div>
 					</div>
 					<!-- data table end -->
-					
 					<div class="modal fade" id="modalDetalleCategoriaDocente">
                      	<div class="modal-dialog modal-dialog-centered" role="document">
                         	<div class="modal-content">
@@ -105,7 +96,6 @@
 										</div>
 									</div>
 								</form>
-                                	
                                  </div>
                                  <div class="modal-footer">
                                   	<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -113,17 +103,13 @@
                                </div>
                             </div>
                          </div>
-					
 				</div>
 			</div>
 		</div>
 		<!-- main content area end -->
 		<footer th:replace="fragments/footer :: footer"></footer>
-
 	</div>
 	<!-- page container area end -->
-	
-	<th:block th:replace="fragments/script"></th:block>
-
+	<th:block th:replace="fragments/script :: script"></th:block>
 </body>
 </html>

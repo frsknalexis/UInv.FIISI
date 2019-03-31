@@ -6,17 +6,12 @@
 	<div id="preloader">
 		<div class="loader"></div>
 	</div>
-
 	<!-- page container area start -->
 	<div class="page-container">
-
 		<div th:replace="fragments/sidebar :: sidebar"></div>
-
 		<!-- main content area start -->
 		<div class="main-content">
-
 			<div th:replace="fragments/header-area :: header-area"></div>
-
 			<!-- page title area start -->
 			<div class="page-title-area">
 				<div class="row align-items-center">
@@ -29,9 +24,7 @@
 							</ul>
 						</div>
 					</div>
-					
 					<div th:replace="fragments/user-profile :: user-profile"></div>
-					
 				</div>
 			</div>
 			<!-- page title area end -->
@@ -45,17 +38,14 @@
 								<form id="formDocumento" class="needs-validation" novalidate=""
 									 th:object="${documento}"
 									method="post">
-
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
-
 											<div class="input-group">
 												<input type="hidden" class="form-control" th:field="*{documentoId}"
 													id="documento-id" required=""/>
 											</div>
 										</div>
 									</div>
-
 									<div class="form-row">
 										<div class="col-md-12 mb-3">
 											<label for="abreviatura-documento">Abrev. Documento</label>
@@ -92,24 +82,18 @@
 									<button id="guardarDocumento" class="btn btn-outline-primary btn-sm" type="submit"><i class="fa fa-check-circle"></i> Guardar
 										documento</button>
 									<a class="btn btn-outline-danger btn-sm" th:href="@{/documento/listar}"><i class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
-
 								</form>
-
 							</div>
 						</div>
 					</div>
 					<!-- accordion style 1 end -->
-
 				</div>
 			</div>
 		</div>
 		<!-- main content area end -->
 		<footer th:replace="fragments/footer :: footer"></footer>
-
 	</div>
 	<!-- page container area end -->
-
-	<th:block th:replace="fragments/script"></th:block>
-
+	<th:block th:replace="fragments/script :: script"></th:block>
 </body>
 </html>

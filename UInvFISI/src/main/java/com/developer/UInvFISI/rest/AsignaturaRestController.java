@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.developer.UInvFISI.entity.Asignatura;
 import com.developer.UInvFISI.service.AsignaturaService;
+import com.developer.UInvFISI.util.Constantes;
 
 @RestController
 @RequestMapping("/api/asignatura")
@@ -132,5 +133,61 @@ public class AsignaturaRestController {
 			
 			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@GetMapping("/asignatura/disabled/{asignaturaId}")
+	public ResponseEntity<ResponseBaseOperacion> disabledAsignatura(@PathVariable(value="asignaturaId") Integer asignaturaId) {
+		
+		Asignatura asignatura = null;
+		
+		try {
+			
+			if(asignaturaId != null && asignaturaId.intValue() > 0) {
+				asignatura = asignaturaService.getByAsignaturaId(asignaturaId);
+				if(asignatura != null) {
+					if(asignatura.getHabilitado().equals(true)) {
+						asignaturaService.delete(asignaturaId);
+						ResponseBaseOperacion response = new ResponseBaseOperacion(Constantes.SUCCESS_MESSAGE, asignatura);
+						return ResponseEntity.ok()
+								.body(response);
+					}
+				}
+				else {
+					return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.NO_CONTENT);
+				}
+			}
+		}
+		catch(Exception e) {
+			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
+		}
+		return null;
+	}
+	
+	@GetMapping("/asignatura/enabled/{asignaturaId}")
+	public ResponseEntity<ResponseBaseOperacion> enabledAsignatura(@PathVariable(value="asignaturaId") Integer asignaturaId) {
+		
+		Asignatura asignatura = null;
+		
+		try {
+			
+			if(asignaturaId != null && asignaturaId.intValue() > 0) {
+				asignatura = asignaturaService.getByAsignaturaId(asignaturaId);
+				if(asignatura != null) {
+					if(asignatura.getHabilitado().equals(false)) {
+						asignaturaService.enabled(asignaturaId);
+						ResponseBaseOperacion response = new ResponseBaseOperacion(Constantes.SUCCESS_MESSAGE, asignatura);
+						return ResponseEntity.ok()
+								.body(response);
+					}
+				}
+				else {
+					return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.NO_CONTENT);
+				}
+			}
+		}
+		catch(Exception e) {
+			return new ResponseEntity<ResponseBaseOperacion>(HttpStatus.BAD_REQUEST);
+		}
+		return null;
 	}
 }

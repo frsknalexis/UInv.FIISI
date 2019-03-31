@@ -6,17 +6,12 @@
     <div id="preloader">
         <div class="loader"></div>
     </div>
-    
      <!-- page container area start -->
     <div class="page-container">
-        
         <div th:replace="fragments/sidebar :: sidebar"></div>
-        
         <!-- main content area start -->
         <div class="main-content">
-          
           <div th:replace="fragments/header-area :: header-area"></div>
-          
             <!-- page title area start -->
             <div class="page-title-area">
                 <div class="row align-items-center">
@@ -40,12 +35,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title" th:text="${titulo}"></h4>
-                                
                                 <a th:href="@{/escuela/form}" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus-circle"></i> Agregar Escuela</a>
                                 <hr/>
                                 <div class="data-tables">
-                                    <table id="dataTable" class="text-center table table-hover" width="100%">
-                                        <thead class="bg-light text-capitalize">
+                                    <table id="dataTable" class="text-center table table-hover table-striped" width="100%">
+                                        <thead class="bg-primary text-capitalize">
                                             <tr>
                                                 <th>Escuela</th>
                                                 <th>Director</th>
@@ -129,11 +123,8 @@
         </div>
         <!-- main content area end -->
        <footer th:replace="fragments/footer :: footer"></footer>
-       
     </div>
     <!-- page container area end -->
-
-	<th:block th:replace="fragments/script"></th:block>
-	 
+	<th:block th:replace="fragments/script :: script"></th:block>
 </body>
 </html>

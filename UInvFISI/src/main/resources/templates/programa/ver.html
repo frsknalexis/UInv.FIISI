@@ -2,22 +2,16 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/headinc :: head"></head>
 <body>
-
 	<!-- preloader area start -->
 	<div id="preloader">
 		<div class="loader"></div>
 	</div>
-
 	<!-- page container area start -->
 	<div class="page-container">
-
 		<div th:replace="fragments/sidebar :: sidebar"></div>
-
 		<!-- main content area start -->
 		<div class="main-content">
-
 			<div th:replace="fragments/header-area :: header-area"></div>
-
 			<!-- page title area start -->
 			<div class="page-title-area">
 				<div class="row align-items-center">
@@ -30,9 +24,7 @@
 							</ul>
 						</div>
 					</div>
-					
 					<div th:replace="fragments/user-profile :: user-profile"></div>
-					
 				</div>
 			</div>
 			<!-- page title area end -->
@@ -74,17 +66,13 @@
 						</div>
 					</div>
 					<!-- accordion style 1 end -->
-
 				</div>
 			</div>
 		</div>
 		<!-- main content area end -->
 		<footer th:replace="fragments/footer :: footer"></footer>
-
 	</div>
 	<!-- page container area end -->
-
-	<th:block th:replace="fragments/script"></th:block>
-
+	<th:block th:replace="fragments/script :: script"></th:block>
 </body>
 </html>

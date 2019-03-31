@@ -1,8 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
 <head th:replace="fragments/headinc :: head"></head>
-
 <body>
     <!-- preloader area start -->
     <div id="preloader">
@@ -11,14 +9,10 @@
     <!-- preloader area end -->
     <!-- page container area start -->
     <div class="page-container">
-        
         <div th:replace="fragments/sidebar :: sidebar"></div>
-        
         <!-- main content area start -->
         <div class="main-content">
-          
           <div th:replace="fragments/header-area :: header-area"></div>
-          
             <!-- page title area start -->
             <div class="page-title-area">
                 <div class="row align-items-center">
@@ -30,16 +24,13 @@
                                 <li><span>Dashboard</span></li>
                             </ul>
                         </div>
-                    </div>
-                    
+                    </div>                    
                    <div th:replace="fragments/user-profile :: user-profile"></div>
-                   
                 </div>
             </div>
             <!-- page title area end -->
             <div class="main-content-inner">
                 <div class="row">
-                    
                     <!-- seo fact area start -->
                     <div class="col-lg-8">
                         <div class="row">
@@ -90,20 +81,14 @@
                         </div>
                     </div>
                     <!-- seo fact area end -->
-                    
                 </div>
             </div>
         </div>
         <!-- main content area end -->
        <footer th:replace="fragments/footer :: footer"></footer>
-       
     </div>
     <!-- page container area end -->
-
-	<th:block th:replace="fragments/script"></th:block>
-	<script type="text/javascript" th:src="@{/assets/js/inicio.js}"></script>
-    
+	<th:block th:replace="fragments/script :: script"></th:block>
+	<script type="text/javascript" th:src="@{/assets/js/inicio.js}"></script>  
 </body>
-
 </html>
-

@@ -2,22 +2,16 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/headinc :: head"></head>
 <body>
-
 	<!-- preloader area start -->
 	<div id="preloader">
 		<div class="loader"></div>
 	</div>
-	
 	<!-- page container area start -->
 	<div class="page-container">
-
 		<div th:replace="fragments/sidebar :: sidebar"></div>
-
 		<!-- main content area start -->
 		<div class="main-content">
-
 			<div th:replace="fragments/header-area :: header-area"></div>
-
 			<!-- page title area start -->
 			<div class="page-title-area">
 				<div class="row align-items-center">
@@ -30,9 +24,7 @@
 							</ul>
 						</div>
 					</div>
-					
 					<div th:replace="fragments/user-profile :: user-profile"></div>
-					
 				</div>
 			</div>
 			<!-- page title area end -->
@@ -107,7 +99,6 @@
 												</select>
 											</div>
 										</div>
-	
 										<div class="col-md-4 mb-3">
 											<label for="denominacion">Denominacion</label>
 											<div class="input-group">
@@ -121,7 +112,6 @@
 													ingrese un valor</div>
 											</div>
 										</div>
-										
 										<div class="col-md-4 mb-3">
 											<label for="fechaInicio">Fecha Sustentacion</label>
 											<div class="input-group">
@@ -135,7 +125,6 @@
 											</div>
 										</div>
 									</div>
-									
 									<div class="form-row">
 										<div class="col-md-4 mb-3">
 											<label for="anioInvestigacion">Citacion</label>
@@ -155,7 +144,6 @@
 												</select>
 											</div>
 										</div>
-									
 										<div class="col-md-4 mb-3">
 											<label for="tipoGrado">Grado Academico</label>
 											<div class="input-group">
@@ -188,9 +176,7 @@
 										</div>
 									</div>
 								</div>
-									
 									<div class="form-row">
-										
 										<div class="col-md-4 mb-3">
 											<label for="tipoGrado">Area de Conocimiento</label>
 											<div class="input-group">
@@ -220,7 +206,6 @@
 											</div>
 										</div>
 									</div>
-									
 									<button id="guardarTrabajo" class="btn btn-outline-primary btn-sm" type="submit">
 										<i class="fa fa-check-circle"></i> Guardar Trabajo
 									</button>
@@ -228,22 +213,16 @@
 										th:href="@{/trabajo/list}"><i
 										class="fa fa-arrow-circle-o-left"></i> Cancelar</a>
 								</form>
-								
 							</div>
 						</div>
 					</div>
-				
-
 				</div>
 			</div>
 		</div>
 		<!-- main content area end -->
 		<footer th:replace="fragments/footer :: footer"></footer>
-
 	</div>
 	<!-- page container area end -->
-
-	<th:block th:replace="fragments/script"></th:block>
-
+	<th:block th:replace="fragments/script :: script"></th:block>
 </body>
 </html>

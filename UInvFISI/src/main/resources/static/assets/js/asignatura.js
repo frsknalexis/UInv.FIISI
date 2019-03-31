@@ -296,6 +296,104 @@ $(document).on('ready', function() {
 		$(location).attr('href', '/asignaturaAlumno/formAsignaturaDetalle/' + asignaturaId);
 	});
 	
+	$('#dataTable tbody').on('click', 'button#disabledAsignatura', function() {
+		
+		var asignaturaId = $(this).attr('idasignatura');
+		console.log("asignaturaId: " + asignaturaId);
+		
+		swal({
+	        title: '¿Esta Seguro de finalizar el Proceso de esta Asignatura ?',
+	        text: '¡Si no lo esta puede Cancelar la accion!',
+	        type: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        cancelButtonText: 'Cancelar',
+	        confirmButtonText: '¡Si, finalizar Proceso !'
+	    }).then((result) => {
+	        if(result.value){
+	           
+	        	 $.ajax({
+	                 url: '/api/asignatura/asignatura/disabled/' + asignaturaId,
+	                 type: 'GET',
+	                 dataType: 'json',
+	                 success: function(response){
+	                	 
+	                	 console.log(response);
+	                     swal({
+	                         type: "success",
+	                         title: "El Proceso de la Asignatura: " + response.data.nombreAsignatura + " ha sido finalizado correctamente",
+	                         showConfirmButton: true,
+	                         confirmButtonText: "Cerrar",
+	                         closeOnConfirm: false
+	                     }).then((result) => {
+	                         if(result.value) {
+	                             $(location).attr("href", '/asignatura/list');
+	                         }
+	                     })
+	                 }
+	             });
+	        }
+	        else {
+	            swal({
+	                type: "error",
+	                title: "Cancelado", 
+	                text: "Usted ha cancelado la acción de finalizar Proceso"
+	            });
+	        }
+	    });
+	});
+	
+	$('#dataTable tbody').on('click', 'button#enabledAsignatura', function() {
+		
+		var asignaturaId = $(this).attr('idasignatura');
+		console.log("asignaturaId: " + asignaturaId);
+		
+		swal({
+	        title: '¿Esta Seguro de habilitar esta Asignatura ?',
+	        text: '¡Si no lo esta puede Cancelar la accion!',
+	        type: 'warning',
+	        showCancelButton: true,
+	        confirmButtonColor: '#3085d6',
+	        cancelButtonColor: '#d33',
+	        cancelButtonText: 'Cancelar',
+	        confirmButtonText: '¡Si, habilitar Asignatura !'
+	    }).then((result) => {
+	        if(result.value){
+	           
+	        	$.ajax({
+	        		
+	        		url: '/api/asignatura/asignatura/enabled/' + asignaturaId,
+	        		type: 'GET',
+	        		dataType: 'json',
+	        		success: function(response){
+	        			
+	        			console.log(response);
+	        			
+	        			swal({
+	        				type: "success",
+	                        title: "La Asignatura: " + response.data.nombreAsignatura + " ha sido habilitada correctamente",
+	                        showConfirmButton: true,
+	                        confirmButtonText: "Cerrar",
+	                        closeOnConfirm: false
+	                       }).then((result) => {
+	                         if(result.value) {
+	                            $(location).attr("href", '/asignatura/list');
+	                        }
+	                     })
+	                 }
+	        	});
+	        }
+	        else {
+	            swal({
+	                type: "error",
+	                title: "Cancelado", 
+	                text: "Usted ha cancelado la acción de habilitar"
+	            });
+	        }
+	    });
+	});
+	
 	$('#docenteAsignatura').autocomplete({
 		
 		source: function(request, response) {
